@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench｜SeisBlue</title>
+  <meta name="description" content="短短幾年，AI 挑地震波從各實驗室各寫各的程式，變成一行指令就能叫出訓練好的模型。這篇科普介紹這條線怎麼鋪起來：PhaseNet、EQTransformer，以及把整個生態串起來的 SeisBench。" />
+  <meta name="keywords" content="地震 AI, 相位拾取, phase picking, PhaseNet, EQTransformer, SeisBench, 深度學習, 地震偵測, U-Net, attention" />
+  <meta name="author" content="黃俊銘 Chun-Ming Huang" />
+  <link rel="canonical" href="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/articles/ai-phase-picking-landscape/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:site_name" content="藍震有限公司 SeisBlue" />
+  <meta property="og:title" content="AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench" />
+  <meta property="og:description" content="短短幾年，AI 挑地震波從各做各的，變成人人能上手。PhaseNet、EQTransformer，到把生態串起來的 SeisBench。" />
+  <meta property="og:url" content="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
+  <meta property="og:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2026-05-28" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench" />
+  <meta name="twitter:description" content="短短幾年，AI 挑地震波從各做各的，變成人人能上手。PhaseNet、EQTransformer，到把生態串起來的 SeisBench。" />
+  <meta name="twitter:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
+
+  <!-- BlogPosting JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench",
+    "description": "短短幾年，AI 挑地震波從各實驗室各寫各的程式，變成一行指令就能叫出訓練好的模型。介紹 PhaseNet、EQTransformer，以及把整個生態串起來的 SeisBench。",
+    "image": "https://www.seisblue.com/articles/og-landscape.jpg",
+    "datePublished": "2026-05-28",
+    "dateModified": "2026-05-28",
+    "inLanguage": "zh-Hant",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.seisblue.com/articles/ai-phase-picking-landscape/"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "黃俊銘 Chun-Ming Huang"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "藍震有限公司 SeisBlue Co., Ltd.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.seisblue.com/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue 藍震有限公司 logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>藍震有限公司</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="主導覽">
+        <a href="/#about">關於我們</a>
+        <a href="/#services">業務範圍</a>
+        <a href="/#seisblue">地震 AI</a>
+        <a href="/articles/">文章</a>
+        <a href="/en/articles/ai-phase-picking-landscape/" class="nav__lang" hreflang="en" lang="en">EN</a>
+        <a href="/#contact" class="nav__cta">聯絡我們</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <article>
+      <header class="article-hero">
+        <div class="hero__bg" aria-hidden="true">
+          <svg class="hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+            <path class="wave wave--1" d="M0,100 Q180,40 360,100 T720,100 T1080,100 T1440,100" fill="none" />
+            <path class="wave wave--2" d="M0,120 Q180,60 360,120 T720,120 T1080,120 T1440,120" fill="none" />
+            <path class="wave wave--3" d="M0,140 Q180,90 360,140 T720,140 T1080,140 T1440,140" fill="none" />
+          </svg>
+        </div>
+        <div class="article-hero__inner">
+          <p class="eyebrow">文章 · 地震 AI</p>
+          <h1>AI 怎麼學會挑地震波的？</h1>
+          <div class="article-meta">
+            <span>2026.05.28</span>
+            <span>黃俊銘 Chun-Ming Huang</span>
+            <span>約 6 分鐘</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article">
+        <div class="article__inner">
+          <p class="article__lead">
+            AI 是怎麼一步步接手「挑地震波」這件工作的？短短幾年，這個領域從各實驗室各寫各的程式，
+            變成一行指令就能叫出別人訓練好的模型。這篇就講這條線怎麼鋪起來，主角有三個：
+            PhaseNet、EQTransformer，以及把它們串起來的 SeisBench。
+          </p>
+
+          <div class="prose">
+            <div class="timeline">
+              <div class="timeline__item">
+                <p class="timeline__year">2019</p>
+                <p class="timeline__title">PhaseNet</p>
+                <p>把挑波重新定義成圖像分割題（U-Net 的本行），並用高斯曲線當目標、好訓練又準，成為整個領域的標竿。</p>
+              </div>
+              <div class="timeline__item">
+                <p class="timeline__year">2020</p>
+                <p class="timeline__title">EQTransformer</p>
+                <p>引進注意力機制，把偵測、P 波、S 波拆成三個獨立分支，各司其職、互不干擾。</p>
+              </div>
+              <div class="timeline__item">
+                <p class="timeline__year">2022</p>
+                <p class="timeline__title">SeisBench</p>
+                <p>把眾多模型與資料集包進同一套介面，讓結果能被公平比較、被重現。</p>
+              </div>
+            </div>
+
+            <h2>PhaseNet：把挑波變成一道「圖像分割」題</h2>
+            <p>
+              2019 年，史丹佛的 Weiqiang Zhu 和 Greg Beroza 提出了 <a href="https://github.com/AI4EPS/PhaseNet" target="_blank" rel="noopener">PhaseNet</a>。它最關鍵的一步，
+              是把「挑波」這個問題<strong>重新定義</strong>了。原本大家把挑波當成「在一長串訊號裡，精準找出某一個到達時間點」；
+              PhaseNet 改成把它當成一道<strong>圖像分割</strong>題：逐點判斷「這裡屬於 P 波、屬於 S 波，還是什麼都沒有」。
+              這正好是 U-Net 這個網路結構的本行；U-Net 原本就是用來切割醫學影像，在 X 光和 MRI 裡圈出器官邊界。
+              挑地震波和圈器官邊界，本質上是同一種題目。
+            </p>
+            <p>
+              第二個改動沒那麼顯眼，但一樣關鍵。地震波到達的「正確時間」本來是一個單一時間點，
+              要模型精準命中這個點很難訓練：目標又尖又稀疏，差一點就幾乎全錯。
+              PhaseNet 把這個尖銳的時間點攤成一條<em>高斯曲線</em>：
+              以人工標記的位置為中心、兩側帶一點寬度，等於把「人工標記本來就會有的誤差」直接寫進訓練目標裡。
+              目標變寬，模型就有了容錯空間，也好訓練得多。
+            </p>
+            <p>
+              把三軸波形丟進 U-Net，輸出 P、S、雜訊三條機率曲線，哪裡的曲線衝高，就是那種波到了。
+              它用美國北加州幾十年累積的人工標記資料訓練，結果又快又準，準到後來幾乎成了整個領域的<strong>標竿</strong>：
+              新方法一出來，第一件事就是拿它跟 PhaseNet 比。
+            </p>
+
+            <figure>
+              <img src="/articles/phasenet-example.webp" alt="相位拾取範例：同一筆地震的三軸波形，以及 P、S 兩條高斯機率曲線輸出" width="673" height="679" loading="lazy" />
+              <figcaption>一個實際範例：上面三條是同一筆地震的三軸波形（Z／N／E），最下面是模型輸出。淺色是人工標記的<b>高斯曲線</b>（標準答案），深色是模型預測，P（藍）、S（紅）兩個峰幾乎完全疊上標準答案。兩個重點都在這張圖裡：輸入是逐點判讀的整段波形（圖像分割的概念），而目標不是一個單一時間點、是一條帶寬度的高斯曲線。<br/>圖／<a href="https://github.com/SeisBlue" target="_blank" rel="noopener">SeisBlue</a></figcaption>
+            </figure>
+
+            <h2>EQTransformer：把三件事拆開來做</h2>
+            <p>
+              2020 年，同一個圈子的 Mousavi 等人提出 <a href="https://github.com/smousavi05/EQTransformer" target="_blank" rel="noopener">EQTransformer</a>，登上《Nature Communications》。
+            </p>
+            <p>
+              如果說 PhaseNet 證明了「深度學習挑波可行」，EQTransformer 想的是「能不能做得更聰明」。
+              它引進了當時席捲 AI 圈的<em>注意力機制</em>（attention，後來大型語言模型用的就是同一套底層想法），
+              讓模型在看一段波形時，能同時權衡遠處和近處的線索。
+            </p>
+            <p>
+              它的關鍵設計，是把三件事<strong>拆開來做</strong>：偵測「這段裡到底有沒有地震」、標 P 波、標 S 波，
+              各自交給獨立的輸出分支（head），彼此不干擾。原因在於 PhaseNet 原本把
+              P 波、S 波、雜訊當成三個並排的頻道一起預測，但「有沒有地震」這種偵測訊號涵蓋整段事件、又寬又長，
+              份量遠比 P、S 那兩個又窄又小的高斯尖峰重；全部混在一起學，小小的 P、S 很容易被偵測訊號蓋過去。
+              拆成獨立的 head，每件事才能專心做好自己的。它用一個叫 STEAD 的大型公開地震資料集訓練，
+              資料量比 PhaseNet 當年又大了一截。
+            </p>
+
+            <h2>百花齊放之後的麻煩</h2>
+            <p>
+              PhaseNet、EQTransformer 之後，各種模型冒出來，這本來是好事，但很快撞上一個現實問題：
+              <strong>大家根本沒辦法公平比較</strong>。
+            </p>
+            <p>
+              每個模型用不同格式的資料、不同的前處理、不同的評分標準。你想知道 A 模型是不是真的比 B 好，
+              得先花好幾週把兩邊的資料管線、環境全部重搭一次。光是「把資料讀進來」這一步，就足以勸退很多人。
+              研究做不出可重現的對比，領域就很難往前。
+            </p>
+
+            <h2>SeisBench：地震 AI 的 USB 介面</h2>
+            <p>
+              2022 年，德國的研究團隊（Woollam、Münchmeyer 等人）推出 <a href="https://github.com/seisbench/seisbench" target="_blank" rel="noopener">SeisBench</a>，解決的正是這件事。
+            </p>
+            <p>
+              你可以把它想成地震 AI 的 <em>USB</em>：任何一個訓練好的模型（PhaseNet、EQTransformer 等等）、
+              任何一個公開資料集，都用同一種接法接上去。想換模型？改一行字。想換資料集？再改一行。
+              原本要搭好幾週的東西，現在幾行程式就跑起來，而且每個人跑出來的結果可以直接對比。
+            </p>
+            <p>
+              SeisBench 沒有發明新的挑波模型，但它做的事一樣重要：它把這個領域從「各做各的」變成
+              「人人能上手、結果能重現」。今天一個剛入門的學生，一個下午就能試完過去好幾篇論文的成果；
+              這在五年前幾乎做不到。
+            </p>
+
+            <h2>那接下來呢？</h2>
+            <p>
+              這幾年下來，AI 挑波從一個新點子，長成了開放又可重現的生態系。基礎設施鋪好了，門檻也降下來了。
+            </p>
+            <p>
+              但工具成熟，不代表問題都解決了。模型在某些情況下還是會出錯，例如 S 波振幅被壓抑，
+              或是遇到訓練時沒見過的地區與儀器就水土不服。基礎打穩之後，大家的注意力自然會從「能不能做」，
+              轉到這些更具體的毛病上。
+            </p>
+            <p>
+              想看 AI 挑波其中一個具體難題怎麼被拆解，可以接著讀：<a href="/articles/bluedisc-shape-aware-loss/">AI 為什麼老是漏看 S 波？ →</a>
+            </p>
+          </div>
+
+          <section class="article__refs">
+            <h2>參考文獻</h2>
+            <p>
+              Zhu, W., &amp; Beroza, G. C. (2019).
+              <strong>PhaseNet: A Deep-Neural-Network-Based Seismic Arrival-Time Picking Method.</strong>
+              <em>Geophysical Journal International</em>, 216(1), 261–273.
+              <a href="https://doi.org/10.1093/gji/ggy423" target="_blank" rel="noopener">doi.org/10.1093/gji/ggy423</a>
+            </p>
+            <p>
+              Mousavi, S. M., Ellsworth, W. L., Zhu, W., Chuang, L. Y., &amp; Beroza, G. C. (2020).
+              <strong>Earthquake Transformer—An Attentive Deep-Learning Model for Simultaneous Earthquake Detection and Phase Picking.</strong>
+              <em>Nature Communications</em>, 11, 3952.
+              <a href="https://doi.org/10.1038/s41467-020-17591-w" target="_blank" rel="noopener">doi.org/10.1038/s41467-020-17591-w</a>
+            </p>
+            <p>
+              Woollam, J., Münchmeyer, J., Tilmann, F., Rietbrock, A., Lange, D., Bornstein, T., et al. (2022).
+              <strong>SeisBench—A Toolbox for Machine Learning in Seismology.</strong>
+              <em>Seismological Research Letters</em>, 93(3), 1695–1709.
+              <a href="https://doi.org/10.1785/0220210324" target="_blank" rel="noopener">doi.org/10.1785/0220210324</a>
+            </p>
+          </section>
+
+          <a class="article__back" href="/articles/">← 回到文章列表</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · 藍震有限公司</strong>
+        <p>以軟體與 AI 為核心 — Made in Taiwan.</p>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

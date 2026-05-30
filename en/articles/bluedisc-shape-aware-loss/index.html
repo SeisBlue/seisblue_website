@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>Why Does AI Keep Missing S-Waves? From a Failure Mode to Shape-Aware Loss | SeisBlue</title>
+  <meta name="description" content="Deep-learning phase pickers have a long-standing quirk: the S-wave position is right, but its amplitude gets pushed below the detection threshold. This is a plain-language explainer of why it gets stuck, and how BlueDisc recovers it with a shape-aware loss and a conditional GAN — a 64% gain in effective S-phase detections." />
+  <meta name="keywords" content="seismic AI, earthquake AI, phase picking, S-wave, deep learning, shape-aware loss, GAN, BlueDisc, SeisBlue, loss function, earthquake detection" />
+  <meta name="author" content="Chun-Ming Huang (黃俊銘)" />
+  <link rel="canonical" href="https://www.seisblue.com/en/articles/bluedisc-shape-aware-loss/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/articles/bluedisc-shape-aware-loss/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="zh_TW" />
+  <meta property="og:site_name" content="SeisBlue Co., Ltd." />
+  <meta property="og:title" content="Why Does AI Keep Missing S-Waves? From a Failure Mode to Shape-Aware Loss" />
+  <meta property="og:description" content="The S-wave position is right, but its amplitude gets pushed below the detection threshold. How BlueDisc recovers it with a shape-aware loss — a 64% gain in effective detections." />
+  <meta property="og:url" content="https://www.seisblue.com/en/articles/bluedisc-shape-aware-loss/" />
+  <meta property="og:image" content="https://www.seisblue.com/articles/og-bluedisc.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2026-05-28" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why Does AI Keep Missing S-Waves? From a Failure Mode to Shape-Aware Loss" />
+  <meta name="twitter:description" content="The S-wave position is right, but its amplitude gets pushed below the detection threshold. How BlueDisc recovers it with a shape-aware loss — a 64% gain in effective detections." />
+  <meta name="twitter:image" content="https://www.seisblue.com/articles/og-bluedisc.jpg" />
+
+  <!-- BlogPosting JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why Does AI Keep Missing S-Waves? From a Failure Mode to Shape-Aware Loss",
+    "description": "A plain-language explainer of why deep-learning phase pickers suppress S-wave amplitudes, and how BlueDisc recovers them with a shape-aware loss and a conditional GAN — a 64% gain in effective detections.",
+    "image": "https://www.seisblue.com/articles/og-bluedisc.jpg",
+    "datePublished": "2026-05-28",
+    "dateModified": "2026-05-28",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.seisblue.com/en/articles/bluedisc-shape-aware-loss/"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Chun-Ming Huang"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SeisBlue Co., Ltd.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.seisblue.com/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/en/" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue Co., Ltd. logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>SeisBlue Co., Ltd.</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/en/#about">About</a>
+        <a href="/en/#services">Services</a>
+        <a href="/en/#seisblue">Seismic AI</a>
+        <a href="/en/articles/">Articles</a>
+        <a href="/articles/bluedisc-shape-aware-loss/" class="nav__lang" hreflang="zh-Hant" lang="zh-Hant">中</a>
+        <a href="/en/#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <article>
+      <header class="article-hero">
+        <div class="hero__bg" aria-hidden="true">
+          <svg class="hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+            <path class="wave wave--1" d="M0,100 Q180,40 360,100 T720,100 T1080,100 T1440,100" fill="none" />
+            <path class="wave wave--2" d="M0,120 Q180,60 360,120 T720,120 T1080,120 T1440,120" fill="none" />
+            <path class="wave wave--3" d="M0,140 Q180,90 360,140 T720,140 T1080,140 T1440,140" fill="none" />
+          </svg>
+        </div>
+        <div class="article-hero__inner">
+          <p class="eyebrow">Article · Seismic AI</p>
+          <h1>Why Does AI Keep Missing S-Waves?</h1>
+          <div class="article-meta">
+            <span>2026.05.28</span>
+            <span>Chun-Ming Huang 黃俊銘</span>
+            <span>6 min read</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article">
+        <div class="article__inner">
+          <p class="article__lead">
+            Seismometers record around the clock. In a single year, Taiwan logs tens of thousands of ground motions.
+            Picking out which of those are earthquakes — and the exact moment each one arrives — was traditionally
+            done by hand: an analyst reading waveform after waveform, marking them one by one. A seasoned analyst
+            does this well, but the volume is overwhelming, and analysts are human. They need sleep.
+          </p>
+
+          <div class="prose">
+            <p>
+              So over the past few years, seismologists handed the job to deep learning. Once a model is trained,
+              you feed it a stretch of waveform and it tells you the moment a P-wave arrives and the moment an S-wave arrives.
+            </p>
+            <p>
+              P-waves and S-waves are two types of seismic wave. The P-wave is fast and arrives first. The S-wave is
+              slower and arrives later, but it carries more destructive energy — it's what you feel most when a building shakes.
+              Where the earthquake is and how severe it is depend on both of these arrival times. Neither can be missed.
+            </p>
+
+            <h2>A baffling failure mode</h2>
+            <p>
+              The problem is that when the AI picks P-waves it behaves like a perfectionist, yet it keeps fumbling the S-waves.
+              On the very same waveform — where the S-wave's location is obvious to a human — the model produces a lopsided,
+              stunted little peak that lands just below our detection threshold, and so it gets counted as a miss.
+            </p>
+            <p>
+              Stranger still, the location it sees is usually correct. The timing is right; it's the height that falls short.
+            </p>
+
+            <figure class="figure--portrait">
+              <img src="/articles/amplitude-suppression.webp" alt="P-wave and S-wave predictions across training steps; the S-wave prediction is gradually pushed below the detection threshold" width="1000" height="1954" loading="lazy" />
+              <figcaption>How predictions for the same waveform evolve during training (top to bottom = increasing steps). The P-wave (blue) grows sharper, while the <b>S-wave (red) is pushed lower and lower until it sinks below the detection threshold</b> — its position is right, but its height has vanished.</figcaption>
+            </figure>
+
+            <p>
+              Seismologists have known about this for years. The usual response is to reach for a bigger model, feed it
+              more data, or tweak the training recipe — treating it as an annoying side effect to be worked around.
+            </p>
+            <p>
+              This paper didn't try to work around it. The authors wanted to understand exactly why it happens.
+            </p>
+
+            <h2>Why it gets stuck</h2>
+            <p>
+              Imagine you're judging how closely a portrait resembles its subject. The intuitive way is to look at the
+              whole face. But suppose the rules change: you're not allowed to view the whole image, only to chop it into
+              hundreds of little cells, score each cell independently, and add up the scores. Now you're in trouble.
+            </p>
+            <p>
+              Each cell can only tell you whether it should be brighter or darker. No single cell can tell you the whole
+              face should shift a little to the left. So when the predicted shape is correct but its position is nudged
+              slightly to the right, every cell receives the same signal — <em>you're not bright enough, tone yourself down</em>.
+              The prediction grows fainter and fainter, but its position is never corrected.
+            </p>
+            <p>
+              The conventional way of training an AI to find S-waves is exactly this kind of per-cell scoring. It has no
+              mechanism to tell the model which way to shift as a whole — only to dial brightness up or down. So the S-wave
+              prediction stalls at some position, neither here nor there, flattening itself ever thinner.
+            </p>
+
+            <figure>
+              <img src="/articles/loss-landscape.webp" alt="The loss landscape from point-wise scoring offers a downward gradient but almost no gradient to move the prediction sideways to the correct position" width="1200" height="1331" loading="lazy" />
+              <figcaption>The loss landscape produced by point-wise scoring. The gradient the model receives can essentially only push the prediction <b>down (vertically)</b>; there is almost no slope to <b>move the whole waveform sideways</b> to the correct position — so the prediction flattens while its position never gets corrected.</figcaption>
+            </figure>
+
+            <p>
+              S-waves are especially prone to this, and two further things pour fuel on the fire. First, their ground truth
+              is inherently fuzzier: after travelling far, an S-wave broadens and its edges blur, and even human experts
+              disagree on the exact pick by a few hundred milliseconds — so the "correct answer" in the training data is
+              already noisy. Second, AI models are naturally drawn to sharp features, and they tend to anchor the prediction
+              to the most prominent kink in the waveform — which happens not to be where the S-wave belongs.
+            </p>
+            <p>
+              The three factors together trap the S-wave prediction in a corner with no way out.
+            </p>
+
+            <h2>The fix</h2>
+            <p>
+              With the diagnosis in hand, the fix follows naturally.
+            </p>
+            <p>
+              The authors turned to a technique called a GAN. GANs are usually used to generate fake photos or videos:
+              the idea is to pit two models against each other, one producing and one criticizing. The producer tries to
+              fool the critic; the critic tries to tell real from fake; and in the end the producer is pushed to look more
+              and more genuine.
+            </p>
+            <p>
+              In this paper, the critic — the discriminator — has one job: glance at the model's output and judge whether
+              its overall shape looks like a real label. It doesn't care about each cell's individual value; <em>it looks at the whole face</em>.
+            </p>
+            <p>
+              That fills in the signal that was missing all along. The model can no longer just get each cell's brightness
+              right; it has to make the whole face hold together, or the discriminator catches it at a glance.
+            </p>
+
+            <figure>
+              <img src="/articles/gan-compare.webp" alt="S-wave predictions for the same waveform under conventional training versus after adding a GAN; the GAN restores the S-wave prediction to full height" width="1200" height="958" loading="lazy" />
+              <figcaption>Predictions for the same waveform. <b>Middle: conventional training</b> — the S-wave (red) is squashed low. <b>Bottom: after adding the GAN</b> — the S-wave prediction returns to the same full height as the P-wave.</figcaption>
+            </figure>
+
+            <div class="keystat">
+              <strong>+64%</strong>
+              <span>After ten thousand training steps, the batch of S-wave predictions that had been stuck below the threshold were all pushed back up — a 64% gain in effective detections. Signals once counted as misses are now recovered.</span>
+            </div>
+
+            <figure>
+              <img src="/articles/s-distribution.webp" alt="Distribution of S-wave predictions by position error and height; after adding the GAN the share of precise, above-threshold predictions rises sharply" width="1200" height="853" loading="lazy" />
+              <figcaption>Distribution of all S-wave predictions by <b>position error</b> and <b>height</b>. The share that is precise and above threshold rises from 32.4% to 53.1%; the share buried below the threshold is nearly cleared, from 24.8% down to 1.3%.</figcaption>
+            </figure>
+
+            <h2>Why this matters more than the 64%</h2>
+            <p>
+              64% is a lovely number, but it isn't what makes this paper genuinely interesting.
+            </p>
+            <p>
+              What it really achieves is taking a phenomenon that was treated as an engineering nuisance and breaking it
+              down into something that can be understood, predicted, and analyzed. Why it gets stuck, where it gets stuck,
+              and how to release it — all of it can be spelled out. The whole process moves from trial-and-error to
+              principled analysis.
+            </p>
+            <p>
+              This diagnosis isn't limited to earthquakes. It applies to any task that marks a moment in time within a
+              signal: a heartbeat in an ECG, an event in a satellite signal, a syllable boundary in speech. Whenever the
+              ground truth is something with a shape, conventional point-by-point scoring can drop you into the same trap.
+            </p>
+            <p>
+              The paper ends on an idea: <strong>understanding the shape of the loss function itself matters no less than
+              understanding the model architecture</strong>. We're used to debating which network to swap in, how many layers
+              to add, which activation to use — but rarely does anyone stop to ask whether the objective we're telling the
+              model to optimize has the right shape in the first place.
+            </p>
+            <p>
+              Get the scoring rule wrong, and even the most powerful model is wasted.
+            </p>
+          </div>
+
+          <section class="article__refs">
+            <h2>Reference</h2>
+            <p>
+              Huang, C.-M., Chang, L.-H., Chang, I.-H., Lee, A.-S., &amp; Kuo-Chen, H. (2025).
+              <strong>Recovering Sub-threshold S-wave Arrivals in Deep Learning Phase Pickers via Shape-Aware Loss.</strong>
+              <em>arXiv preprint</em>, arXiv:2511.06731.
+            </p>
+            <p>
+              <a href="https://arxiv.org/abs/2511.06731" target="_blank" rel="noopener">arxiv.org/abs/2511.06731</a><br />
+              <a href="https://www.researchgate.net/publication/397480133_Recovering_Sub-threshold_S-wave_Arrivals_in_Deep_Learning_Phase_Pickers_via_Shape-Aware_Loss" target="_blank" rel="noopener">ResearchGate</a><br />
+              Code: <a href="https://github.com/SeisBlue/BlueDisc" target="_blank" rel="noopener">github.com/SeisBlue/BlueDisc</a>
+            </p>
+          </section>
+
+          <section class="article__refs">
+            <h2>Appendix: training animation</h2>
+            <p>An animated version of the first figure in this article. As training progresses, you can watch the S-wave prediction get pushed down below the detection threshold.</p>
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/rdnCe1mJpA8" title="BlueDisc: animation of S-wave prediction suppression during training" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </section>
+
+          <a class="article__back" href="/en/articles/">← Back to articles</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · SeisBlue Co., Ltd.</strong>
+        <p>Built around software &amp; AI — Made in Taiwan.</p>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

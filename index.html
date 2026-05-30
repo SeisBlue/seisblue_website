@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>藍震有限公司 SeisBlue｜地震監測 AI：相位拾取、地震目錄與早期預警</title>
+  <meta name="description" content="藍震有限公司 (SeisBlue Co., Ltd.) 是專注地震監測 AI 的台灣科技公司。我們把深度學習地震研究工程化、部署成能穩定運行的系統，涵蓋相位拾取、近即時地震目錄與地震早期預警。" />
+  <meta name="keywords" content="藍震有限公司, SeisBlue, 地震 AI, 地震偵測, 深度學習, 相位拾取, 地震早期預警, EEW, 地震目錄, S 波偵測, BlueDisc, TT-SAM, SeisBlue Platform, 地震監測" />
+  <meta name="author" content="藍震有限公司 SeisBlue Co., Ltd." />
+  <link rel="canonical" href="https://www.seisblue.com/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:site_name" content="藍震有限公司 SeisBlue" />
+  <meta property="og:title" content="藍震有限公司 SeisBlue｜地震監測 AI" />
+  <meta property="og:description" content="把地震 AI 研究工程化、落地成產品。藍震打造深度學習相位拾取、近即時地震目錄與地震早期預警系統。" />
+  <meta property="og:url" content="https://www.seisblue.com/" />
+  <meta property="og:image" content="https://www.seisblue.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="藍震有限公司 SeisBlue｜地震監測 AI" />
+  <meta name="twitter:description" content="把地震 AI 研究工程化、落地成產品。藍震打造深度學習相位拾取、近即時地震目錄與地震早期預警系統。" />
+  <meta name="twitter:image" content="https://www.seisblue.com/og-image.png" />
+
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "藍震有限公司",
+    "alternateName": ["SeisBlue", "SeisBlue Co., Ltd."],
+    "url": "https://www.seisblue.com/",
+    "logo": "https://www.seisblue.com/logo.png",
+    "description": "藍震有限公司 (SeisBlue Co., Ltd.) 是一家專注於地震監測 AI 的台灣科技公司，把深度學習地震研究工程化、部署成可穩定運行的系統，涵蓋相位拾取、近即時地震目錄與地震早期預警。",
+    "email": "jimmy@seisblue.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "南京東路四段 186 號 6 樓之 3",
+      "addressLocality": "松山區",
+      "addressRegion": "臺北市",
+      "addressCountry": "TW"
+    },
+    "sameAs": [
+      "https://github.com/SeisBlue",
+      "https://jimmylab.seisblue.com",
+      "https://reserve.seisblue.com"
+    ],
+    "subOrganization": [
+      {
+        "@type": "Organization",
+        "name": "SeisBlue 地震 AI",
+        "url": "https://www.seisblue.com/#seisblue",
+        "description": "深度學習地震偵測、相位拾取、近即時地震目錄與早期預警技術。"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#top" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue 藍震有限公司 logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>藍震有限公司</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="主導覽">
+        <a href="#about">關於我們</a>
+        <a href="#services">地震 AI 技術</a>
+        <a href="/articles/">文章</a>
+        <a href="/en/" class="nav__lang" hreflang="en" lang="en">EN</a>
+        <a href="#contact" class="nav__cta">聯絡我們</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <svg class="hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+          <path class="wave wave--1" d="M0,100 Q180,40 360,100 T720,100 T1080,100 T1440,100" fill="none" />
+          <path class="wave wave--2" d="M0,120 Q180,60 360,120 T720,120 T1080,120 T1440,120" fill="none" />
+          <path class="wave wave--3" d="M0,140 Q180,90 360,140 T720,140 T1080,140 T1440,140" fill="none" />
+        </svg>
+      </div>
+      <div class="hero__inner">
+        <p class="eyebrow">Seismic Monitoring AI · Taiwan</p>
+        <h1>讓 AI，<br/>讀懂每一次地動。</h1>
+        <p class="hero__lead">
+          藍震有限公司 (SeisBlue Co., Ltd.) 是專注
+          <strong>地震監測 AI</strong> 的台灣科技公司。
+          我們把深度學習地震研究，工程化、部署成能穩定運行的系統——
+          <strong>深度學習相位拾取</strong>、
+          <strong>近即時地震目錄</strong>與
+          <strong>地震早期預警</strong>。
+        </p>
+        <div class="hero__cta">
+          <a href="#services" class="btn btn--primary">了解我們的技術</a>
+          <a href="#contact" class="btn btn--ghost">聯絡我們 →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="section__inner two-col">
+        <div>
+          <p class="eyebrow">關於藍震</p>
+          <h2>從一行波形，<br/>到一則地震速報。</h2>
+        </div>
+        <div class="about__body">
+          <p>
+            藍震以<strong>深度學習與地震學</strong>為核心能力，
+            專注把連續波形轉化成可信賴的地震資訊。
+          </p>
+          <p>
+            做的始終是同一件事：
+            <em>把難以捉摸的地動訊號，變成可即時行動的判斷。</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="section__inner">
+        <p class="eyebrow">我們做什麼</p>
+        <h2>把研究方法，<br/>變成上得了線的系統。</h2>
+        <p class="section__lead">
+          藍震結合多年地震 AI 的研究經驗與工程實作，
+          搭建訓練管線、整合即時資料流，
+          把研究方法落地成能在生產環境穩定運行的系統。
+        </p>
+
+        <div class="services__grid">
+          <a class="service-card" href="#case-bluedisc">
+            <div class="service-card__head">
+              <span class="service-card__tag">方法研究</span>
+              <h3>BlueDisc<br/>S 波偵測方法</h3>
+            </div>
+            <p>針對深度學習長期漏看 S 波的問題，以 shape-aware loss 訓練策略，在標準測試集上把有效 S 相位偵測數提升 64%。</p>
+            <span class="service-card__cta">看方法細節 →</span>
+          </a>
+
+          <a class="service-card" href="#case-platform">
+            <div class="service-card__head">
+              <span class="service-card__tag">生產框架</span>
+              <h3>SeisBlue Platform<br/>地震資料處理框架</h3>
+            </div>
+            <p>把連續波形、相位拾取到輸出地震目錄的整段流程封裝成可穩定運行的服務，已被多篇同儕審查研究採用。</p>
+            <span class="service-card__cta">了解平台 →</span>
+          </a>
+
+          <a class="service-card" href="#case-ttsam">
+            <div class="service-card__head">
+              <span class="service-card__tag">即時預警系統</span>
+              <h3>TT-SAM<br/>地震早期預警</h3>
+            </div>
+            <p>Taiwan Transformer Shaking Alert Model，即時預警管線基於 Earthworm 即時資料流運作。</p>
+            <span class="service-card__cta">了解系統 →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="seisblue" class="section technology">
+      <div class="section__inner">
+        <p class="eyebrow">AI 應用 · 地震 AI</p>
+        <h2>從研究方法，<br/>到產品級落地。</h2>
+        <p class="section__lead">
+          藍震結合地震 AI 的<strong>研究經驗與工程能力</strong>，
+          搭建訓練管線、整合即時資料流，把研究方法落地成可在生產環境穩定運行的服務。
+          下方是這份能力的具體展現。
+        </p>
+
+        <div class="arch__grid arch__grid--three">
+          <article class="arch-card">
+            <span class="arch-card__num">01</span>
+            <h4>方法研究</h4>
+            <p>從 loss、訓練策略到資料工程，以紮實的研究經驗，從模型層級提升效能上限。</p>
+          </article>
+          <article class="arch-card">
+            <span class="arch-card__num">02</span>
+            <h4>訓練管線與環境</h4>
+            <p>搭建可重現、可擴展的訓練基礎設施，規劃資料前處理、模型架構與訓練策略。</p>
+          </article>
+          <article class="arch-card">
+            <span class="arch-card__num">03</span>
+            <h4>產品級部署</h4>
+            <p>把模型整合進即時資料流（如 Earthworm），確保服務在 7×24 環境下穩定運行。</p>
+          </article>
+        </div>
+
+        <h3 id="case-bluedisc" class="arch__title">案例一 · BlueDisc：S 波偵測方法</h3>
+        <p class="arch__desc">
+          BlueDisc 源自黃俊銘在相位拾取上多年的方法研究。
+          針對深度學習相位拾取長期遇到的 <em>S 波振幅抑制</em> 問題，
+          這套研究剖析 <strong>損失函數在訓練中的角色</strong> 與
+          <strong>資料為何難以收斂的成因</strong>，
+          並以 <strong>shape-then-align</strong> 訓練策略搭配條件式 GAN 進行驗證。
+          在標準測試集上，有效 S 相位偵測數提升 <strong>64%</strong>。
+          程式碼公開於 <a href="https://github.com/SeisBlue/BlueDisc" target="_blank" rel="noopener">github.com/SeisBlue/BlueDisc</a>，完整成果見下方 preprint。
+          想用白話了解這套方法，可讀這篇科普：<a href="/articles/bluedisc-shape-aware-loss/">AI 為什麼老是漏看 S 波？ →</a>
+        </p>
+
+        <h3 id="case-platform" class="arch__title">案例二 · SeisBlue 平台</h3>
+        <p class="arch__desc">
+          SeisBlue 是黃俊銘開發並開源的深度學習地震資料處理框架。
+          平台把連續波形進入、相位拾取、到輸出地震目錄的整段流程，
+          封裝成可在生產環境穩定運行的服務，
+          已被多篇同儕審查研究採用為核心處理工具（詳見下方引用）。
+          程式碼公開於 <a href="https://github.com/SeisBlue/SeisBlue" target="_blank" rel="noopener">github.com/SeisBlue/SeisBlue</a>。
+        </p>
+
+        <h3 id="case-ttsam" class="arch__title">案例三 · TT-SAM 即時 EEW 管線</h3>
+        <p class="arch__desc">
+          <strong>TT-SAM</strong> (Taiwan Transformer Shaking Alert Model) 是地震早期預警系統。
+          模型架構參考自 Münchmeyer 等 (2020) 的 TEAM 框架，由黃俊銘負責
+          <strong>AI 落地的工程核心</strong>——訓練環境搭建、訓練管線設計，到產品級部署。
+          即時管線基於 Earthworm 即時資料流運作。
+        </p>
+
+        <div class="refs">
+          <h3 class="refs__title">學術依據</h3>
+          <p class="refs__desc">
+            以下整理 SeisBlue 與 TT-SAM 相關的主要學術發表，以及採用這些技術的後續研究。
+          </p>
+
+          <h4 class="refs__group">BlueDisc：S 波偵測方法</h4>
+          <ol class="refs__list">
+            <li class="refs__lead">
+              <span class="refs__badge refs__badge--lead">第一作者</span>
+              <p>
+                Huang, C.-M., Chang, L.-H., Chang, I.-H., Lee, A.-S., &amp; Kuo-Chen, H. (2025).
+                <strong>Recovering Sub-threshold S-wave Arrivals in Deep Learning Phase Pickers via Shape-Aware Loss.</strong>
+                <em>arXiv preprint</em>, arXiv:2511.06731.
+                <a href="https://arxiv.org/abs/2511.06731" target="_blank" rel="noopener">arxiv.org/abs/2511.06731</a>
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="refs__group">SeisBlue 平台</h4>
+          <ol class="refs__list">
+            <li class="refs__primary">
+              <span class="refs__badge">主引用</span>
+              <p>
+                Huang, C.-M., Chang, L.-H., Kuo-Chen, H., &amp; Zhuang, Y. (2023).
+                <strong>SeisBlue: a deep-learning data processing platform for seismology.</strong>
+                <em>EGU General Assembly 2023</em>, Vienna, Austria, EGU23-13927.
+                <a href="https://doi.org/10.5194/egusphere-egu23-13927" target="_blank" rel="noopener">doi.org/10.5194/egusphere-egu23-13927</a>
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="refs__group">TT-SAM 系統</h4>
+          <ol class="refs__list">
+            <li class="refs__primary">
+              <span class="refs__badge">主引用</span>
+              <p>
+                Chen, Y.-H., Chan, C.-H., Chang, C.-C., &amp; Ma, K.-F. (2026).
+                <strong>A Deep Learning Framework for Peak Ground Velocity Prediction Using Multi-Station Velocity Waveforms: The Taiwan Transformer Shaking Alert Model (TT-SAM).</strong>
+                <em>Journal of Geophysical Research: Machine Learning and Computation</em>.
+                <a href="https://doi.org/10.1029/2025JH001005" target="_blank" rel="noopener">doi.org/10.1029/2025JH001005</a>
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="refs__group">採用 SeisBlue 平台的後續研究</h4>
+          <ol class="refs__list refs__list--cites">
+            <li>
+              <p>
+                Sun, W.-F., Pan, S.-Y., Huang, C.-M., Guan, Z.-K., Yen, I.-C., Ho, C.-W., Chi, T.-C., Ku, C.-S., Huang, B.-S., Fu, C.-C., &amp; Kuo-Chen, H. (2024).
+                <strong>Deep learning-based earthquake catalog reveals the seismogenic structures of the 2022 M<sub>W</sub> 6.9 Chihshang earthquake sequence.</strong>
+                <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
+                <a href="https://doi.org/10.1007/s44195-024-00063-9" target="_blank" rel="noopener">doi.org/10.1007/s44195-024-00063-9</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Huang, B.-S., Ku, C.-S., Lin, C.-J., Lee, S.-J., Chen, Y.-L. E., Jiang, J.-S., &amp; Sun, W.-F. (2024).
+                <strong>The first 30 min hidden aftershocks of the 2022 September 17, M<sub>L</sub> 6.4, Guanshan, Taiwan earthquake and its seismological implications.</strong>
+                <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
+                <a href="https://doi.org/10.1007/s44195-023-00059-x" target="_blank" rel="noopener">doi.org/10.1007/s44195-023-00059-x</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Sun, W.-F., Pan, S.-Y., Liu, Y.-H., Kuo-Chen, H., Ku, C.-S., Lin, C.-M., &amp; Fu, C.-C. (2025).
+                <strong>A Deep-Learning-Based Real-Time Microearthquake Monitoring System (RT-MEMS) for Taiwan.</strong>
+                <em>Sensors</em>, 25(11), 3353.
+                <a href="https://doi.org/10.3390/s25113353" target="_blank" rel="noopener">doi.org/10.3390/s25113353</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Kuo-Chen, H., Sun, W.-F., Kan, L.-Y., Pan, S.-Y., Yen, I.-C., Liang, S.-H., Guan, Z.-K., Liu, Y.-H., Chen, W.-S., &amp; Brown, D. (2025).
+                <strong>Real-Time Earthquake Monitoring with Deep Learning: A Case Study of the 2025 M<sub>L</sub> 6.4 Dapu Earthquake and Its Fault System in Southwestern Taiwan.</strong>
+                <em>The Seismic Record</em>, 5(3), 320–329.
+                <a href="https://pubs.geoscienceworld.org/ssa/tsr/article/5/3/320/661129/Real-Time-Earthquake-Monitoring-with-Deep-Learning" target="_blank" rel="noopener">geoscienceworld.org</a>
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="articles" class="section">
+      <div class="section__inner">
+        <p class="eyebrow">文章 · Articles</p>
+        <h2>地震 AI 的<br/>研究與科普筆記。</h2>
+        <p class="section__lead">
+          把模型、損失函數與真實資料背後的故事，寫成讀得懂的文字。
+        </p>
+
+        <div class="article-list article-list--cols">
+          <a class="article-card" href="/articles/ai-phase-picking-landscape/">
+            <p class="article-card__meta">2026.05.28 · 地震 AI</p>
+            <h2>AI 怎麼學會挑地震波的？</h2>
+            <p>從各實驗室各寫各的程式，到一行指令就能叫出訓練好的模型——PhaseNet、EQTransformer，到把生態串起來的 SeisBench。</p>
+            <span class="article-card__cta">閱讀全文 →</span>
+          </a>
+          <a class="article-card" href="/articles/bluedisc-shape-aware-loss/">
+            <p class="article-card__meta">2026.05.28 · 地震 AI</p>
+            <h2>AI 為什麼老是漏看 S 波？</h2>
+            <p>S 波位置抓對了、振幅卻被壓在偵測門檻下。BlueDisc 如何用 shape-aware loss 把它救回來，有效偵測數提升 64%。</p>
+            <span class="article-card__cta">閱讀全文 →</span>
+          </a>
+        </div>
+
+        <div class="articles-more">
+          <a href="/articles/" class="btn btn--ghost">看全部文章 →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="section__inner contact__inner">
+        <div>
+          <p class="eyebrow">聯絡我們</p>
+          <h2>與藍震合作，<br/>從一封信開始。</h2>
+          <p class="section__lead">
+            無論是地震監測合作、模型導入，或是研究與系統整合的委託，
+            都歡迎直接來信討論。
+          </p>
+        </div>
+        <div class="contact__card">
+          <h3>藍震有限公司 SeisBlue Co., Ltd.</h3>
+          <ul>
+            <li><span>主要聯絡</span><a class="email" data-user="jimmy" data-domain="seisblue.com" href="#">jimmy [at] seisblue.com</a></li>
+            <li><span>地址</span>臺北市松山區南京東路 4 段 186 號 6 樓之 3</li>
+            <li><span>GitHub</span><a href="https://github.com/SeisBlue" target="_blank" rel="noopener">github.com/SeisBlue</a></li>
+          </ul>
+          <a class="btn btn--primary btn--block email" data-user="jimmy" data-domain="seisblue.com" href="#contact">寄信給我們</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · 藍震有限公司</strong>
+        <p>專注地震監測 AI — Made in Taiwan.</p>
+        <p class="footer__addr">臺北市松山區南京東路 4 段 186 號 6 樓之 3 · <a class="email" data-user="jimmy" data-domain="seisblue.com" href="#">jimmy [at] seisblue.com</a></p>
+      </div>
+      <div class="footer__more">
+        <span class="footer__more-title">其他作品</span>
+        <a href="https://reserve.seisblue.com" target="_blank" rel="noopener">Blue's Reserve — 客製飲品品牌 ↗</a>
+        <a href="https://jimmylab.seisblue.com" target="_blank" rel="noopener">Jimmy Lab — 技術部落格與軟體接案 ↗</a>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

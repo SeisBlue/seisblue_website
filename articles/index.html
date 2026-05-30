@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>文章｜藍震有限公司 SeisBlue 地震 AI</title>
+  <meta name="description" content="黃俊銘在地震 AI 的技術筆記與科普，主題涵蓋深度學習地震偵測、相位拾取、損失函數設計與早期預警。" />
+  <meta name="author" content="黃俊銘 Chun-Ming Huang" />
+  <link rel="canonical" href="https://www.seisblue.com/articles/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/articles/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/articles/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/articles/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:site_name" content="藍震有限公司 SeisBlue" />
+  <meta property="og:title" content="文章｜藍震有限公司 SeisBlue 地震 AI" />
+  <meta property="og:description" content="黃俊銘在地震 AI 的技術筆記與科普，主題涵蓋深度學習地震偵測、相位拾取、損失函數設計與早期預警。" />
+  <meta property="og:url" content="https://www.seisblue.com/articles/" />
+  <meta property="og:image" content="https://www.seisblue.com/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue 藍震有限公司 logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>藍震有限公司</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="主導覽">
+        <a href="/#about">關於我們</a>
+        <a href="/#services">業務範圍</a>
+        <a href="/#seisblue">地震 AI</a>
+        <a href="/articles/">文章</a>
+        <a href="/en/articles/" class="nav__lang" hreflang="en" lang="en">EN</a>
+        <a href="/#contact" class="nav__cta">聯絡我們</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section">
+      <div class="section__inner">
+        <p class="eyebrow">文章 · Articles</p>
+        <h2>技術文章與科普</h2>
+        <p class="section__lead">
+          黃俊銘在地震 AI 的研究與工程心得。把模型、損失函數與真實資料背後的故事，寫成讀得懂的文字。
+        </p>
+
+        <div class="article-list">
+          <a class="article-card" href="/articles/ai-phase-picking-landscape/">
+            <p class="article-card__meta">2026.05.28 · 地震 AI</p>
+            <h2>AI 怎麼學會挑地震波的？</h2>
+            <p>
+              短短幾年，AI 挑地震波從各實驗室各寫各的程式，變成一行指令就能叫出訓練好的模型。
+              這篇科普介紹這條線怎麼鋪起來：PhaseNet、EQTransformer，以及把整個生態串起來的 SeisBench。
+            </p>
+            <span class="article-card__cta">閱讀全文 →</span>
+          </a>
+
+          <a class="article-card" href="/articles/bluedisc-shape-aware-loss/">
+            <p class="article-card__meta">2026.05.28 · 地震 AI</p>
+            <h2>AI 為什麼老是漏看 S 波？</h2>
+            <p>
+              深度學習相位拾取有個怪毛病：S 波明明位置抓對了，振幅卻被壓在偵測門檻底下，被當成沒看到。
+              這篇用最白話的方式講清楚它為什麼會卡住，以及 BlueDisc 如何用 shape-aware loss 把它救回來——有效偵測數提升 64%。
+            </p>
+            <span class="article-card__cta">閱讀全文 →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · 藍震有限公司</strong>
+        <p>以軟體與 AI 為核心 — Made in Taiwan.</p>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

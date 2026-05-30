@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>SeisBlue Co., Ltd. | Seismic monitoring AI: phase picking, catalogs & early warning</title>
+  <meta name="description" content="SeisBlue Co., Ltd. is a Taiwan-based tech company focused on seismic monitoring AI. We engineer deep-learning seismic research into systems that run reliably in production — deep-learning phase picking, near-real-time earthquake catalogs, and earthquake early warning." />
+  <meta name="keywords" content="SeisBlue, SeisBlue Co Ltd, seismic AI, earthquake AI, deep learning, phase picking, earthquake early warning, EEW, earthquake catalog, S-wave detection, BlueDisc, TT-SAM, SeisBlue Platform, seismic monitoring, Taiwan" />
+  <meta name="author" content="SeisBlue Co., Ltd." />
+  <link rel="canonical" href="https://www.seisblue.com/en/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="zh_TW" />
+  <meta property="og:site_name" content="SeisBlue Co., Ltd." />
+  <meta property="og:title" content="SeisBlue Co., Ltd. | Seismic Monitoring AI" />
+  <meta property="og:description" content="Engineering seismic-AI research into production systems. SeisBlue builds deep-learning phase picking, near-real-time earthquake catalogs, and earthquake early warning systems." />
+  <meta property="og:url" content="https://www.seisblue.com/en/" />
+  <meta property="og:image" content="https://www.seisblue.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SeisBlue Co., Ltd. | Seismic Monitoring AI" />
+  <meta name="twitter:description" content="Engineering seismic-AI research into production systems. SeisBlue builds deep-learning phase picking, near-real-time earthquake catalogs, and earthquake early warning systems." />
+  <meta name="twitter:image" content="https://www.seisblue.com/og-image.png" />
+
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SeisBlue Co., Ltd.",
+    "alternateName": ["SeisBlue", "藍震有限公司"],
+    "url": "https://www.seisblue.com/",
+    "logo": "https://www.seisblue.com/logo.png",
+    "description": "SeisBlue Co., Ltd. is a Taiwan-based technology company focused on seismic monitoring AI. It engineers deep-learning seismic research into systems that run reliably in production, covering phase picking, near-real-time earthquake catalogs, and earthquake early warning.",
+    "email": "jimmy@seisblue.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "6F-3, No. 186, Sec. 4, Nanjing E. Rd.",
+      "addressLocality": "Songshan District",
+      "addressRegion": "Taipei City",
+      "addressCountry": "TW"
+    },
+    "sameAs": [
+      "https://github.com/SeisBlue",
+      "https://jimmylab.seisblue.com",
+      "https://reserve.seisblue.com"
+    ],
+    "subOrganization": [
+      {
+        "@type": "Organization",
+        "name": "SeisBlue Seismic AI",
+        "url": "https://www.seisblue.com/en/#seisblue",
+        "description": "Deep-learning seismic phase picking, near-real-time earthquake catalogs, and earthquake early warning."
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#top" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue Co., Ltd. logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>SeisBlue Co., Ltd.</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#services">Seismic AI</a>
+        <a href="/en/articles/">Articles</a>
+        <a href="/" class="nav__lang" hreflang="zh-Hant" lang="zh-Hant">中</a>
+        <a href="#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <svg class="hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+          <path class="wave wave--1" d="M0,100 Q180,40 360,100 T720,100 T1080,100 T1440,100" fill="none" />
+          <path class="wave wave--2" d="M0,120 Q180,60 360,120 T720,120 T1080,120 T1440,120" fill="none" />
+          <path class="wave wave--3" d="M0,140 Q180,90 360,140 T720,140 T1080,140 T1440,140" fill="none" />
+        </svg>
+      </div>
+      <div class="hero__inner">
+        <p class="eyebrow">Seismic Monitoring AI · Taiwan</p>
+        <h1>Teaching AI<br/>to read every tremor.</h1>
+        <p class="hero__lead">
+          SeisBlue Co., Ltd. is a Taiwan-based technology company focused on
+          <strong>seismic monitoring AI</strong>.
+          We engineer deep-learning seismic research into systems that run reliably in production —
+          <strong>deep-learning phase picking</strong>,
+          <strong>near-real-time earthquake catalogs</strong>, and
+          <strong>earthquake early warning</strong>.
+        </p>
+        <div class="hero__cta">
+          <a href="#services" class="btn btn--primary">Explore our technology</a>
+          <a href="#contact" class="btn btn--ghost">Contact us →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="section__inner two-col">
+        <div>
+          <p class="eyebrow">About SeisBlue</p>
+          <h2>From a single waveform,<br/>to an earthquake alert.</h2>
+        </div>
+        <div class="about__body">
+          <p>
+            SeisBlue's core capability is <strong>deep learning and seismology</strong>.
+            We focus on turning continuous waveforms into trustworthy earthquake information.
+          </p>
+          <p>
+            We're always doing the same thing:
+            <em>turning elusive ground-motion signals into judgments you can act on in real time.</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="section__inner">
+        <p class="eyebrow">What We Do</p>
+        <h2>From research methods,<br/>to systems that ship.</h2>
+        <p class="section__lead">
+          SeisBlue pairs years of seismic-AI research experience with engineering practice —
+          building training pipelines, integrating real-time data streams, and turning
+          research methods into systems that run reliably in production.
+        </p>
+
+        <div class="services__grid">
+          <a class="service-card" href="#case-bluedisc">
+            <div class="service-card__head">
+              <span class="service-card__tag">Method Research</span>
+              <h3>BlueDisc<br/>S-wave detection method</h3>
+            </div>
+            <p>Targeting deep learning's long-standing failure to detect S-waves, a shape-aware loss training strategy raises effective S-phase detections by 64% on standard benchmarks.</p>
+            <span class="service-card__cta">See the method →</span>
+          </a>
+
+          <a class="service-card" href="#case-platform">
+            <div class="service-card__head">
+              <span class="service-card__tag">Production Framework</span>
+              <h3>SeisBlue Platform<br/>seismic data framework</h3>
+            </div>
+            <p>Packages the full pipeline — from continuous waveforms and phase picking to catalog output — into a service that runs reliably in production. Adopted by multiple peer-reviewed studies.</p>
+            <span class="service-card__cta">Explore the platform →</span>
+          </a>
+
+          <a class="service-card" href="#case-ttsam">
+            <div class="service-card__head">
+              <span class="service-card__tag">Real-Time EEW</span>
+              <h3>TT-SAM<br/>earthquake early warning</h3>
+            </div>
+            <p>The Taiwan Transformer Shaking Alert Model — a real-time warning pipeline running on the Earthworm real-time data stream.</p>
+            <span class="service-card__cta">Explore the system →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="seisblue" class="section technology">
+      <div class="section__inner">
+        <p class="eyebrow">AI Application · Seismic AI</p>
+        <h2>From research methods,<br/>to production deployment.</h2>
+        <p class="section__lead">
+          SeisBlue combines seismic-AI <strong>research experience with engineering capability</strong> —
+          building training pipelines, integrating real-time data streams,
+          and turning research methods into services that run reliably in production.
+          Below are concrete demonstrations.
+        </p>
+
+        <div class="arch__grid arch__grid--three">
+          <article class="arch-card">
+            <span class="arch-card__num">01</span>
+            <h4>Method Research</h4>
+            <p>From loss functions and training strategies to data engineering — deep research experience that raises performance ceilings at the model level.</p>
+          </article>
+          <article class="arch-card">
+            <span class="arch-card__num">02</span>
+            <h4>Training Infrastructure</h4>
+            <p>Reproducible, scalable training infrastructure — covering data preprocessing, model architecture, and training strategy.</p>
+          </article>
+          <article class="arch-card">
+            <span class="arch-card__num">03</span>
+            <h4>Production Deployment</h4>
+            <p>Integrating models into real-time data streams (e.g. Earthworm) to keep services running 24/7.</p>
+          </article>
+        </div>
+
+        <h3 id="case-bluedisc" class="arch__title">Case 1 · BlueDisc: S-wave detection method</h3>
+        <p class="arch__desc">
+          BlueDisc grew out of Chun-Ming Huang's years of research on phase picking.
+          Targeting the long-standing <em>S-wave amplitude suppression</em> problem in
+          deep-learning phase pickers, the work dissects
+          <strong>the role of the loss function in training</strong> and
+          <strong>why the data fails to converge</strong> —
+          validated through a <strong>shape-then-align</strong> training strategy with a conditional GAN
+          proof of concept. On standard benchmarks, effective S-phase detections rose by
+          <strong>64%</strong>.
+          Source at <a href="https://github.com/SeisBlue/BlueDisc" target="_blank" rel="noopener">github.com/SeisBlue/BlueDisc</a>; full results in the preprint below.
+        </p>
+
+        <h3 id="case-platform" class="arch__title">Case 2 · The SeisBlue Platform</h3>
+        <p class="arch__desc">
+          SeisBlue is a deep-learning seismic data processing framework
+          developed and open-sourced by Chun-Ming Huang.
+          The platform packages the full pipeline — from waveform ingestion through phase picking
+          to catalog output — into a service that runs reliably in production.
+          It has been adopted by multiple peer-reviewed studies as a core processing tool
+          (see citations below).
+          Source at <a href="https://github.com/SeisBlue/SeisBlue" target="_blank" rel="noopener">github.com/SeisBlue/SeisBlue</a>.
+        </p>
+
+        <h3 id="case-ttsam" class="arch__title">Case 3 · TT-SAM Real-Time EEW Pipeline</h3>
+        <p class="arch__desc">
+          <strong>TT-SAM</strong> (Taiwan Transformer Shaking Alert Model) is an earthquake early warning system.
+          Its architecture references the TEAM framework by Münchmeyer et al. (2020);
+          Chun-Ming Huang led the <strong>AI engineering core</strong> —
+          training environment setup, pipeline design, and production deployment.
+          The real-time pipeline runs on the Earthworm real-time data stream.
+        </p>
+
+        <div class="refs">
+          <h3 class="refs__title">Academic References</h3>
+          <p class="refs__desc">
+            Below are the primary publications related to SeisBlue and TT-SAM,
+            along with follow-up research adopting these technologies.
+          </p>
+
+          <h4 class="refs__group">BlueDisc · S-wave detection method</h4>
+          <ol class="refs__list">
+            <li class="refs__lead">
+              <span class="refs__badge refs__badge--lead">First Author</span>
+              <p>
+                Huang, C.-M., Chang, L.-H., Chang, I.-H., Lee, A.-S., &amp; Kuo-Chen, H. (2025).
+                <strong>Recovering Sub-threshold S-wave Arrivals in Deep Learning Phase Pickers via Shape-Aware Loss.</strong>
+                <em>arXiv preprint</em>, arXiv:2511.06731.
+                <a href="https://arxiv.org/abs/2511.06731" target="_blank" rel="noopener">arxiv.org/abs/2511.06731</a>
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="refs__group">SeisBlue Platform</h4>
+          <ol class="refs__list">
+            <li class="refs__primary">
+              <span class="refs__badge">Primary</span>
+              <p>
+                Huang, C.-M., Chang, L.-H., Kuo-Chen, H., &amp; Zhuang, Y. (2023).
+                <strong>SeisBlue: a deep-learning data processing platform for seismology.</strong>
+                <em>EGU General Assembly 2023</em>, Vienna, Austria, EGU23-13927.
+                <a href="https://doi.org/10.5194/egusphere-egu23-13927" target="_blank" rel="noopener">doi.org/10.5194/egusphere-egu23-13927</a>
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="refs__group">TT-SAM System</h4>
+          <ol class="refs__list">
+            <li class="refs__primary">
+              <span class="refs__badge">Primary</span>
+              <p>
+                Chen, Y.-H., Chan, C.-H., Chang, C.-C., &amp; Ma, K.-F. (2026).
+                <strong>A Deep Learning Framework for Peak Ground Velocity Prediction Using Multi-Station Velocity Waveforms: The Taiwan Transformer Shaking Alert Model (TT-SAM).</strong>
+                <em>Journal of Geophysical Research: Machine Learning and Computation</em>.
+                <a href="https://doi.org/10.1029/2025JH001005" target="_blank" rel="noopener">doi.org/10.1029/2025JH001005</a>
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="refs__group">Follow-up research adopting the SeisBlue Platform</h4>
+          <ol class="refs__list refs__list--cites">
+            <li>
+              <p>
+                Sun, W.-F., Pan, S.-Y., Huang, C.-M., Guan, Z.-K., Yen, I.-C., Ho, C.-W., Chi, T.-C., Ku, C.-S., Huang, B.-S., Fu, C.-C., &amp; Kuo-Chen, H. (2024).
+                <strong>Deep learning-based earthquake catalog reveals the seismogenic structures of the 2022 M<sub>W</sub> 6.9 Chihshang earthquake sequence.</strong>
+                <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
+                <a href="https://doi.org/10.1007/s44195-024-00063-9" target="_blank" rel="noopener">doi.org/10.1007/s44195-024-00063-9</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Huang, B.-S., Ku, C.-S., Lin, C.-J., Lee, S.-J., Chen, Y.-L. E., Jiang, J.-S., &amp; Sun, W.-F. (2024).
+                <strong>The first 30 min hidden aftershocks of the 2022 September 17, M<sub>L</sub> 6.4, Guanshan, Taiwan earthquake and its seismological implications.</strong>
+                <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
+                <a href="https://doi.org/10.1007/s44195-023-00059-x" target="_blank" rel="noopener">doi.org/10.1007/s44195-023-00059-x</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Sun, W.-F., Pan, S.-Y., Liu, Y.-H., Kuo-Chen, H., Ku, C.-S., Lin, C.-M., &amp; Fu, C.-C. (2025).
+                <strong>A Deep-Learning-Based Real-Time Microearthquake Monitoring System (RT-MEMS) for Taiwan.</strong>
+                <em>Sensors</em>, 25(11), 3353.
+                <a href="https://doi.org/10.3390/s25113353" target="_blank" rel="noopener">doi.org/10.3390/s25113353</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Kuo-Chen, H., Sun, W.-F., Kan, L.-Y., Pan, S.-Y., Yen, I.-C., Liang, S.-H., Guan, Z.-K., Liu, Y.-H., Chen, W.-S., &amp; Brown, D. (2025).
+                <strong>Real-Time Earthquake Monitoring with Deep Learning: A Case Study of the 2025 M<sub>L</sub> 6.4 Dapu Earthquake and Its Fault System in Southwestern Taiwan.</strong>
+                <em>The Seismic Record</em>, 5(3), 320–329.
+                <a href="https://pubs.geoscienceworld.org/ssa/tsr/article/5/3/320/661129/Real-Time-Earthquake-Monitoring-with-Deep-Learning" target="_blank" rel="noopener">geoscienceworld.org</a>
+              </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="articles" class="section">
+      <div class="section__inner">
+        <p class="eyebrow">Articles</p>
+        <h2>Research &amp; explainers<br/>on seismic AI.</h2>
+        <p class="section__lead">
+          The stories behind the models, loss functions, and real-world data — written to be read.
+        </p>
+
+        <div class="article-list article-list--cols">
+          <a class="article-card" href="/en/articles/ai-phase-picking-landscape/">
+            <p class="article-card__meta">2026.05.28 · Seismic AI</p>
+            <h2>How Did AI Learn to Pick Seismic Phases?</h2>
+            <p>From every lab writing its own code to a one-line model call — PhaseNet, EQTransformer, and the SeisBench toolbox that tied the ecosystem together.</p>
+            <span class="article-card__cta">Read more →</span>
+          </a>
+          <a class="article-card" href="/en/articles/bluedisc-shape-aware-loss/">
+            <p class="article-card__meta">2026.05.28 · Seismic AI</p>
+            <h2>Why Does AI Keep Missing S-Waves?</h2>
+            <p>The S-wave position is right, but its amplitude sinks below the detection threshold. How BlueDisc recovers it with a shape-aware loss — a 64% gain.</p>
+            <span class="article-card__cta">Read more →</span>
+          </a>
+        </div>
+
+        <div class="articles-more">
+          <a href="/en/articles/" class="btn btn--ghost">See all articles →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="section__inner contact__inner">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Work with SeisBlue.<br/>Start with an email.</h2>
+          <p class="section__lead">
+            Whether it's a seismic monitoring collaboration, model integration,
+            or a research and systems-integration project, just send us a message.
+          </p>
+        </div>
+        <div class="contact__card">
+          <h3>SeisBlue Co., Ltd. · 藍震有限公司</h3>
+          <ul>
+            <li><span>Primary</span><a class="email" data-user="jimmy" data-domain="seisblue.com" href="#">jimmy [at] seisblue.com</a></li>
+            <li><span>Address</span>6F-3, No. 186, Sec. 4, Nanjing E. Rd., Songshan, Taipei</li>
+            <li><span>GitHub</span><a href="https://github.com/SeisBlue" target="_blank" rel="noopener">github.com/SeisBlue</a></li>
+          </ul>
+          <a class="btn btn--primary btn--block email" data-user="jimmy" data-domain="seisblue.com" href="#contact">Send us an email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · 藍震有限公司</strong>
+        <p>Focused on seismic monitoring AI — Made in Taiwan.</p>
+        <p class="footer__addr">6F-3, No. 186, Sec. 4, Nanjing E. Rd., Songshan Dist., Taipei City · <a class="email" data-user="jimmy" data-domain="seisblue.com" href="#">jimmy [at] seisblue.com</a></p>
+      </div>
+      <div class="footer__more">
+        <span class="footer__more-title">Other Work</span>
+        <a href="https://reserve.seisblue.com" target="_blank" rel="noopener">Blue's Reserve — Custom beverage brand ↗</a>
+        <a href="https://jimmylab.seisblue.com" target="_blank" rel="noopener">Jimmy Lab — Tech blog & software consulting ↗</a>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

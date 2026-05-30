@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss｜SeisBlue</title>
+  <meta name="description" content="深度學習相位拾取長期有個怪毛病：S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。這篇用最白話的方式講清楚為什麼會卡住，以及 BlueDisc 如何用 shape-aware loss 與條件式 GAN 把它救回來，有效 S 相位偵測數提升 64%。" />
+  <meta name="keywords" content="地震 AI, 相位拾取, phase picking, S 波, S-wave, 深度學習, shape-aware loss, GAN, BlueDisc, SeisBlue, 損失函數, 地震偵測" />
+  <meta name="author" content="黃俊銘 Chun-Ming Huang" />
+  <link rel="canonical" href="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/articles/bluedisc-shape-aware-loss/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:site_name" content="藍震有限公司 SeisBlue" />
+  <meta property="og:title" content="AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss" />
+  <meta property="og:description" content="S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。BlueDisc 如何用 shape-aware loss 把它救回來，有效偵測數提升 64%。" />
+  <meta property="og:url" content="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
+  <meta property="og:image" content="https://www.seisblue.com/articles/og-bluedisc.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2026-05-28" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss" />
+  <meta name="twitter:description" content="S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。BlueDisc 如何用 shape-aware loss 把它救回來，有效偵測數提升 64%。" />
+  <meta name="twitter:image" content="https://www.seisblue.com/articles/og-bluedisc.jpg" />
+
+  <!-- BlogPosting JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss",
+    "description": "深度學習相位拾取長期有個怪毛病：S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。BlueDisc 如何用 shape-aware loss 與條件式 GAN 把它救回來，有效偵測數提升 64%。",
+    "image": "https://www.seisblue.com/articles/og-bluedisc.jpg",
+    "datePublished": "2026-05-28",
+    "dateModified": "2026-05-28",
+    "inLanguage": "zh-Hant",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.seisblue.com/articles/bluedisc-shape-aware-loss/"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "黃俊銘 Chun-Ming Huang"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "藍震有限公司 SeisBlue Co., Ltd.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.seisblue.com/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue 藍震有限公司 logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>藍震有限公司</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="主導覽">
+        <a href="/#about">關於我們</a>
+        <a href="/#services">業務範圍</a>
+        <a href="/#seisblue">地震 AI</a>
+        <a href="/articles/">文章</a>
+        <a href="/en/articles/bluedisc-shape-aware-loss/" class="nav__lang" hreflang="en" lang="en">EN</a>
+        <a href="/#contact" class="nav__cta">聯絡我們</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <article>
+      <header class="article-hero">
+        <div class="hero__bg" aria-hidden="true">
+          <svg class="hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+            <path class="wave wave--1" d="M0,100 Q180,40 360,100 T720,100 T1080,100 T1440,100" fill="none" />
+            <path class="wave wave--2" d="M0,120 Q180,60 360,120 T720,120 T1080,120 T1440,120" fill="none" />
+            <path class="wave wave--3" d="M0,140 Q180,90 360,140 T720,140 T1080,140 T1440,140" fill="none" />
+          </svg>
+        </div>
+        <div class="article-hero__inner">
+          <p class="eyebrow">文章 · 地震 AI</p>
+          <h1>AI 為什麼老是漏看 S 波？</h1>
+          <div class="article-meta">
+            <span>2026.05.28</span>
+            <span>黃俊銘 Chun-Ming Huang</span>
+            <span>約 6 分鐘</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article">
+        <div class="article__inner">
+          <p class="article__lead">
+            地震儀整天都在錄資料，台灣一年大概要記錄上萬次震動。從這些波形裡面挑出哪些是地震、發生在哪一刻，
+            傳統上是靠人去看波形圖，一個個標記。一個資深分析師可以標得很好，但量太大，分析師也是人，也要睡覺。
+          </p>
+
+          <div class="prose">
+            <p>
+              所以這幾年來，地震學家把這件事丟給深度學習。模型訓練完之後，丟一段波形進去，
+              它會告訴你哪個時刻有 P 波到達、哪個時刻有 S 波到達。
+            </p>
+            <p>
+              P 波跟 S 波是地震波的兩種類型。P 波跑得快，先到。S 波慢一點，後到，但破壞力更強，
+              房子搖晃感受最明顯的就是它。震源在哪、地震多嚴重，這兩個時間點都不能漏。
+            </p>
+
+            <h2>一個莫名其妙的失敗模式</h2>
+            <p>
+              問題是，AI 挑 P 波的時候表現得像個完美主義者，挑 S 波卻常常出包。
+              同一段波形，明明對人類來說 S 波的位置一目瞭然，模型偏偏給出一個歪掉、又長不大的小峰值，
+              剛好低於我們設定的偵測門檻，於是被當成沒看到。
+            </p>
+            <p>
+              更詭異的是，它看到的位置常常是準的。時間沒錯，就是高度不夠。
+            </p>
+
+            <figure class="figure--portrait">
+              <img src="/articles/amplitude-suppression.webp" alt="隨訓練步數變化的 P 波與 S 波預測，S 波預測逐漸被壓低至偵測門檻以下" width="1000" height="1954" loading="lazy" />
+              <figcaption>同一筆波形在訓練過程中的預測變化（由上到下為訓練步數遞增）。P 波（藍）越來越尖銳，<b>S 波（紅）卻被一路壓低，最後沉到偵測門檻以下</b>——位置沒跑掉，高度卻消失了。</figcaption>
+            </figure>
+
+            <p>
+              這個現象地震學界知道很多年了，大家通常的反應是換更大的模型、餵更多資料、調整訓練方法，
+              把它當成一個煩人的副作用慢慢繞過去。
+            </p>
+            <p>
+              這篇論文沒有想繞，作者想搞清楚到底為什麼。
+            </p>
+
+            <h2>為什麼會卡住</h2>
+            <p>
+              想像一下你要評一張肖像畫畫得像不像。直覺的做法是看整張臉。
+              但如果規則改成不准看整張，只能把畫面切成幾百個小格子，每格獨立打分，最後加起來，事情就麻煩了。
+            </p>
+            <p>
+              每一格只能告訴你這格該調亮還是調暗。沒有任何一格能告訴你整張臉的位置應該往左移一點。
+              所以當預測的形狀正確、位置卻往右偏了一點點，每一格收到的訊號都是<em>你不夠亮、把自己壓低</em>。
+              預測越畫越淡，但位置永遠不會被修正。
+            </p>
+            <p>
+              傳統訓練 AI 找 S 波的方式，正好就是這種逐格打分。它沒有任何機制告訴模型整體應該往哪邊挪，
+              只能上下調亮度。S 波預測就這樣卡在某個位置不上不下，把自己越壓越扁。
+            </p>
+
+            <figure>
+              <img src="/articles/loss-landscape.webp" alt="逐點計算的損失曲面，只有縱向的下壓梯度，缺乏將預測橫移到正確位置的梯度" width="1200" height="1331" loading="lazy" />
+              <figcaption>逐點打分形成的損失地形。模型收到的梯度幾乎只能把預測<b>往下壓（縱向）</b>；要把整段波形<b>橫移到正確位置</b>卻幾乎沒有坡度可循——於是預測越壓越扁，位置卻永遠修不動。</figcaption>
+            </figure>
+            <p>
+              S 波特別容易中招，還因為兩件事火上加油。第一，它的標準答案本身就比較模糊：
+              S 波傳得遠了之後波形會變胖、邊界變糊，連人類專家標出來的位置都會差個幾百毫秒，訓練資料裡正確答案就帶噪音。
+              第二，AI 模型天生愛尖銳的東西，會把預測錨在波形上最明顯的轉折，剛好不是 S 波該在的位置。
+            </p>
+            <p>
+              三件事湊在一起，把 S 波預測困死在一個無解的角落。
+            </p>
+
+            <h2>解法</h2>
+            <p>
+              診斷找到了，解法就好辦。
+            </p>
+            <p>
+              作者用了一個叫 GAN 的技術。GAN 通常用來生假照片或假影片，原理是讓兩個模型互相對抗，
+              一個負責生產，一個負責挑剔。生產的努力騙過挑剔的，挑剔的努力分辨真假，
+              最後生產的被逼得越來越像真貨。
+            </p>
+            <p>
+              在這篇論文裡，挑剔的那個鑑別器的工作是看一眼模型輸出，判斷整體形狀像不像真正的標籤。
+              它不在乎每一格獨立的數值，<em>它看的是整張臉</em>。
+            </p>
+            <p>
+              這就補上了原本缺失的那個訊號。模型不能只把每格的亮度調對，它必須讓整張臉說得過去，
+              否則鑑別器一眼就揪出來。
+            </p>
+
+            <figure>
+              <img src="/articles/gan-compare.webp" alt="同一筆波形在傳統訓練與加入 GAN 之後的 S 波預測對比，加入 GAN 後 S 波預測回到完整高度" width="1200" height="958" loading="lazy" />
+              <figcaption>同一筆波形的預測對比。<b>中：傳統訓練</b>，S 波（紅）被壓得低低的；<b>下：加入 GAN 之後</b>，S 波預測回到和 P 波一樣完整的高度。</figcaption>
+            </figure>
+
+            <div class="keystat">
+              <strong>+64%</strong>
+              <span>訓練一萬步之後，原本卡在門檻下方的那批 S 波預測全部被推了上來，有效偵測數提升 64%。原本被當成沒看到的訊號，現在被找回來了。</span>
+            </div>
+
+            <figure>
+              <img src="/articles/s-distribution.webp" alt="S 波預測的位置誤差與高度分布，加入 GAN 後越過門檻的精準預測比例大幅提升" width="1200" height="853" loading="lazy" />
+              <figcaption>所有 S 波預測按「位置誤差」與「高度」的分布。<b>精準且越過門檻</b>的比例從 32.4% 提升到 53.1%；原本<b>埋在門檻下</b>的 24.8% 幾乎清空，只剩 1.3%。</figcaption>
+            </figure>
+
+            <h2>為什麼這件事比 64% 重要</h2>
+            <p>
+              64% 這個數字很漂亮，但這篇論文真正讓人覺得有趣的地方不是它。
+            </p>
+            <p>
+              它真正做到的事情，是把一個原本被當成工程麻煩的現象，拆解成一個可以被理解、被預測、被分析的東西。
+              為什麼會卡住、卡在哪、怎麼放出來，全部能講清楚。整個流程從試誤推到了原則性分析。
+            </p>
+            <p>
+              這套診斷不只能用在地震。任何需要從訊號裡標出時間點的任務都適用，
+              心電圖上的心跳、衛星訊號裡的事件、語音裡的音節邊界。
+              只要標準答案是一個有形狀的東西，傳統的逐點打分都可能讓你掉進同一個陷阱。
+            </p>
+            <p>
+              論文最後其實在提一個觀念：<strong>理解損失函數本身的形狀，重要程度不輸理解模型架構</strong>。
+              我們很習慣討論換哪種網路、加幾層、用哪個函數，但很少有人停下來問，
+              你叫模型優化的那個目標，它本身的形狀長得對不對。
+            </p>
+            <p>
+              評分標準錯了，再厲害的模型也是白搭。
+            </p>
+          </div>
+
+          <section class="article__refs">
+            <h2>參考文獻</h2>
+            <p>
+              Huang, C.-M., Chang, L.-H., Chang, I.-H., Lee, A.-S., &amp; Kuo-Chen, H. (2025).
+              <strong>Recovering Sub-threshold S-wave Arrivals in Deep Learning Phase Pickers via Shape-Aware Loss.</strong>
+              <em>arXiv preprint</em>, arXiv:2511.06731.
+            </p>
+            <p>
+              <a href="https://arxiv.org/abs/2511.06731" target="_blank" rel="noopener">arxiv.org/abs/2511.06731</a><br />
+              <a href="https://www.researchgate.net/publication/397480133_Recovering_Sub-threshold_S-wave_Arrivals_in_Deep_Learning_Phase_Pickers_via_Shape-Aware_Loss" target="_blank" rel="noopener">ResearchGate</a><br />
+              程式碼：<a href="https://github.com/SeisBlue/BlueDisc" target="_blank" rel="noopener">github.com/SeisBlue/BlueDisc</a>
+            </p>
+          </section>
+
+          <section class="article__refs">
+            <h2>附錄：訓練過程動畫</h2>
+            <p>本文第一張圖的動畫版。隨著訓練步數推進，可以看到 S 波預測如何一路被壓到偵測門檻以下。</p>
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/rdnCe1mJpA8" title="BlueDisc：S 波預測在訓練過程中被壓抑的動畫" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </section>
+
+          <a class="article__back" href="/articles/">← 回到文章列表</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · 藍震有限公司</strong>
+        <p>以軟體與 AI 為核心 — Made in Taiwan.</p>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

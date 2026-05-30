@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench | SeisBlue</title>
+  <meta name="description" content="In just a few years, AI phase picking went from every lab writing its own code to calling a pre-trained model in a single line. A plain-language tour of how that happened: PhaseNet, EQTransformer, and SeisBench, the toolbox that tied the ecosystem together." />
+  <meta name="keywords" content="seismic AI, phase picking, PhaseNet, EQTransformer, SeisBench, deep learning, earthquake detection, U-Net, attention" />
+  <meta name="author" content="Chun-Ming Huang (黃俊銘)" />
+  <link rel="canonical" href="https://www.seisblue.com/en/articles/ai-phase-picking-landscape/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/articles/ai-phase-picking-landscape/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="zh_TW" />
+  <meta property="og:site_name" content="SeisBlue Co., Ltd." />
+  <meta property="og:title" content="How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench" />
+  <meta property="og:description" content="In a few years, AI phase picking went from every lab writing its own code to a shared, reproducible ecosystem. PhaseNet, EQTransformer, and SeisBench." />
+  <meta property="og:url" content="https://www.seisblue.com/en/articles/ai-phase-picking-landscape/" />
+  <meta property="og:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="2026-05-28" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench" />
+  <meta name="twitter:description" content="In a few years, AI phase picking went from every lab writing its own code to a shared, reproducible ecosystem. PhaseNet, EQTransformer, and SeisBench." />
+  <meta name="twitter:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
+
+  <!-- BlogPosting JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench",
+    "description": "A plain-language tour of how AI phase picking matured: PhaseNet, EQTransformer, and SeisBench, the toolbox that tied the ecosystem together.",
+    "image": "https://www.seisblue.com/articles/og-landscape.jpg",
+    "datePublished": "2026-05-28",
+    "dateModified": "2026-05-28",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.seisblue.com/en/articles/ai-phase-picking-landscape/"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Chun-Ming Huang"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SeisBlue Co., Ltd.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.seisblue.com/logo.png"
+      }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/en/" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue Co., Ltd. logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>SeisBlue Co., Ltd.</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/en/#about">About</a>
+        <a href="/en/#services">Services</a>
+        <a href="/en/#seisblue">Seismic AI</a>
+        <a href="/en/articles/">Articles</a>
+        <a href="/articles/ai-phase-picking-landscape/" class="nav__lang" hreflang="zh-Hant" lang="zh-Hant">中</a>
+        <a href="/en/#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <article>
+      <header class="article-hero">
+        <div class="hero__bg" aria-hidden="true">
+          <svg class="hero__wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+            <path class="wave wave--1" d="M0,100 Q180,40 360,100 T720,100 T1080,100 T1440,100" fill="none" />
+            <path class="wave wave--2" d="M0,120 Q180,60 360,120 T720,120 T1080,120 T1440,120" fill="none" />
+            <path class="wave wave--3" d="M0,140 Q180,90 360,140 T720,140 T1080,140 T1440,140" fill="none" />
+          </svg>
+        </div>
+        <div class="article-hero__inner">
+          <p class="eyebrow">Article · Seismic AI</p>
+          <h1>How Did AI Learn to Pick Seismic Phases?</h1>
+          <div class="article-meta">
+            <span>2026.05.28</span>
+            <span>Chun-Ming Huang 黃俊銘</span>
+            <span>6 min read</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article">
+        <div class="article__inner">
+          <p class="article__lead">
+            How did AI come to take over the job of picking seismic phases? In just a few years, the field went from
+            every lab writing its own code to calling someone else's pre-trained model in a single line. This is the story
+            of how that path got laid, with three protagonists: PhaseNet, EQTransformer, and the SeisBench toolbox that
+            tied them together.
+          </p>
+
+          <div class="prose">
+            <div class="timeline">
+              <div class="timeline__item">
+                <p class="timeline__year">2019</p>
+                <p class="timeline__title">PhaseNet</p>
+                <p>Recast phase picking as an image-segmentation problem (U-Net's home turf), with Gaussian-curve targets that train well; accurate enough to become the field's benchmark.</p>
+              </div>
+              <div class="timeline__item">
+                <p class="timeline__year">2020</p>
+                <p class="timeline__title">EQTransformer</p>
+                <p>Brought in the attention mechanism and split detection, P, and S into three independent heads so they don't interfere.</p>
+              </div>
+              <div class="timeline__item">
+                <p class="timeline__year">2022</p>
+                <p class="timeline__title">SeisBench</p>
+                <p>Wrapped many models and datasets in one interface, so results could finally be compared fairly and reproduced.</p>
+              </div>
+            </div>
+
+            <h2>PhaseNet: turning phase picking into an image-segmentation task</h2>
+            <p>
+              In 2019, Weiqiang Zhu and Greg Beroza at Stanford introduced <a href="https://github.com/AI4EPS/PhaseNet" target="_blank" rel="noopener">PhaseNet</a>. Its most important move was to
+              <strong>redefine</strong> the problem. Picking had been treated as "finding one precise arrival time in a long
+              stream of signal"; PhaseNet recast it as an <strong>image-segmentation</strong> task: label point by point
+              whether each spot is a P-wave, an S-wave, or nothing at all. That is exactly what the U-Net architecture was
+              built for; U-Net was originally designed to segment medical images, outlining organ boundaries in X-rays and
+              MRIs. Picking seismic phases and outlining an organ are, at heart, the same kind of problem.
+            </p>
+            <p>
+              The second change is subtler but just as important. The "correct" arrival time of a seismic wave is a single
+              instant, but asking a model to hit one exact point is very hard to train: the target is sharp and sparse, and
+              being slightly off counts as almost entirely wrong. PhaseNet spreads that sharp instant into a
+              <em>Gaussian curve</em>, centered on the human-labeled position with a little width on each side, which writes
+              the labeling error humans always have straight into the training target. A wider target gives the model room
+              for error and trains far more easily.
+            </p>
+            <p>
+              Feed the three-component waveform into a U-Net, and out come three probability curves (P, S, and noise);
+              wherever a curve spikes, that phase has arrived. Trained on decades of hand-labeled data from Northern
+              California, it was fast and accurate, accurate enough to become the field's <strong>benchmark</strong>: when a
+              new method appears, the first thing people do is compare it against PhaseNet.
+            </p>
+
+            <figure>
+              <img src="/articles/phasenet-example.webp" alt="A phase-picking example: a three-component waveform and the P and S Gaussian probability outputs" width="673" height="679" loading="lazy" />
+              <figcaption>A real example: the top three traces are the three components (Z / N / E) of a single earthquake, and the bottom panel is the model's output. The light curves are the human-labeled <b>Gaussian targets</b> (the ground truth); the dark ones are the predictions, with the P (blue) and S (red) peaks landing almost exactly on the targets. Both ideas show up here: the input is the whole waveform read point by point (the image-segmentation view), and the target is not a single instant but a curve with width.<br/>Image / <a href="https://github.com/SeisBlue" target="_blank" rel="noopener">SeisBlue</a></figcaption>
+            </figure>
+
+            <h2>EQTransformer: pulling three tasks apart</h2>
+            <p>
+              In 2020, Mousavi and colleagues from the same circle introduced <a href="https://github.com/smousavi05/EQTransformer" target="_blank" rel="noopener">EQTransformer</a>, published in <em>Nature Communications</em>.
+            </p>
+            <p>
+              If PhaseNet proved that "deep learning can pick phases," EQTransformer asked "can we do it more cleverly?"
+              It brought in the <em>attention mechanism</em> that was then sweeping the AI world (the same underlying idea
+              that large language models later run on), letting the model weigh distant and nearby cues simultaneously as
+              it reads a stretch of waveform.
+            </p>
+            <p>
+              Its key design is to <strong>pull three tasks apart</strong>: detecting whether there's an earthquake in the
+              segment at all, picking the P-wave, and picking the S-wave, each handled by its own independent output branch
+              (head) so they don't interfere. The reason: PhaseNet originally predicts P, S, and noise together as three
+              side-by-side channels, but a detection signal (is there an earthquake?) spans the whole event and is wide and
+              long, carrying far more weight than the two narrow little Gaussian peaks of P and S. Learn them all mixed
+              together and the tiny P and S signals are easily drowned out by the detection one. Splitting them into
+              separate heads lets each task focus on its own job. EQTransformer was trained on a large public dataset
+              called STEAD, bigger than the one PhaseNet used.
+            </p>
+
+            <h2>The trouble after a hundred flowers bloom</h2>
+            <p>
+              After PhaseNet and EQTransformer, all kinds of models appeared. That's a good thing in principle, but it soon
+              ran into a practical problem: <strong>nobody could compare them fairly</strong>.
+            </p>
+            <p>
+              Each model used differently formatted data, different preprocessing, different scoring. To find out whether
+              model A really beat model B, you first had to spend weeks rebuilding both data pipelines and environments
+              from scratch. Just the "load the data in" step was enough to put many people off. If research can't produce
+              reproducible comparisons, the field struggles to move forward.
+            </p>
+
+            <h2>SeisBench: a USB port for seismic AI</h2>
+            <p>
+              In 2022, a German research team (Woollam, Münchmeyer, and colleagues) released <a href="https://github.com/seisbench/seisbench" target="_blank" rel="noopener">SeisBench</a>, which addresses
+              exactly this.
+            </p>
+            <p>
+              Think of it as a <em>USB port</em> for seismic AI: any pre-trained model (PhaseNet, EQTransformer, and more)
+              and any public dataset plug in the same way. Want to swap models? Change one line. Want a different dataset?
+              Change another. What used to take weeks to set up now runs in a few lines of code, and everyone's results can
+              be compared directly.
+            </p>
+            <p>
+              SeisBench didn't invent a new phase picker, but what it did matters just as much: it turned the field from
+              "everyone doing their own thing" into "anyone can pick it up, and results can be reproduced." Today a newcomer
+              can try out the results of several past papers in a single afternoon, something that was barely possible five
+              years ago.
+            </p>
+
+            <h2>So what's next?</h2>
+            <p>
+              Over these few years, AI phase picking grew from a new idea into an open, reproducible ecosystem. The
+              infrastructure is in place, and the barrier to entry has dropped.
+            </p>
+            <p>
+              But mature tools don't mean every problem is solved. Models still fail in certain situations, for example the
+              S-wave amplitude getting suppressed, or struggling when they meet regions and instruments they never saw
+              during training. Once the foundation is solid, attention naturally shifts from "can it be done at all" to
+              these more specific flaws.
+            </p>
+            <p>
+              For a look at how one of those specific problems gets taken apart, read on:
+              <a href="/en/articles/bluedisc-shape-aware-loss/">Why Does AI Keep Missing S-Waves? →</a>
+            </p>
+          </div>
+
+          <section class="article__refs">
+            <h2>References</h2>
+            <p>
+              Zhu, W., &amp; Beroza, G. C. (2019).
+              <strong>PhaseNet: A Deep-Neural-Network-Based Seismic Arrival-Time Picking Method.</strong>
+              <em>Geophysical Journal International</em>, 216(1), 261–273.
+              <a href="https://doi.org/10.1093/gji/ggy423" target="_blank" rel="noopener">doi.org/10.1093/gji/ggy423</a>
+            </p>
+            <p>
+              Mousavi, S. M., Ellsworth, W. L., Zhu, W., Chuang, L. Y., &amp; Beroza, G. C. (2020).
+              <strong>Earthquake Transformer—An Attentive Deep-Learning Model for Simultaneous Earthquake Detection and Phase Picking.</strong>
+              <em>Nature Communications</em>, 11, 3952.
+              <a href="https://doi.org/10.1038/s41467-020-17591-w" target="_blank" rel="noopener">doi.org/10.1038/s41467-020-17591-w</a>
+            </p>
+            <p>
+              Woollam, J., Münchmeyer, J., Tilmann, F., Rietbrock, A., Lange, D., Bornstein, T., et al. (2022).
+              <strong>SeisBench—A Toolbox for Machine Learning in Seismology.</strong>
+              <em>Seismological Research Letters</em>, 93(3), 1695–1709.
+              <a href="https://doi.org/10.1785/0220210324" target="_blank" rel="noopener">doi.org/10.1785/0220210324</a>
+            </p>
+          </section>
+
+          <a class="article__back" href="/en/articles/">← Back to articles</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · SeisBlue Co., Ltd.</strong>
+        <p>Built around software &amp; AI — Made in Taiwan.</p>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

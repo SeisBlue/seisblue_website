@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <title>Articles | SeisBlue Co., Ltd. — Seismic AI</title>
+  <meta name="description" content="Technical notes and explainers by Chun-Ming Huang, covering deep-learning earthquake detection, phase picking, loss function design, and early warning." />
+  <meta name="author" content="Chun-Ming Huang (黃俊銘)" />
+  <link rel="canonical" href="https://www.seisblue.com/en/articles/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.seisblue.com/articles/" />
+  <link rel="alternate" hreflang="en" href="https://www.seisblue.com/en/articles/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.seisblue.com/articles/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="SeisBlue Co., Ltd." />
+  <meta property="og:title" content="Articles | SeisBlue Co., Ltd. — Seismic AI" />
+  <meta property="og:description" content="Technical notes and explainers by Chun-Ming Huang on deep-learning earthquake detection, phase picking, loss function design, and early warning." />
+  <meta property="og:url" content="https://www.seisblue.com/en/articles/" />
+  <meta property="og:image" content="https://www.seisblue.com/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" /></noscript>
+  <script type="module" src="/src/main.ts"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LFXXQQK4Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9LFXXQQK4Z');
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="/en/" class="brand">
+        <img class="brand__mark" src="/logo.webp" alt="SeisBlue Co., Ltd. logo" width="36" height="36" />
+        <span class="brand__text">
+          <strong>SeisBlue</strong>
+          <em>SeisBlue Co., Ltd.</em>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/en/#about">About</a>
+        <a href="/en/#services">Services</a>
+        <a href="/en/#seisblue">Seismic AI</a>
+        <a href="/en/articles/">Articles</a>
+        <a href="/articles/" class="nav__lang" hreflang="zh-Hant" lang="zh-Hant">中</a>
+        <a href="/en/#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section">
+      <div class="section__inner">
+        <p class="eyebrow">Articles</p>
+        <h2>Technical articles &amp; explainers</h2>
+        <p class="section__lead">
+          Notes from Chun-Ming Huang's research and engineering in seismic AI — the stories behind the models,
+          loss functions, and real-world data, written to be read.
+        </p>
+
+        <div class="article-list">
+          <a class="article-card" href="/en/articles/ai-phase-picking-landscape/">
+            <p class="article-card__meta">2026.05.28 · Seismic AI</p>
+            <h2>How Did AI Learn to Pick Seismic Phases?</h2>
+            <p>
+              In just a few years, AI phase picking went from every lab writing its own code to calling a pre-trained
+              model in a single line. A plain-language tour of how that happened: PhaseNet, EQTransformer, and the
+              SeisBench toolbox that tied the ecosystem together.
+            </p>
+            <span class="article-card__cta">Read more →</span>
+          </a>
+
+          <a class="article-card" href="/en/articles/bluedisc-shape-aware-loss/">
+            <p class="article-card__meta">2026.05.28 · Seismic AI</p>
+            <h2>Why Does AI Keep Missing S-Waves?</h2>
+            <p>
+              Deep-learning phase pickers have a strange quirk: the S-wave position is right, but its amplitude gets
+              pushed below the detection threshold and counted as a miss. A plain-language look at why it gets stuck,
+              and how BlueDisc recovers it with a shape-aware loss — a 64% gain in effective detections.
+            </p>
+            <span class="article-card__cta">Read more →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <strong>SeisBlue · SeisBlue Co., Ltd.</strong>
+        <p>Built around software &amp; AI — Made in Taiwan.</p>
+      </div>
+      <p class="footer__meta">© <span id="year"></span> SeisBlue Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
