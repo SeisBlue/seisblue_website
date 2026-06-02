@@ -147,6 +147,110 @@
       </div>
     </section>
 
+    <section id="flow" class="section flow">
+      <div class="section__inner">
+        <p class="eyebrow">從訊號到行動 · How it works</p>
+        <h2>同一條地動訊號，<br/>兩種讀法。</h2>
+        <p class="section__lead">
+          一條連續波形進來，藍震用兩條路徑讀它——一條搶時間，一條看全局。
+        </p>
+
+        <div class="flow-diagram">
+          <div class="flow-node flow-node--input">
+            <div class="flow-wave" aria-hidden="true">
+              <svg viewBox="0 0 300 64" preserveAspectRatio="none">
+                <path class="flow-wave__path flow-wave__path--1" d="M0,34 Q18,8 36,34 T72,34 T108,34 T144,34 T180,34 T216,34 T252,34 T288,34 T324,34" />
+                <path class="flow-wave__path flow-wave__path--2" d="M0,40 Q18,18 36,40 T72,40 T108,40 T144,40 T180,40 T216,40 T252,40 T288,40 T324,40" />
+              </svg>
+            </div>
+            <h3>連續波形</h3>
+            <p>測站 7×24 不間斷送進來的原始地動訊號。</p>
+          </div>
+
+          <div class="flow-fork" aria-hidden="true">
+            <svg viewBox="0 0 100 240" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="forkGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#4ea7ff" />
+                  <stop offset="1" stop-color="#7be0ff" />
+                </linearGradient>
+              </defs>
+              <path class="flow-fork__line" d="M0,120 C50,120 50,52 100,52" />
+              <path class="flow-fork__line" d="M0,120 C50,120 50,188 100,188" />
+            </svg>
+          </div>
+
+          <div class="flow-branches">
+            <div class="flow-branch flow-branch--a">
+              <div class="flow-node">
+                <span class="flow-scale">秒級</span>
+                <h3>直接從波形預警</h3>
+                <p>不等定位、不等目錄，模型直接從多站波形判讀地動強度，在強震波抵達前搶下數秒反應時間。</p>
+              </div>
+            </div>
+            <div class="flow-branch flow-branch--b">
+              <div class="flow-node">
+                <span class="flow-scale">秒級</span>
+                <h3>相位拾取</h3>
+                <p>深度學習在雜訊中找出 P、S 波到時。</p>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node">
+                <span class="flow-scale">近即時</span>
+                <h3>地震目錄</h3>
+                <p>彙整多站到時，定出每次地震的位置、規模與時間。</p>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node">
+                <span class="flow-scale">長期</span>
+                <h3>背景與異常</h3>
+                <p>從累積目錄建立背景地震活動，辨識偏離，指向值得調查的地下變化。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="flow-coda">一條搶秒數，一條看趨勢——同一條訊號，藍震兩種都做成能穩定上線的系統。</p>
+      </div>
+    </section>
+
+    <section id="usecases" class="section usecases">
+      <div class="section__inner">
+        <p class="eyebrow">應用場景 · Use cases</p>
+        <h2>同一條訊號，<br/>在秒、分、年各說一件事。</h2>
+        <p class="section__lead">
+          地震資訊的價值，取決於它在什麼時間尺度上被讀懂。藍震在三個尺度上各做一件事。
+        </p>
+
+        <div class="usecase-grid">
+          <article class="usecase-card">
+            <p class="usecase-card__scale">秒級 · Seconds</p>
+            <h3>關鍵設施早期預警</h3>
+            <p>
+              強震波抵達前的數秒，模型直接從多站波形判讀地動強度、發出警報，
+              供關鍵基礎設施接入自動防護或停機決策。不等定位、不等目錄——搶的就是這幾秒。
+            </p>
+          </article>
+          <article class="usecase-card">
+            <p class="usecase-card__scale">近即時 · Near-real-time</p>
+            <h3>監測網與地震目錄</h3>
+            <p>
+              地震發生後的數分鐘內，把連續波形即時轉成近即時地震目錄，
+              定出每一次地震的位置、規模與時間，為監測與防災單位提供穩定、可重現的地震資訊基礎。
+            </p>
+          </article>
+          <article class="usecase-card">
+            <p class="usecase-card__scale">長期 · Long-term</p>
+            <h3>背景與異常偵測</h3>
+            <p>
+              從長期累積的目錄建立區域的背景地震活動，當活動度出現異常偏離時及早察覺、
+              指向需要調查的地下變化。這塊藍震有深度學習的底子，期待與有需求的單位攜手開發。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <div id="services" aria-hidden="true"></div>
     <section id="seisblue" class="section technology">
       <div class="section__inner">

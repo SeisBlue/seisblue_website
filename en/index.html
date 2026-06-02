@@ -148,6 +148,116 @@
       </div>
     </section>
 
+    <section id="flow" class="section flow">
+      <div class="section__inner">
+        <p class="eyebrow">How it works</p>
+        <h2>One signal,<br/>two ways to read it.</h2>
+        <p class="section__lead">
+          One continuous waveform comes in, and SeisBlue reads it along two paths —
+          one races the clock, one sees the whole picture.
+        </p>
+
+        <div class="flow-diagram">
+          <div class="flow-node flow-node--input">
+            <div class="flow-wave" aria-hidden="true">
+              <svg viewBox="0 0 300 64" preserveAspectRatio="none">
+                <path class="flow-wave__path flow-wave__path--1" d="M0,34 Q18,8 36,34 T72,34 T108,34 T144,34 T180,34 T216,34 T252,34 T288,34 T324,34" />
+                <path class="flow-wave__path flow-wave__path--2" d="M0,40 Q18,18 36,40 T72,40 T108,40 T144,40 T180,40 T216,40 T252,40 T288,40 T324,40" />
+              </svg>
+            </div>
+            <h3>Continuous waveform</h3>
+            <p>Raw ground-motion signal streaming in from stations, 7×24, without a break.</p>
+          </div>
+
+          <div class="flow-fork" aria-hidden="true">
+            <svg viewBox="0 0 100 240" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="forkGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#4ea7ff" />
+                  <stop offset="1" stop-color="#7be0ff" />
+                </linearGradient>
+              </defs>
+              <path class="flow-fork__line" d="M0,120 C50,120 50,52 100,52" />
+              <path class="flow-fork__line" d="M0,120 C50,120 50,188 100,188" />
+            </svg>
+          </div>
+
+          <div class="flow-branches">
+            <div class="flow-branch flow-branch--a">
+              <div class="flow-node">
+                <span class="flow-scale">Seconds</span>
+                <h3>Alert straight from the waveform</h3>
+                <p>No location, no catalog — the model reads ground-motion intensity from multi-station waveforms and buys seconds of warning before strong shaking arrives.</p>
+              </div>
+            </div>
+            <div class="flow-branch flow-branch--b">
+              <div class="flow-node">
+                <span class="flow-scale">Seconds</span>
+                <h3>Phase picking</h3>
+                <p>Deep learning finds P- and S-wave arrival times amid the noise.</p>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node">
+                <span class="flow-scale">Near-real-time</span>
+                <h3>Earthquake catalog</h3>
+                <p>Multi-station arrivals are merged to fix each event's location, magnitude, and time.</p>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-node">
+                <span class="flow-scale">Long-term</span>
+                <h3>Background &amp; anomaly</h3>
+                <p>The accumulated catalog builds background seismicity; deviations point to subsurface changes worth investigating.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="flow-coda">One races the clock, one watches the trend — from the same signal, SeisBlue engineers both into systems that run in production.</p>
+      </div>
+    </section>
+
+    <section id="usecases" class="section usecases">
+      <div class="section__inner">
+        <p class="eyebrow">Use cases</p>
+        <h2>One signal,<br/>three timescales.</h2>
+        <p class="section__lead">
+          The value of seismic information depends on the timescale at which it's read.
+          SeisBlue does one thing at each of three.
+        </p>
+
+        <div class="usecase-grid">
+          <article class="usecase-card">
+            <p class="usecase-card__scale">Seconds</p>
+            <h3>Early warning for critical facilities</h3>
+            <p>
+              In the seconds before strong shaking arrives, the model reads ground-motion intensity
+              directly from multi-station waveforms and issues an alert — letting critical infrastructure
+              trigger automated protection or shutdown. No location, no catalog — just those few seconds.
+            </p>
+          </article>
+          <article class="usecase-card">
+            <p class="usecase-card__scale">Near-real-time</p>
+            <h3>Monitoring networks &amp; earthquake catalogs</h3>
+            <p>
+              Within minutes of an earthquake, continuous waveforms become a near-real-time catalog —
+              pinning down the location, magnitude, and time of each event, giving monitoring and
+              disaster-response agencies a stable, reproducible foundation of seismic information.
+            </p>
+          </article>
+          <article class="usecase-card">
+            <p class="usecase-card__scale">Long-term</p>
+            <h3>Background &amp; anomaly detection</h3>
+            <p>
+              From a long-accumulated catalog, build a region's background seismicity — and flag
+              deviations early, pointing to subsurface changes worth investigating. This is an area
+              SeisBlue's deep-learning foundation is built to develop, in partnership with organizations
+              that need it.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <div id="services" aria-hidden="true"></div>
     <section id="seisblue" class="section technology">
       <div class="section__inner">
