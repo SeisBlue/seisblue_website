@@ -149,22 +149,31 @@
 
     <section id="flow" class="section flow">
       <div class="section__inner">
-        <p class="eyebrow">從訊號到行動 · How it works</p>
-        <h2>同一條地動訊號，<br/>兩種讀法。</h2>
+        <p class="eyebrow">從訊號到應用 · From signal to application</p>
+        <h2>同一條訊號，<br/>讀成三種能用上的成果。</h2>
         <p class="section__lead">
-          一條連續波形進來，藍震用兩條路徑讀它——一條搶時間，一條看全局。
+          一條連續波形進來，沿兩條路徑展開——一條搶時間、一條看全局——
+          落成三個不同時間尺度的成果，各自服務真實的現場。
         </p>
 
         <div class="flow-diagram">
-          <div class="flow-node flow-node--input">
-            <div class="flow-wave" aria-hidden="true">
-              <svg viewBox="0 0 300 64" preserveAspectRatio="none">
-                <path class="flow-wave__path flow-wave__path--1" d="M0,34 Q18,8 36,34 T72,34 T108,34 T144,34 T180,34 T216,34 T252,34 T288,34 T324,34" />
-                <path class="flow-wave__path flow-wave__path--2" d="M0,40 Q18,18 36,40 T72,40 T108,40 T144,40 T180,40 T216,40 T252,40 T288,40 T324,40" />
-              </svg>
+          <div class="flow-trunk">
+            <div class="flow-node flow-node--input">
+              <div class="flow-wave" aria-hidden="true">
+                <svg viewBox="0 0 300 64" preserveAspectRatio="none">
+                  <path class="flow-wave__path flow-wave__path--1" d="M0,34 Q18,8 36,34 T72,34 T108,34 T144,34 T180,34 T216,34 T252,34 T288,34 T324,34" />
+                  <path class="flow-wave__path flow-wave__path--2" d="M0,40 Q18,18 36,40 T72,40 T108,40 T144,40 T180,40 T216,40 T252,40 T288,40 T324,40" />
+                </svg>
+              </div>
+              <h3>連續波形</h3>
+              <p>測站 7×24 不間斷送進來的原始地動訊號。</p>
             </div>
-            <h3>連續波形</h3>
-            <p>測站 7×24 不間斷送進來的原始地動訊號。</p>
+            <span class="flow-arrow flow-arrow--down" aria-hidden="true">→</span>
+            <div class="flow-node">
+              <span class="flow-scale">秒級</span>
+              <h3>相位拾取</h3>
+              <p>深度學習在雜訊中找出 P、S 波到時——所有判斷的起點。</p>
+            </div>
           </div>
 
           <div class="flow-fork" aria-hidden="true">
@@ -175,8 +184,8 @@
                   <stop offset="1" stop-color="#7be0ff" />
                 </linearGradient>
               </defs>
-              <path class="flow-fork__line" d="M0,120 C50,120 50,52 100,52" />
-              <path class="flow-fork__line" d="M0,120 C50,120 50,188 100,188" />
+              <path class="flow-fork__line" d="M0,176 C52,176 50,52 100,52" />
+              <path class="flow-fork__line" d="M0,176 C52,176 60,190 100,190" />
             </svg>
           </div>
 
@@ -184,17 +193,11 @@
             <div class="flow-branch flow-branch--a">
               <div class="flow-node">
                 <span class="flow-scale">秒級</span>
-                <h3>直接從波形預警</h3>
-                <p>不等定位、不等目錄，模型直接從多站波形判讀地動強度，在強震波抵達前搶下數秒反應時間。</p>
+                <h3>地震早期預警</h3>
+                <p>累積數站的到時後即可估算，不必等完整目錄，在強震波抵達前搶下數秒反應時間。</p>
               </div>
             </div>
             <div class="flow-branch flow-branch--b">
-              <div class="flow-node">
-                <span class="flow-scale">秒級</span>
-                <h3>相位拾取</h3>
-                <p>深度學習在雜訊中找出 P、S 波到時。</p>
-              </div>
-              <span class="flow-arrow" aria-hidden="true">→</span>
               <div class="flow-node">
                 <span class="flow-scale">近即時</span>
                 <h3>地震目錄</h3>
@@ -210,44 +213,59 @@
           </div>
         </div>
 
-        <p class="flow-coda">一條搶秒數，一條看趨勢——同一條訊號，藍震兩種都做成能穩定上線的系統。</p>
-      </div>
-    </section>
-
-    <section id="usecases" class="section usecases">
-      <div class="section__inner">
-        <p class="eyebrow">應用場景 · Use cases</p>
-        <h2>同一條訊號，<br/>在秒、分、年各說一件事。</h2>
-        <p class="section__lead">
-          地震資訊的價值，取決於它在什麼時間尺度上被讀懂。藍震在三個尺度上各做一件事。
-        </p>
-
+        <p class="eyebrow flow-apps__lead">這些成果，用在哪 · In the field</p>
         <div class="usecase-grid">
           <article class="usecase-card">
             <p class="usecase-card__scale">秒級 · Seconds</p>
-            <h3>關鍵設施早期預警</h3>
+            <h3>關鍵設施的自動防護</h3>
             <p>
-              強震波抵達前的數秒，模型直接從多站波形判讀地動強度、發出警報，
-              供關鍵基礎設施接入自動防護或停機決策。不等定位、不等目錄——搶的就是這幾秒。
+              把這數秒接進關鍵基礎設施的自動防護或停機決策——
+              讓警報直接觸發行動，而不只是一則通知。
             </p>
           </article>
           <article class="usecase-card">
             <p class="usecase-card__scale">近即時 · Near-real-time</p>
-            <h3>監測網與地震目錄</h3>
+            <h3>監測與防災的資訊基礎</h3>
             <p>
-              地震發生後的數分鐘內，把連續波形即時轉成近即時地震目錄，
-              定出每一次地震的位置、規模與時間，為監測與防災單位提供穩定、可重現的地震資訊基礎。
+              為監測網與防災單位提供穩定、可重現的近即時地震資訊，
+              成為後續研判與發布的共同依據。
             </p>
           </article>
           <article class="usecase-card">
             <p class="usecase-card__scale">長期 · Long-term</p>
-            <h3>背景與異常偵測</h3>
+            <h3>與你共同開發</h3>
             <p>
-              從長期累積的目錄建立區域的背景地震活動，當活動度出現異常偏離時及早察覺、
-              指向需要調查的地下變化。這塊藍震有深度學習的底子，期待與有需求的單位攜手開發。
+              背景與異常偵測這塊，藍震有深度學習的底子——
+              期待從你的資料與場景出發，一起把它做出來。
             </p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section id="live" class="section live">
+      <div class="section__inner">
+        <p class="eyebrow">系統實況 · In operation</p>
+        <h2>看它跑起來。</h2>
+        <p class="section__lead">
+          全台 472 個測站的連續波形即時進站，模型同步偵測、標出 P 波到時——
+          這是 2025 年<strong>大埔地震</strong>餘震序列期間，監測畫面的真實樣貌。此監測系統與<strong>中央氣象署</strong>合作開發。
+        </p>
+
+        <figure class="live-video">
+          <video
+            class="live-video__el"
+            autoplay muted loop playsinline
+            poster="/monitoring-poster.jpg"
+            preload="metadata"
+            aria-label="即時地震監測畫面：全台測站連續波形與即時相位拾取（加速播放）">
+            <source src="/monitoring-loop.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="live-video__cap">
+            即時監測畫面，為 6 倍速播放。
+            <a href="https://www.youtube.com/watch?v=YfdoW8SAnLs" target="_blank" rel="noopener">看完整即時錄影 →</a>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
