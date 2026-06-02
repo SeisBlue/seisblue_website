@@ -328,7 +328,40 @@ p:last-child { margin-bottom: 0; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 56px;
-  align-items: center;
+  align-items: start;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: grid;
+  gap: 16px;
+}
+.services-list li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.services-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--brand);
+}
+.services-list strong {
+  display: block;
+  margin-bottom: 2px;
+  font-family: "Space Grotesk", "Noto Sans TC", sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text);
 }
 @media (max-width: 860px) { .contact__inner { grid-template-columns: 1fr; gap: 32px; } }
 
