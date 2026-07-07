@@ -478,7 +478,7 @@ p:last-child { margin-bottom: 0; }
 .cap-card p { font-size: 0.9rem; margin: 0; }
 
 /* ---------- Cases: capability → example ---------- */
-.cases { margin-top: 48px; }
+.cases { margin-top: 48px; counter-reset: case; }
 .case {
   padding-top: 32px;
   margin-top: 32px;
@@ -493,6 +493,10 @@ p:last-child { margin-bottom: 0; }
   color: var(--brand-2);
   font-weight: 600;
   margin: 0 0 6px;
+}
+.case__cap::before {
+  counter-increment: case;
+  content: counter(case, decimal-leading-zero) " · ";
 }
 .case__name {
   font-family: "Space Grotesk", "Noto Sans TC", sans-serif;
