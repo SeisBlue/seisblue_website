@@ -280,6 +280,62 @@
           下方是這份能力的具體展現。
         </p>
 
+        <div class="mlops-diagram">
+          <div class="flow-node flow-node--offline mlops-n1">
+            <span class="flow-scale">離線</span>
+            <h3>資料輸入</h3>
+            <p>彙整地震目錄與連續波形，配對成帶標籤的訓練資料。</p>
+          </div>
+          <span class="flow-arrow mlops-a1" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--offline mlops-n2">
+            <span class="flow-scale">離線</span>
+            <h3>前處理</h3>
+            <p>清理、切窗與到時對齊，把原始波形整理成模型可學習的樣本。</p>
+          </div>
+          <span class="flow-arrow mlops-a2" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--offline mlops-n3">
+            <span class="flow-scale">離線</span>
+            <h3>模型訓練</h3>
+            <p>可重現的訓練管線——實驗追蹤、超參數與訓練策略一次管好。</p>
+          </div>
+
+          <div class="mlops-connector mlops-drop" aria-hidden="true">
+            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
+              <path class="mlops-connector__line" d="M12,2 V54" />
+              <path class="mlops-connector__head" d="M5,48 L12,58 L19,48" />
+            </svg>
+          </div>
+          <div class="flow-node flow-node--offline mlops-n4">
+            <span class="flow-scale">離線</span>
+            <h3>評估測試</h3>
+            <p>在標準測試集上驗證 P、S 偵測表現，確認超越現行版本才放行。</p>
+          </div>
+          <span class="flow-arrow mlops-a3" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--online mlops-n5">
+            <span class="flow-scale">上線</span>
+            <h3>部署上線</h3>
+            <p>打包成服務、接進即時資料流，在 7×24 環境下穩定運行。</p>
+          </div>
+          <span class="flow-arrow mlops-a4" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--online mlops-n6">
+            <span class="flow-scale">上線</span>
+            <h3>線上監控</h3>
+            <p>盯著延遲、效能與資料漂移；上線撿到的新事件，累積成新的訓練資料。</p>
+          </div>
+
+          <div class="mlops-connector mlops-loop" aria-hidden="true">
+            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
+              <path class="mlops-connector__line" d="M12,62 V10" />
+              <path class="mlops-connector__head" d="M5,16 L12,6 L19,16" />
+            </svg>
+          </div>
+          <p class="mlops-loop-label">↺ 新事件回流成下一輪訓練資料——模型越跑越準</p>
+        </div>
+
+        <div class="mlops-caps__head">
+          <p class="eyebrow">核心能力 · Capabilities</p>
+          <h3 class="mlops-caps__title">這條管線的三段，<br/>正是我們的三種能力。</h3>
+        </div>
         <div class="cap-grid">
           <article class="cap-card">
             <h4>方法研究</h4>

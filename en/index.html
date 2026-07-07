@@ -285,6 +285,62 @@
           Below are concrete demonstrations.
         </p>
 
+        <div class="mlops-diagram">
+          <div class="flow-node flow-node--offline mlops-n1">
+            <span class="flow-scale">Offline</span>
+            <h3>Data input</h3>
+            <p>Earthquake catalogs paired with continuous waveforms become labeled training data.</p>
+          </div>
+          <span class="flow-arrow mlops-a1" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--offline mlops-n2">
+            <span class="flow-scale">Offline</span>
+            <h3>Preprocessing</h3>
+            <p>Cleaning, windowing, and arrival-time alignment turn raw waveforms into learnable samples.</p>
+          </div>
+          <span class="flow-arrow mlops-a2" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--offline mlops-n3">
+            <span class="flow-scale">Offline</span>
+            <h3>Model training</h3>
+            <p>Reproducible training pipelines — experiment tracking, hyperparameters, and training strategy in one place.</p>
+          </div>
+
+          <div class="mlops-connector mlops-drop" aria-hidden="true">
+            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
+              <path class="mlops-connector__line" d="M12,2 V54" />
+              <path class="mlops-connector__head" d="M5,48 L12,58 L19,48" />
+            </svg>
+          </div>
+          <div class="flow-node flow-node--offline mlops-n4">
+            <span class="flow-scale">Offline</span>
+            <h3>Evaluation</h3>
+            <p>P- and S-detection performance is validated on standard test sets — a model ships only if it beats the current version.</p>
+          </div>
+          <span class="flow-arrow mlops-a3" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--online mlops-n5">
+            <span class="flow-scale">Online</span>
+            <h3>Deployment</h3>
+            <p>Packaged as a service and wired into real-time data streams, running reliably 24/7.</p>
+          </div>
+          <span class="flow-arrow mlops-a4" aria-hidden="true">→</span>
+          <div class="flow-node flow-node--online mlops-n6">
+            <span class="flow-scale">Online</span>
+            <h3>Monitoring</h3>
+            <p>Latency, performance, and data drift are watched continuously; new events picked in production accumulate as fresh training data.</p>
+          </div>
+
+          <div class="mlops-connector mlops-loop" aria-hidden="true">
+            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
+              <path class="mlops-connector__line" d="M12,62 V10" />
+              <path class="mlops-connector__head" d="M5,16 L12,6 L19,16" />
+            </svg>
+          </div>
+          <p class="mlops-loop-label">↺ New events flow back as the next round of training data — the model keeps getting sharper</p>
+        </div>
+
+        <div class="mlops-caps__head">
+          <p class="eyebrow">Core capabilities</p>
+          <h3 class="mlops-caps__title">Three stages of this pipeline —<br/>our three core capabilities.</h3>
+        </div>
         <div class="cap-grid">
           <article class="cap-card">
             <h4>Method Research</h4>
