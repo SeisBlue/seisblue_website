@@ -772,6 +772,11 @@ p:last-child { margin-bottom: 0; }
   .mlops-connector__line { animation: none; }
 }
 
+/* Temporarily hidden while the MLOps pipeline is still in development.
+   Delete this rule to re-enable the diagram and its capabilities heading. */
+.mlops-diagram,
+.mlops-caps__head { display: none !important; }
+
 /* ---------- Live system showcase ---------- */
 .live-video { margin: 40px 0 0; }
 .live-video__el {
