@@ -183,9 +183,94 @@ p:last-child { margin-bottom: 0; }
 .nav__dropdown a:first-child { padding-top: 14px; }
 .nav__dropdown a:last-child { padding-bottom: 14px; }
 
+/* Hamburger (mobile only) */
+.nav__toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin-right: -8px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+}
+.nav__toggle span {
+  position: absolute;
+  left: 10px;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--text);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.nav__toggle span:nth-child(1) { top: 13px; }
+.nav__toggle span:nth-child(2) { top: 19px; }
+.nav__toggle span:nth-child(3) { top: 25px; }
+.nav--open .nav__toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav--open .nav__toggle span:nth-child(2) { opacity: 0; }
+.nav--open .nav__toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
 @media (max-width: 720px) {
-  .nav__links a:not(.nav__cta),
-  .nav__menu { display: none; }
+  .nav__toggle { display: block; }
+
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 24px 24px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem;
+    max-height: calc(100vh - 69px);
+    overflow-y: auto;
+  }
+  .nav--open .nav__links { display: flex; }
+
+  .nav__links > a:not(.nav__cta):not(.nav__lang),
+  .nav__menu-btn {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Training submenu: shown inline as a labelled group */
+  .nav__menu-btn {
+    width: 100%;
+    cursor: default;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    padding-bottom: 6px;
+    border-bottom: 0;
+  }
+  .nav__menu-btn::after { display: none; }
+  .nav__dropdown {
+    display: block;
+    position: static;
+    transform: none;
+    padding: 0 0 6px;
+    min-width: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__dropdown::before { display: none; }
+  .nav__links .nav__dropdown a,
+  .nav__dropdown a:first-child,
+  .nav__dropdown a:last-child { padding: 10px 0 10px 14px; white-space: normal; }
+
+  .nav__lang {
+    align-self: flex-start;
+    margin-top: 18px;
+  }
+  .nav__cta {
+    margin-top: 16px;
+    text-align: center;
+    padding: 12px 16px;
+  }
 }
 
 /* ---------- Hero ---------- */

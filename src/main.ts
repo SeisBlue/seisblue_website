@@ -20,3 +20,18 @@ document.querySelectorAll<HTMLAnchorElement>('a.email').forEach((el) => {
     el.textContent = address;
   }
 });
+
+// Mobile nav: hamburger toggles the link panel; close on link tap or Escape
+const nav = document.querySelector<HTMLElement>('.nav');
+const navToggle = document.querySelector<HTMLButtonElement>('.nav__toggle');
+if (nav && navToggle) {
+  const setOpen = (open: boolean) => {
+    nav.classList.toggle('nav--open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  };
+  navToggle.addEventListener('click', () => setOpen(!nav.classList.contains('nav--open')));
+  nav.querySelectorAll('.nav__links a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+}
