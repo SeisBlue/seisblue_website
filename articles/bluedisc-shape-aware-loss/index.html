@@ -93,7 +93,13 @@
         <a href="/#services">業務範圍</a>
         <a href="/#seisblue">地震 AI</a>
         <a href="/articles/">文章</a>
-        <a href="https://jimmy60504.github.io/agentic-curriculum-notes/" target="_blank" rel="noopener">教育訓練</a>
+        <div class="nav__menu">
+          <button type="button" class="nav__menu-btn" aria-haspopup="true">教育訓練</button>
+          <div class="nav__dropdown">
+            <a href="https://jimmy60504.github.io/agentic-curriculum-notes/" target="_blank" rel="noopener">Agentic DevOps</a>
+            <a href="https://jimmy60504.github.io/agentic-knowledge-work/" target="_blank" rel="noopener">Agent 時代的知識工作</a>
+          </div>
+        </div>
         <a href="/en/articles/bluedisc-shape-aware-loss/" class="nav__lang" hreflang="en" lang="en">EN</a>
         <a href="/#contact" class="nav__cta">聯絡我們</a>
       </nav>
@@ -129,6 +135,13 @@
           </p>
 
           <div class="prose">
+            <figure>
+              <div class="video-embed video-embed--wide">
+                <iframe src="https://www.youtube.com/embed/bKfACdqpWC4" title="Why Do Deep Learning Pickers Miss Clear S Waves?" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <figcaption>影片版（英文）：用幾分鐘看完這篇文章在講什麼。</figcaption>
+            </figure>
+
             <p>
               所以這幾年來，地震學家把這件事丟給深度學習。模型訓練完之後，丟一段波形進去，
               它會告訴你哪個時刻有 P 波到達、哪個時刻有 S 波到達。
