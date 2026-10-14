@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="apple-touch-icon" href="/logo.png" />
   <title>How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench | SeisBlue</title>
-  <meta name="description" content="In just a few years, AI phase picking went from every lab writing its own code to calling a pre-trained model in a single line. A plain-language tour of how that happened: PhaseNet, EQTransformer, and SeisBench, the toolbox that tied the ecosystem together." />
+  <meta name="description" content="In just a few years, AI phase picking moved from each lab writing its own code to loading a trained model with a single command. This article introduces three milestones in that development: PhaseNet, EQTransformer, and SeisBench, which unified the ecosystem." />
   <meta name="keywords" content="seismic AI, phase picking, PhaseNet, EQTransformer, SeisBench, deep learning, earthquake detection, U-Net, attention" />
   <meta name="author" content="Chun-Ming Huang (黃俊銘)" />
   <link rel="canonical" href="https://www.seisblue.com/en/articles/ai-phase-picking-landscape/" />
@@ -21,7 +21,7 @@
   <meta property="og:locale:alternate" content="zh_TW" />
   <meta property="og:site_name" content="SeisBlue Co., Ltd." />
   <meta property="og:title" content="How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench" />
-  <meta property="og:description" content="In a few years, AI phase picking went from every lab writing its own code to a shared, reproducible ecosystem. PhaseNet, EQTransformer, and SeisBench." />
+  <meta property="og:description" content="In a few years, AI phase picking moved from separate, independent development to an open and reproducible ecosystem. This article introduces PhaseNet, EQTransformer, and SeisBench." />
   <meta property="og:url" content="https://www.seisblue.com/en/articles/ai-phase-picking-landscape/" />
   <meta property="og:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -31,7 +31,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench" />
-  <meta name="twitter:description" content="In a few years, AI phase picking went from every lab writing its own code to a shared, reproducible ecosystem. PhaseNet, EQTransformer, and SeisBench." />
+  <meta name="twitter:description" content="In a few years, AI phase picking moved from separate, independent development to an open and reproducible ecosystem. This article introduces PhaseNet, EQTransformer, and SeisBench." />
   <meta name="twitter:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
 
   <!-- BlogPosting JSON-LD -->
@@ -40,7 +40,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "How Did AI Learn to Pick Seismic Phases? From PhaseNet to SeisBench",
-    "description": "A plain-language tour of how AI phase picking matured: PhaseNet, EQTransformer, and SeisBench, the toolbox that tied the ecosystem together.",
+    "description": "An introduction to how AI phase picking matured, covering PhaseNet, EQTransformer, and SeisBench, which unified the ecosystem.",
     "image": "https://www.seisblue.com/articles/og-landscape.jpg",
     "datePublished": "2026-05-28",
     "dateModified": "2026-05-28",
@@ -93,8 +93,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links" id="site-nav" aria-label="Primary">
-        <a href="/en/#services">Services</a>
-        <a href="/en/#seisblue">Seismic AI</a>
+        <a href="/en/#services">Seismic AI</a>
         <a href="/en/articles/">Articles</a>
         <div class="nav__menu">
           <button type="button" class="nav__menu-btn" aria-haspopup="true">Training</button>
@@ -133,10 +132,9 @@
       <div class="article">
         <div class="article__inner">
           <p class="article__lead">
-            How did AI come to take over the job of picking seismic phases? In just a few years, the field went from
-            every lab writing its own code to calling someone else's pre-trained model in a single line. This is the story
-            of how that path got laid, with three protagonists: PhaseNet, EQTransformer, and the SeisBench toolbox that
-            tied them together.
+            How did AI gradually take over the work of picking seismic phases? In just a few years, the field moved from
+            each lab writing its own code to loading a model trained by others with a single command. This article
+            introduces three milestones in that development: PhaseNet, EQTransformer, and SeisBench, which integrates them.
           </p>
 
           <div class="prose">
@@ -144,114 +142,109 @@
               <div class="timeline__item">
                 <p class="timeline__year">2019</p>
                 <p class="timeline__title">PhaseNet</p>
-                <p>Recast phase picking as an image-segmentation problem (U-Net's home turf), with Gaussian-curve targets that train well; accurate enough to become the field's benchmark.</p>
+                <p>Redefined phase picking as an image-segmentation problem, a task U-Net is designed for, and used Gaussian curves as training targets. Stable training and high accuracy made it the benchmark for the field.</p>
               </div>
               <div class="timeline__item">
                 <p class="timeline__year">2020</p>
                 <p class="timeline__title">EQTransformer</p>
-                <p>Brought in the attention mechanism and split detection, P, and S into three independent heads so they don't interfere.</p>
+                <p>Introduced the attention mechanism and separated earthquake detection, P-wave picking, and S-wave picking into three independent branches that learn without interfering with each other.</p>
               </div>
               <div class="timeline__item">
                 <p class="timeline__year">2022</p>
                 <p class="timeline__title">SeisBench</p>
-                <p>Wrapped many models and datasets in one interface, so results could finally be compared fairly and reproduced.</p>
+                <p>Integrated many models and datasets into a single interface, so that results can be compared fairly and reproduced.</p>
               </div>
             </div>
 
-            <h2>PhaseNet: turning phase picking into an image-segmentation task</h2>
+            <h2>PhaseNet: phase picking as image segmentation</h2>
             <p>
-              In 2019, Weiqiang Zhu and Greg Beroza at Stanford introduced <a href="https://github.com/AI4EPS/PhaseNet" target="_blank" rel="noopener">PhaseNet</a>. Its most important move was to
-              <strong>redefine</strong> the problem. Picking had been treated as "finding one precise arrival time in a long
-              stream of signal"; PhaseNet recast it as an <strong>image-segmentation</strong> task: label point by point
-              whether each spot is a P-wave, an S-wave, or nothing at all. That is exactly what the U-Net architecture was
-              built for; U-Net was originally designed to segment medical images, outlining organ boundaries in X-rays and
-              MRIs. Picking seismic phases and outlining an organ are, at heart, the same kind of problem.
+              In 2019, Weiqiang Zhu and Greg Beroza of Stanford University introduced <a href="https://github.com/AI4EPS/PhaseNet" target="_blank" rel="noopener">PhaseNet</a>. Its most important contribution
+              was to <strong>redefine</strong> the phase-picking problem. Earlier approaches treated picking as locating one
+              precise arrival time within a long signal. PhaseNet instead treated it as an <strong>image-segmentation</strong>
+              problem, classifying each sample as P-wave, S-wave, or noise. This is exactly the task U-Net was designed for.
+              U-Net was originally developed to segment medical images, such as outlining organ boundaries in X-ray and MRI
+              scans, and picking seismic phases is essentially the same kind of problem.
             </p>
             <p>
-              The second change is subtler but just as important. The "correct" arrival time of a seismic wave is a single
-              instant, but asking a model to hit one exact point is very hard to train: the target is sharp and sparse, and
-              being slightly off counts as almost entirely wrong. PhaseNet spreads that sharp instant into a
-              <em>Gaussian curve</em>, centered on the human-labeled position with a little width on each side, which writes
-              the labeling error humans always have straight into the training target. A wider target gives the model room
-              for error and trains far more easily.
+              The second change is less visible but equally important. The correct arrival time of a seismic wave is a single
+              instant, and training a model to hit that exact point is difficult because the target is sharp and sparse, so a
+              small offset counts as almost entirely wrong. PhaseNet spreads this instant into a <em>Gaussian curve</em>
+              centered on the manually labeled position, with some width on either side. This builds the uncertainty of manual
+              labels into the training target. With a wider target, the model has a tolerance for error and trains much more easily.
             </p>
             <p>
-              Feed the three-component waveform into a U-Net, and out come three probability curves (P, S, and noise);
-              wherever a curve spikes, that phase has arrived. Trained on decades of hand-labeled data from Northern
-              California, it was fast and accurate, accurate enough to become the field's <strong>benchmark</strong>: when a
-              new method appears, the first thing people do is compare it against PhaseNet.
+              The model takes a three-component waveform as input, and the U-Net outputs three probability curves for P-wave,
+              S-wave, and noise. A rise in a curve indicates the arrival of that phase. PhaseNet was trained on decades of manually
+              labeled data from Northern California. It is fast and accurate, and it has since become the field's
+              <strong>benchmark</strong>: new methods are usually compared against PhaseNet first.
             </p>
 
             <figure>
               <img src="/articles/phasenet-example.webp" alt="A phase-picking example: a three-component waveform and the P and S Gaussian probability outputs" width="673" height="679" loading="lazy" />
-              <figcaption>A real example: the top three traces are the three components (Z / N / E) of a single earthquake, and the bottom panel is the model's output. The light curves are the human-labeled <b>Gaussian targets</b> (the ground truth); the dark ones are the predictions, with the P (blue) and S (red) peaks landing almost exactly on the targets. Both ideas show up here: the input is the whole waveform read point by point (the image-segmentation view), and the target is not a single instant but a curve with width.<br/>Image / <a href="https://github.com/SeisBlue" target="_blank" rel="noopener">SeisBlue</a></figcaption>
+              <figcaption>An example: the top three traces are the three components (Z / N / E) of one earthquake, and the bottom panel shows the model output. The light curves are the manually labeled <b>Gaussian targets</b> (the ground truth), and the dark curves are the predictions. The P (blue) and S (red) peaks almost coincide with the targets. The figure shows two key points. The input is the whole waveform evaluated sample by sample, which is the image-segmentation view, and the target is a curve with width rather than a single instant.<br/>Image / <a href="https://github.com/SeisBlue" target="_blank" rel="noopener">SeisBlue</a></figcaption>
             </figure>
 
-            <h2>EQTransformer: pulling three tasks apart</h2>
+            <h2>EQTransformer: separating three tasks</h2>
             <p>
-              In 2020, Mousavi and colleagues from the same circle introduced <a href="https://github.com/smousavi05/EQTransformer" target="_blank" rel="noopener">EQTransformer</a>, published in <em>Nature Communications</em>.
+              In 2020, Mousavi and colleagues from the same research group introduced <a href="https://github.com/smousavi05/EQTransformer" target="_blank" rel="noopener">EQTransformer</a>, published in <em>Nature Communications</em>.
             </p>
             <p>
-              If PhaseNet proved that "deep learning can pick phases," EQTransformer asked "can we do it more cleverly?"
-              It brought in the <em>attention mechanism</em> that was then sweeping the AI world (the same underlying idea
-              that large language models later run on), letting the model weigh distant and nearby cues simultaneously as
-              it reads a stretch of waveform.
+              PhaseNet demonstrated that deep-learning phase picking is feasible, and EQTransformer further improved the model's
+              ability to interpret waveforms. It introduced the <em>attention mechanism</em>, which was spreading rapidly through
+              AI research at the time and later became the basis of large language models. Attention allows the model to consider
+              both distant and nearby features when interpreting a waveform segment.
             </p>
             <p>
-              Its key design is to <strong>pull three tasks apart</strong>: detecting whether there's an earthquake in the
-              segment at all, picking the P-wave, and picking the S-wave, each handled by its own independent output branch
-              (head) so they don't interfere. The reason: PhaseNet originally predicts P, S, and noise together as three
-              side-by-side channels, but a detection signal (is there an earthquake?) spans the whole event and is wide and
-              long, carrying far more weight than the two narrow little Gaussian peaks of P and S. Learn them all mixed
-              together and the tiny P and S signals are easily drowned out by the detection one. Splitting them into
-              separate heads lets each task focus on its own job. EQTransformer was trained on a large public dataset
-              called STEAD, bigger than the one PhaseNet used.
-            </p>
-
-            <h2>The trouble after a hundred flowers bloom</h2>
-            <p>
-              After PhaseNet and EQTransformer, all kinds of models appeared. That's a good thing in principle, but it soon
-              ran into a practical problem: <strong>nobody could compare them fairly</strong>.
-            </p>
-            <p>
-              Each model used differently formatted data, different preprocessing, different scoring. To find out whether
-              model A really beat model B, you first had to spend weeks rebuilding both data pipelines and environments
-              from scratch. Just the "load the data in" step was enough to put many people off. If research can't produce
-              reproducible comparisons, the field struggles to move forward.
+              Its key design is to <strong>separate three tasks</strong>: determining whether the segment contains an earthquake,
+              picking the P-wave, and picking the S-wave. Each task is handled by an independent output branch (head), so the tasks
+              do not interfere with each other. The reason is that PhaseNet predicts P-wave, S-wave, and noise together as three
+              parallel channels. A detection signal covers the whole event and is wide and long, so it carries far more weight than
+              the narrow Gaussian peaks of P and S. When everything is learned together, the P and S signals are easily overshadowed
+              by the detection signal. Separate branches allow each task to be learned properly. EQTransformer was trained on STEAD,
+              a large public seismic dataset considerably larger than the one used for PhaseNet.
             </p>
 
-            <h2>SeisBench: a USB port for seismic AI</h2>
+            <h2>The problem after many models appeared</h2>
             <p>
-              In 2022, a German research team (Woollam, Münchmeyer, and colleagues) released <a href="https://github.com/seisbench/seisbench" target="_blank" rel="noopener">SeisBench</a>, which addresses
-              exactly this.
+              After PhaseNet and EQTransformer, many new models were published. This was a positive development, but it soon led to
+              a practical problem: <strong>the models could not be compared fairly</strong>.
             </p>
             <p>
-              Think of it as a <em>USB port</em> for seismic AI: any pre-trained model (PhaseNet, EQTransformer, and more)
-              and any public dataset plug in the same way. Want to swap models? Change one line. Want a different dataset?
-              Change another. What used to take weeks to set up now runs in a few lines of code, and everyone's results can
+              Each model used a different data format, different preprocessing, and different evaluation criteria. Determining whether
+              model A actually outperformed model B required weeks of rebuilding both data pipelines and environments, and the data
+              loading step alone discouraged many researchers. Without reproducible comparisons, progress in the field is difficult.
+            </p>
+
+            <h2>SeisBench: a common interface for models and data</h2>
+            <p>
+              In 2022, a German research team (Woollam, Münchmeyer, and colleagues) released <a href="https://github.com/seisbench/seisbench" target="_blank" rel="noopener">SeisBench</a> to address
+              exactly this problem.
+            </p>
+            <p>
+              SeisBench works much like a <em>USB</em> interface on a computer: any trained model (such as PhaseNet or EQTransformer)
+              and any public dataset connect in the same way, and switching models or datasets requires changing a single line of code.
+              Environments that once took weeks to build now run with a few lines of code, and results from different researchers can
               be compared directly.
             </p>
             <p>
-              SeisBench didn't invent a new phase picker, but what it did matters just as much: it turned the field from
-              "everyone doing their own thing" into "anyone can pick it up, and results can be reproduced." Today a newcomer
-              can try out the results of several past papers in a single afternoon, something that was barely possible five
-              years ago.
+              SeisBench did not propose a new phase picker, but its contribution is equally important. It moved the field from separate,
+              independent development to tools that anyone can use and results that anyone can reproduce. A student new to the field
+              can now reproduce the results of several past papers in a single afternoon, which was hardly possible five years ago.
             </p>
 
-            <h2>So what's next?</h2>
+            <h2>Directions for further research</h2>
             <p>
-              Over these few years, AI phase picking grew from a new idea into an open, reproducible ecosystem. The
-              infrastructure is in place, and the barrier to entry has dropped.
+              Over the past few years, AI phase picking has grown from a new idea into an open and reproducible ecosystem. The
+              infrastructure is in place, and the barrier to entry is lower.
             </p>
             <p>
-              But mature tools don't mean every problem is solved. Models still fail in certain situations, for example the
-              S-wave amplitude getting suppressed, or struggling when they meet regions and instruments they never saw
-              during training. Once the foundation is solid, attention naturally shifts from "can it be done at all" to
-              these more specific flaws.
+              Mature tools, however, do not mean that every problem is solved. Models still fail in certain situations, for example
+              when S-wave amplitudes are suppressed, or when performance drops in regions and with instruments not seen during training.
+              With the foundation established, research has naturally shifted from feasibility toward these more specific problems.
             </p>
             <p>
-              For a look at how one of those specific problems gets taken apart, read on:
-              <a href="/en/articles/bluedisc-shape-aware-loss/">Why Does AI Keep Missing S-Waves? →</a>
+              For an analysis of one of these problems, see
+              <a href="/en/articles/bluedisc-shape-aware-loss/">Why Does AI Often Miss S-Waves? →</a>
             </p>
           </div>
 

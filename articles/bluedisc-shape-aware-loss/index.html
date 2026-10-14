@@ -6,8 +6,8 @@
 
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="apple-touch-icon" href="/logo.png" />
-  <title>AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss｜SeisBlue</title>
-  <meta name="description" content="深度學習相位拾取長期有個怪毛病：S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。這篇用最白話的方式講清楚為什麼會卡住，以及 BlueDisc 如何用 shape-aware loss 與條件式 GAN 把它救回來，有效 S 相位偵測數提升 64%。" />
+  <title>AI 為什麼經常漏判 S 波？從失敗模式到 shape-aware loss｜SeisBlue</title>
+  <meta name="description" content="深度學習相位拾取長期存在一個問題：S 波的位置判斷正確，振幅卻被壓在偵測門檻以下。本文說明這個問題的成因，以及 BlueDisc 如何以 shape-aware loss 與條件式 GAN 恢復這些 S 波，使有效 S 相位偵測數提升 64%。" />
   <meta name="keywords" content="地震 AI, 相位拾取, phase picking, S 波, S-wave, 深度學習, shape-aware loss, GAN, BlueDisc, SeisBlue, 損失函數, 地震偵測" />
   <meta name="author" content="黃俊銘 Chun-Ming Huang" />
   <link rel="canonical" href="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
@@ -19,8 +19,8 @@
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="zh_TW" />
   <meta property="og:site_name" content="藍震有限公司 SeisBlue" />
-  <meta property="og:title" content="AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss" />
-  <meta property="og:description" content="S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。BlueDisc 如何用 shape-aware loss 把它救回來，有效偵測數提升 64%。" />
+  <meta property="og:title" content="AI 為什麼經常漏判 S 波？從失敗模式到 shape-aware loss" />
+  <meta property="og:description" content="S 波的位置判斷正確，振幅卻被壓在偵測門檻以下。本文說明 BlueDisc 如何以 shape-aware loss 恢復這些 S 波，使有效偵測數提升 64%。" />
   <meta property="og:url" content="https://www.seisblue.com/articles/bluedisc-shape-aware-loss/" />
   <meta property="og:image" content="https://www.seisblue.com/articles/og-bluedisc.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -29,8 +29,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss" />
-  <meta name="twitter:description" content="S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。BlueDisc 如何用 shape-aware loss 把它救回來，有效偵測數提升 64%。" />
+  <meta name="twitter:title" content="AI 為什麼經常漏判 S 波？從失敗模式到 shape-aware loss" />
+  <meta name="twitter:description" content="S 波的位置判斷正確，振幅卻被壓在偵測門檻以下。本文說明 BlueDisc 如何以 shape-aware loss 恢復這些 S 波，使有效偵測數提升 64%。" />
   <meta name="twitter:image" content="https://www.seisblue.com/articles/og-bluedisc.jpg" />
 
   <!-- BlogPosting JSON-LD -->
@@ -38,8 +38,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "AI 為什麼老是漏看 S 波？——從失敗模式到 shape-aware loss",
-    "description": "深度學習相位拾取長期有個怪毛病：S 波明明位置抓對了，振幅卻被壓在偵測門檻以下。BlueDisc 如何用 shape-aware loss 與條件式 GAN 把它救回來，有效偵測數提升 64%。",
+    "headline": "AI 為什麼經常漏判 S 波？從失敗模式到 shape-aware loss",
+    "description": "深度學習相位拾取長期存在一個問題：S 波的位置判斷正確，振幅卻被壓在偵測門檻以下。本文說明 BlueDisc 如何以 shape-aware loss 與條件式 GAN 恢復這些 S 波，使有效偵測數提升 64%。",
     "image": "https://www.seisblue.com/articles/og-bluedisc.jpg",
     "datePublished": "2026-05-28",
     "dateModified": "2026-05-28",
@@ -92,8 +92,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links" id="site-nav" aria-label="主導覽">
-        <a href="/#services">業務範圍</a>
-        <a href="/#seisblue">地震 AI</a>
+        <a href="/#services">地震 AI 技術</a>
         <a href="/articles/">文章</a>
         <div class="nav__menu">
           <button type="button" class="nav__menu-btn" aria-haspopup="true">教育訓練</button>
@@ -120,7 +119,7 @@
         </div>
         <div class="article-hero__inner">
           <p class="eyebrow">文章 · 地震 AI</p>
-          <h1>AI 為什麼老是漏看 S 波？</h1>
+          <h1>AI 為什麼經常漏判 S 波？</h1>
           <div class="article-meta">
             <span>2026.05.28</span>
             <span>黃俊銘 Chun-Ming Huang</span>
@@ -132,8 +131,8 @@
       <div class="article">
         <div class="article__inner">
           <p class="article__lead">
-            地震儀整天都在錄資料，台灣一年大概要記錄上萬次震動。從這些波形裡面挑出哪些是地震、發生在哪一刻，
-            傳統上是靠人去看波形圖，一個個標記。一個資深分析師可以標得很好，但量太大，分析師也是人，也要睡覺。
+            地震儀全天候記錄資料，台灣一年約記錄上萬次震動。從這些波形中辨識哪些是地震、發生於何時，
+            傳統上仰賴分析人員逐一檢視波形圖並標記。資深分析人員能夠標記得相當準確，但資料量龐大，人力終究有限。
           </p>
 
           <div class="prose">
@@ -141,122 +140,120 @@
               <div class="video-embed video-embed--wide">
                 <iframe src="https://www.youtube.com/embed/bKfACdqpWC4" title="Why Do Deep Learning Pickers Miss Clear S Waves?" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
-              <figcaption>影片版（英文）：用幾分鐘看完這篇文章在講什麼。</figcaption>
+              <figcaption>影片版（英文）：以數分鐘的影片說明本文內容。</figcaption>
             </figure>
 
             <p>
-              所以這幾年來，地震學家把這件事丟給深度學習。模型訓練完之後，丟一段波形進去，
-              它會告訴你哪個時刻有 P 波到達、哪個時刻有 S 波到達。
+              因此近年來，地震學家將這項工作交由深度學習處理。模型訓練完成後，輸入一段波形，
+              便能輸出 P 波與 S 波各自的到達時刻。
             </p>
             <p>
-              P 波跟 S 波是地震波的兩種類型。P 波跑得快，先到。S 波慢一點，後到，但破壞力更強，
-              房子搖晃感受最明顯的就是它。震源在哪、地震多嚴重，這兩個時間點都不能漏。
+              P 波與 S 波是地震波的兩種類型。P 波傳播速度較快，最先抵達；S 波速度較慢、較晚抵達，但破壞力更強，
+              建築物最明顯的搖晃主要來自 S 波。判斷震源位置與地震規模時，兩者的到達時間都不可遺漏。
             </p>
 
-            <h2>一個莫名其妙的失敗模式</h2>
+            <h2>一種難以解釋的失敗模式</h2>
             <p>
-              問題是，AI 挑 P 波的時候表現得像個完美主義者，挑 S 波卻常常出包。
-              同一段波形，明明對人類來說 S 波的位置一目瞭然，模型偏偏給出一個歪掉、又長不大的小峰值，
-              剛好低於我們設定的偵測門檻，於是被當成沒看到。
+              問題在於，AI 挑選 P 波時表現相當穩定，挑選 S 波時卻經常出錯。
+              在同一段波形中，S 波的位置對分析人員而言一目瞭然，模型卻輸出一個形狀扭曲、高度不足的小峰值，
+              恰好低於設定的偵測門檻，因而被視為未偵測到。
             </p>
             <p>
-              更詭異的是，它看到的位置常常是準的。時間沒錯，就是高度不夠。
+              更特別的是，模型判斷的位置往往是正確的，時間沒有偏差，只是高度不足。
             </p>
 
             <figure class="figure--portrait">
               <img src="/articles/amplitude-suppression.webp" alt="隨訓練步數變化的 P 波與 S 波預測，S 波預測逐漸被壓低至偵測門檻以下" width="1000" height="1954" loading="lazy" />
-              <figcaption>同一筆波形在訓練過程中的預測變化（由上到下為訓練步數遞增）。P 波（藍）越來越尖銳，<b>S 波（紅）卻被一路壓低，最後沉到偵測門檻以下</b>——位置沒跑掉，高度卻消失了。</figcaption>
+              <figcaption>同一筆波形在訓練過程中的預測變化（由上至下為訓練步數遞增）。P 波（藍）逐漸變得尖銳，<b>S 波（紅）卻持續被壓低，最後落到偵測門檻以下</b>。預測的位置沒有偏移，高度卻逐漸消失。</figcaption>
             </figure>
 
             <p>
-              這個現象地震學界知道很多年了，大家通常的反應是換更大的模型、餵更多資料、調整訓練方法，
-              把它當成一個煩人的副作用慢慢繞過去。
+              地震學界注意到這個現象已有多年，常見的因應方式是換用更大的模型、加入更多資料或調整訓練方法，
+              將其視為一項惱人的副作用，設法迴避。
             </p>
             <p>
-              這篇論文沒有想繞，作者想搞清楚到底為什麼。
+              這篇論文並未選擇迴避，而是著手釐清問題的根本原因。
             </p>
 
-            <h2>為什麼會卡住</h2>
+            <h2>預測停滯的原因</h2>
             <p>
-              想像一下你要評一張肖像畫畫得像不像。直覺的做法是看整張臉。
-              但如果規則改成不准看整張，只能把畫面切成幾百個小格子，每格獨立打分，最後加起來，事情就麻煩了。
+              以評判一幅肖像畫是否相似為例，直覺的做法是觀察整張臉。
+              但若規則改為不可觀察整體，只能將畫面切成數百個小格，每格獨立評分後加總，評判便會遇到困難。
             </p>
             <p>
-              每一格只能告訴你這格該調亮還是調暗。沒有任何一格能告訴你整張臉的位置應該往左移一點。
-              所以當預測的形狀正確、位置卻往右偏了一點點，每一格收到的訊號都是<em>你不夠亮、把自己壓低</em>。
-              預測越畫越淡，但位置永遠不會被修正。
+              每一格只能指出該格應調亮或調暗，沒有任何一格能指出整張臉應向左移動。
+              因此當預測的形狀正確、位置卻稍微偏右時，每一格收到的訊號只有<em>此處應調亮</em>或<em>此處應壓低</em>。
+              預測於是越來越淡，位置卻始終無法修正。
             </p>
             <p>
-              傳統訓練 AI 找 S 波的方式，正好就是這種逐格打分。它沒有任何機制告訴模型整體應該往哪邊挪，
-              只能上下調亮度。S 波預測就這樣卡在某個位置不上不下，把自己越壓越扁。
+              傳統訓練 AI 挑選 S 波的方式，正是這種逐格評分。它沒有任何機制告訴模型整體應往哪個方向移動，
+              只能上下調整數值，S 波預測因此停滯在某個位置，並且越壓越扁。
             </p>
 
             <figure>
               <img src="/articles/loss-landscape.webp" alt="逐點計算的損失曲面，只有縱向的下壓梯度，缺乏將預測橫移到正確位置的梯度" width="1200" height="1331" loading="lazy" />
-              <figcaption>逐點打分形成的損失地形。模型收到的梯度幾乎只能把預測<b>往下壓（縱向）</b>；要把整段波形<b>橫移到正確位置</b>卻幾乎沒有坡度可循——於是預測越壓越扁，位置卻永遠修不動。</figcaption>
+              <figcaption>逐點評分形成的損失地形。模型收到的梯度幾乎只能將預測<b>向下壓（縱向）</b>，將整段預測<b>橫移到正確位置</b>的方向幾乎沒有坡度，因此預測越壓越扁，位置卻始終無法修正。</figcaption>
             </figure>
             <p>
-              S 波特別容易中招，還因為兩件事火上加油。第一，它的標準答案本身就比較模糊：
-              S 波傳得遠了之後波形會變胖、邊界變糊，連人類專家標出來的位置都會差個幾百毫秒，訓練資料裡正確答案就帶噪音。
-              第二，AI 模型天生愛尖銳的東西，會把預測錨在波形上最明顯的轉折，剛好不是 S 波該在的位置。
+              S 波特別容易出現這個問題，還有兩個加劇的因素。第一，S 波的標準答案本身較為模糊。
+              S 波傳播較遠之後，波形會變寬、邊界變得不清楚，即使是專家標記的位置也可能相差數百毫秒，
+              訓練資料中的正確答案因此帶有雜訊。第二，AI 模型傾向回應尖銳的特徵，會將預測固定在波形上最明顯的轉折處，
+              而這個位置恰好不是 S 波應在的位置。
             </p>
             <p>
-              三件事湊在一起，把 S 波預測困死在一個無解的角落。
+              上述三項因素同時作用，使 S 波預測停滯在無法改善的狀態。
             </p>
 
-            <h2>解法</h2>
+            <h2>解決方法</h2>
             <p>
-              診斷找到了，解法就好辦。
+              找出成因之後，便能據此提出解決方法。
             </p>
             <p>
-              作者用了一個叫 GAN 的技術。GAN 通常用來生假照片或假影片，原理是讓兩個模型互相對抗，
-              一個負責生產，一個負責挑剔。生產的努力騙過挑剔的，挑剔的努力分辨真假，
-              最後生產的被逼得越來越像真貨。
+              作者採用一種稱為 GAN 的技術。GAN 通常用於生成影像或影片，原理是讓兩個模型互相對抗，
+              一個負責生成，一個負責鑑別。生成器設法騙過鑑別器，鑑別器設法分辨真假，
+              最終生成器的產出會越來越接近真實資料。
             </p>
             <p>
-              在這篇論文裡，挑剔的那個鑑別器的工作是看一眼模型輸出，判斷整體形狀像不像真正的標籤。
-              它不在乎每一格獨立的數值，<em>它看的是整張臉</em>。
+              在這篇論文中，鑑別器的工作是檢視模型的輸出，判斷其整體形狀是否與真實標籤相似。
+              鑑別器評估的是輸出的<em>整體形狀</em>，不針對每一格的數值個別評分。
             </p>
             <p>
-              這就補上了原本缺失的那個訊號。模型不能只把每格的亮度調對，它必須讓整張臉說得過去，
-              否則鑑別器一眼就揪出來。
+              這項設計補上了原本缺少的訊號。模型不能只將每一格的數值調整正確，還必須使整體形狀合理，
+              否則便會被鑑別器識破。
             </p>
 
             <figure>
               <img src="/articles/gan-compare.webp" alt="同一筆波形在傳統訓練與加入 GAN 之後的 S 波預測對比，加入 GAN 後 S 波預測回到完整高度" width="1200" height="958" loading="lazy" />
-              <figcaption>同一筆波形的預測對比。<b>中：傳統訓練</b>，S 波（紅）被壓得低低的；<b>下：加入 GAN 之後</b>，S 波預測回到和 P 波一樣完整的高度。</figcaption>
+              <figcaption>同一筆波形的預測對比。<b>中：傳統訓練</b>，S 波（紅）被壓得很低；<b>下：加入 GAN 之後</b>，S 波預測恢復到與 P 波相同的完整高度。</figcaption>
             </figure>
 
             <div class="keystat">
               <strong>+64%</strong>
-              <span>訓練一萬步之後，原本卡在門檻下方的那批 S 波預測全部被推了上來，有效偵測數提升 64%。原本被當成沒看到的訊號，現在被找回來了。</span>
+              <span>訓練一萬步之後，原本停滯在門檻下方的 S 波預測全數提升至門檻以上，有效偵測數增加 64%，原本被視為未偵測到的訊號得以恢復。</span>
             </div>
 
             <figure>
               <img src="/articles/s-distribution.webp" alt="S 波預測的位置誤差與高度分布，加入 GAN 後越過門檻的精準預測比例大幅提升" width="1200" height="853" loading="lazy" />
-              <figcaption>所有 S 波預測按「位置誤差」與「高度」的分布。<b>精準且越過門檻</b>的比例從 32.4% 提升到 53.1%；原本<b>埋在門檻下</b>的 24.8% 幾乎清空，只剩 1.3%。</figcaption>
+              <figcaption>所有 S 波預測依位置誤差與高度的分布。<b>位置精準且高於門檻</b>的比例從 32.4% 提升至 53.1%，原本<b>位於門檻以下</b>的 24.8% 幾乎消失，僅剩 1.3%。</figcaption>
             </figure>
 
-            <h2>為什麼這件事比 64% 重要</h2>
+            <h2>這項研究在 64% 之外的意義</h2>
             <p>
-              64% 這個數字很漂亮，但這篇論文真正讓人覺得有趣的地方不是它。
+              64% 是相當亮眼的數字，但這篇論文更值得注意的地方在於方法。
             </p>
             <p>
-              它真正做到的事情，是把一個原本被當成工程麻煩的現象，拆解成一個可以被理解、被預測、被分析的東西。
-              為什麼會卡住、卡在哪、怎麼放出來，全部能講清楚。整個流程從試誤推到了原則性分析。
+              論文將一個原本被視為工程問題的現象，拆解為可以理解、預測與分析的對象，
+              清楚說明預測為何停滯、停滯於何處，以及如何解除，整個流程因此從反覆試誤轉變為有原則的分析。
             </p>
             <p>
-              這套診斷不只能用在地震。任何需要從訊號裡標出時間點的任務都適用，
-              心電圖上的心跳、衛星訊號裡的事件、語音裡的音節邊界。
-              只要標準答案是一個有形狀的東西，傳統的逐點打分都可能讓你掉進同一個陷阱。
+              這套診斷方式不僅適用於地震，凡是需要從訊號中標記時間點的任務都適用，
+              例如心電圖中的心跳、衛星訊號中的事件，以及語音中的音節邊界。
+              只要標準答案是一個具有形狀的訊號，傳統的逐點評分都可能導致相同的問題。
             </p>
             <p>
-              論文最後其實在提一個觀念：<strong>理解損失函數本身的形狀，重要程度不輸理解模型架構</strong>。
-              我們很習慣討論換哪種網路、加幾層、用哪個函數，但很少有人停下來問，
-              你叫模型優化的那個目標，它本身的形狀長得對不對。
-            </p>
-            <p>
-              評分標準錯了，再厲害的模型也是白搭。
+              論文最後提出一個觀點：<strong>理解損失函數本身的形狀，與理解模型架構同等重要</strong>。
+              研究者經常討論應採用哪種網路、增加多少層或使用哪種函數，
+              卻較少檢視模型所優化的目標本身是否設計得當。若評分標準本身有誤，即使採用更強大的模型，也無法解決這類問題。
             </p>
           </div>
 
@@ -276,13 +273,13 @@
 
           <section class="article__refs">
             <h2>附錄：訓練過程動畫</h2>
-            <p>本文第一張圖的動畫版。隨著訓練步數推進，可以看到 S 波預測如何一路被壓到偵測門檻以下。</p>
+            <p>本文第一張圖的動畫版，可觀察 S 波預測如何隨訓練步數推進，逐漸被壓至偵測門檻以下。</p>
             <div class="video-embed">
               <iframe src="https://www.youtube.com/embed/rdnCe1mJpA8" title="BlueDisc：S 波預測在訓練過程中被壓抑的動畫" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
           </section>
 
-          <a class="article__back" href="/articles/">← 回到文章列表</a>
+          <a class="article__back" href="/articles/">← 返回文章列表</a>
         </div>
       </div>
     </article>

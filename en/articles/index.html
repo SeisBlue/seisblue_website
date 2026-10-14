@@ -6,7 +6,7 @@
 
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="apple-touch-icon" href="/logo.png" />
-  <title>Articles | SeisBlue Co., Ltd. — Seismic AI</title>
+  <title>Articles | SeisBlue Co., Ltd. | Seismic AI</title>
   <meta name="description" content="Technical notes and explainers by Chun-Ming Huang, covering deep-learning earthquake detection, phase picking, loss function design, and early warning." />
   <meta name="author" content="Chun-Ming Huang (黃俊銘)" />
   <link rel="canonical" href="https://www.seisblue.com/en/articles/" />
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="SeisBlue Co., Ltd." />
-  <meta property="og:title" content="Articles | SeisBlue Co., Ltd. — Seismic AI" />
+  <meta property="og:title" content="Articles | SeisBlue Co., Ltd. | Seismic AI" />
   <meta property="og:description" content="Technical notes and explainers by Chun-Ming Huang on deep-learning earthquake detection, phase picking, loss function design, and early warning." />
   <meta property="og:url" content="https://www.seisblue.com/en/articles/" />
   <meta property="og:image" content="https://www.seisblue.com/og-image.png" />
@@ -52,8 +52,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links" id="site-nav" aria-label="Primary">
-        <a href="/en/#services">Services</a>
-        <a href="/en/#seisblue">Seismic AI</a>
+        <a href="/en/#services">Seismic AI</a>
         <a href="/en/articles/">Articles</a>
         <div class="nav__menu">
           <button type="button" class="nav__menu-btn" aria-haspopup="true">Training</button>
@@ -74,8 +73,8 @@
         <p class="eyebrow">Articles</p>
         <h2>Technical articles &amp; explainers</h2>
         <p class="section__lead">
-          Notes from Chun-Ming Huang's research and engineering in seismic AI — the stories behind the models,
-          loss functions, and real-world data, written to be read.
+          Notes from Chun-Ming Huang's research and engineering in seismic AI, explaining the principles behind models,
+          loss functions, and real-world data in plain language.
         </p>
 
         <div class="article-list">
@@ -83,20 +82,20 @@
             <p class="article-card__meta">2026.05.28 · Seismic AI</p>
             <h2>How Did AI Learn to Pick Seismic Phases?</h2>
             <p>
-              In just a few years, AI phase picking went from every lab writing its own code to calling a pre-trained
-              model in a single line. A plain-language tour of how that happened: PhaseNet, EQTransformer, and the
-              SeisBench toolbox that tied the ecosystem together.
+              In just a few years, AI phase picking moved from each lab writing its own code to loading a trained model
+              with a single command. This article introduces three milestones: PhaseNet, EQTransformer, and SeisBench,
+              which unified the ecosystem.
             </p>
             <span class="article-card__cta">Read more →</span>
           </a>
 
           <a class="article-card" href="/en/articles/bluedisc-shape-aware-loss/">
             <p class="article-card__meta">2026.05.28 · Seismic AI</p>
-            <h2>Why Does AI Keep Missing S-Waves?</h2>
+            <h2>Why Does AI Often Miss S-Waves?</h2>
             <p>
-              Deep-learning phase pickers have a strange quirk: the S-wave position is right, but its amplitude gets
-              pushed below the detection threshold and counted as a miss. A plain-language look at why it gets stuck,
-              and how BlueDisc recovers it with a shape-aware loss — a 64% gain in effective detections.
+              Deep-learning phase pickers have a long-standing problem: the S-wave position is correct, but its amplitude
+              is pushed below the detection threshold and counted as undetected. This article explains the cause and how
+              BlueDisc recovers these S-waves with a shape-aware loss, increasing effective detections by 64%.
             </p>
             <span class="article-card__cta">Read more →</span>
           </a>

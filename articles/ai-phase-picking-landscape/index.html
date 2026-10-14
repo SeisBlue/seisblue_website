@@ -6,8 +6,8 @@
 
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="apple-touch-icon" href="/logo.png" />
-  <title>AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench｜SeisBlue</title>
-  <meta name="description" content="短短幾年，AI 挑地震波從各實驗室各寫各的程式，變成一行指令就能叫出訓練好的模型。這篇科普介紹這條線怎麼鋪起來：PhaseNet、EQTransformer，以及把整個生態串起來的 SeisBench。" />
+  <title>AI 如何學會挑地震波？從 PhaseNet 到 SeisBench｜SeisBlue</title>
+  <meta name="description" content="短短幾年間，AI 挑波從各實驗室自行撰寫程式，發展為一行指令即可載入訓練完成的模型。本文介紹這段發展的三個里程碑：PhaseNet、EQTransformer，以及整合整個生態系的 SeisBench。" />
   <meta name="keywords" content="地震 AI, 相位拾取, phase picking, PhaseNet, EQTransformer, SeisBench, 深度學習, 地震偵測, U-Net, attention" />
   <meta name="author" content="黃俊銘 Chun-Ming Huang" />
   <link rel="canonical" href="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
@@ -19,8 +19,8 @@
   <meta property="og:type" content="article" />
   <meta property="og:locale" content="zh_TW" />
   <meta property="og:site_name" content="藍震有限公司 SeisBlue" />
-  <meta property="og:title" content="AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench" />
-  <meta property="og:description" content="短短幾年，AI 挑地震波從各做各的，變成人人能上手。PhaseNet、EQTransformer，到把生態串起來的 SeisBench。" />
+  <meta property="og:title" content="AI 如何學會挑地震波？從 PhaseNet 到 SeisBench" />
+  <meta property="og:description" content="AI 挑波在短短幾年間從各自開發，發展為人人可用的開放生態系。本文介紹 PhaseNet、EQTransformer 與整合生態系的 SeisBench。" />
   <meta property="og:url" content="https://www.seisblue.com/articles/ai-phase-picking-landscape/" />
   <meta property="og:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -29,8 +29,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench" />
-  <meta name="twitter:description" content="短短幾年，AI 挑地震波從各做各的，變成人人能上手。PhaseNet、EQTransformer，到把生態串起來的 SeisBench。" />
+  <meta name="twitter:title" content="AI 如何學會挑地震波？從 PhaseNet 到 SeisBench" />
+  <meta name="twitter:description" content="AI 挑波在短短幾年間從各自開發，發展為人人可用的開放生態系。本文介紹 PhaseNet、EQTransformer 與整合生態系的 SeisBench。" />
   <meta name="twitter:image" content="https://www.seisblue.com/articles/og-landscape.jpg" />
 
   <!-- BlogPosting JSON-LD -->
@@ -38,8 +38,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "AI 怎麼學會挑地震波的？——從 PhaseNet 到 SeisBench",
-    "description": "短短幾年，AI 挑地震波從各實驗室各寫各的程式，變成一行指令就能叫出訓練好的模型。介紹 PhaseNet、EQTransformer，以及把整個生態串起來的 SeisBench。",
+    "headline": "AI 如何學會挑地震波？從 PhaseNet 到 SeisBench",
+    "description": "短短幾年間，AI 挑波從各實驗室自行撰寫程式，發展為一行指令即可載入訓練完成的模型。本文介紹 PhaseNet、EQTransformer，以及整合整個生態系的 SeisBench。",
     "image": "https://www.seisblue.com/articles/og-landscape.jpg",
     "datePublished": "2026-05-28",
     "dateModified": "2026-05-28",
@@ -92,8 +92,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links" id="site-nav" aria-label="主導覽">
-        <a href="/#services">業務範圍</a>
-        <a href="/#seisblue">地震 AI</a>
+        <a href="/#services">地震 AI 技術</a>
         <a href="/articles/">文章</a>
         <div class="nav__menu">
           <button type="button" class="nav__menu-btn" aria-haspopup="true">教育訓練</button>
@@ -120,7 +119,7 @@
         </div>
         <div class="article-hero__inner">
           <p class="eyebrow">文章 · 地震 AI</p>
-          <h1>AI 怎麼學會挑地震波的？</h1>
+          <h1>AI 如何學會挑地震波？</h1>
           <div class="article-meta">
             <span>2026.05.28</span>
             <span>黃俊銘 Chun-Ming Huang</span>
@@ -132,9 +131,9 @@
       <div class="article">
         <div class="article__inner">
           <p class="article__lead">
-            AI 是怎麼一步步接手「挑地震波」這件工作的？短短幾年，這個領域從各實驗室各寫各的程式，
-            變成一行指令就能叫出別人訓練好的模型。這篇就講這條線怎麼鋪起來，主角有三個：
-            PhaseNet、EQTransformer，以及把它們串起來的 SeisBench。
+            AI 如何逐步接手挑地震波的工作？短短幾年間，這個領域從各實驗室自行撰寫程式，
+            發展為一行指令即可載入他人訓練完成的模型。本文介紹這段發展中的三個里程碑：
+            PhaseNet、EQTransformer，以及整合兩者的 SeisBench。
           </p>
 
           <div class="prose">
@@ -142,101 +141,101 @@
               <div class="timeline__item">
                 <p class="timeline__year">2019</p>
                 <p class="timeline__title">PhaseNet</p>
-                <p>把挑波重新定義成圖像分割題（U-Net 的本行），並用高斯曲線當目標、好訓練又準，成為整個領域的標竿。</p>
+                <p>將挑波重新定義為圖像分割問題（U-Net 擅長的任務），並以高斯曲線作為訓練目標，訓練穩定且準確，成為整個領域的比較基準。</p>
               </div>
               <div class="timeline__item">
                 <p class="timeline__year">2020</p>
                 <p class="timeline__title">EQTransformer</p>
-                <p>引進注意力機制，把偵測、P 波、S 波拆成三個獨立分支，各司其職、互不干擾。</p>
+                <p>引進注意力機制，將地震偵測、P 波與 S 波拆成三個獨立分支，分別學習、互不干擾。</p>
               </div>
               <div class="timeline__item">
                 <p class="timeline__year">2022</p>
                 <p class="timeline__title">SeisBench</p>
-                <p>把眾多模型與資料集包進同一套介面，讓結果能被公平比較、被重現。</p>
+                <p>將眾多模型與資料集整合於同一套介面，使結果能夠公平比較與重現。</p>
               </div>
             </div>
 
-            <h2>PhaseNet：把挑波變成一道「圖像分割」題</h2>
+            <h2>PhaseNet：將挑波轉為圖像分割問題</h2>
             <p>
-              2019 年，史丹佛的 Weiqiang Zhu 和 Greg Beroza 提出了 <a href="https://github.com/AI4EPS/PhaseNet" target="_blank" rel="noopener">PhaseNet</a>。它最關鍵的一步，
-              是把「挑波」這個問題<strong>重新定義</strong>了。原本大家把挑波當成「在一長串訊號裡，精準找出某一個到達時間點」；
-              PhaseNet 改成把它當成一道<strong>圖像分割</strong>題：逐點判斷「這裡屬於 P 波、屬於 S 波，還是什麼都沒有」。
-              這正好是 U-Net 這個網路結構的本行；U-Net 原本就是用來切割醫學影像，在 X 光和 MRI 裡圈出器官邊界。
-              挑地震波和圈器官邊界，本質上是同一種題目。
+              2019 年，史丹佛大學的 Weiqiang Zhu 與 Greg Beroza 提出 <a href="https://github.com/AI4EPS/PhaseNet" target="_blank" rel="noopener">PhaseNet</a>。其最關鍵的貢獻，
+              是<strong>重新定義</strong>了挑波問題。過去的做法將挑波視為在一長串訊號中精準找出某個到達時間點，
+              PhaseNet 則將其轉為<strong>圖像分割</strong>問題，逐點判斷每個取樣點屬於 P 波、S 波或雜訊。
+              這正是 U-Net 擅長的任務。U-Net 原本用於分割醫學影像，例如在 X 光與 MRI 中圈出器官邊界，
+              而挑地震波與圈出器官邊界，在本質上屬於同一類問題。
             </p>
             <p>
-              第二個改動沒那麼顯眼，但一樣關鍵。地震波到達的「正確時間」本來是一個單一時間點，
-              要模型精準命中這個點很難訓練：目標又尖又稀疏，差一點就幾乎全錯。
-              PhaseNet 把這個尖銳的時間點攤成一條<em>高斯曲線</em>：
-              以人工標記的位置為中心、兩側帶一點寬度，等於把「人工標記本來就會有的誤差」直接寫進訓練目標裡。
-              目標變寬，模型就有了容錯空間，也好訓練得多。
+              第二項改動較不顯眼，但同樣關鍵。地震波的正確到達時間原本是單一時間點，
+              要求模型精準命中這個點並不容易訓練，因為目標既尖銳又稀疏，稍有偏差便幾乎完全錯誤。
+              PhaseNet 將這個時間點展開為一條<em>高斯曲線</em>，
+              以人工標記的位置為中心，兩側保留一定寬度，等於將人工標記本身的誤差納入訓練目標。
+              目標變寬之後，模型有了容錯空間，訓練也容易得多。
             </p>
             <p>
-              把三軸波形丟進 U-Net，輸出 P、S、雜訊三條機率曲線，哪裡的曲線衝高，就是那種波到了。
-              它用美國北加州幾十年累積的人工標記資料訓練，結果又快又準，準到後來幾乎成了整個領域的<strong>標竿</strong>：
-              新方法一出來，第一件事就是拿它跟 PhaseNet 比。
+              模型以三軸波形作為輸入，經 U-Net 輸出 P 波、S 波與雜訊三條機率曲線，曲線升高之處即代表該類波到達。
+              PhaseNet 以美國北加州數十年累積的人工標記資料訓練，速度快且準確度高，此後幾乎成為整個領域的<strong>比較基準</strong>，
+              新方法發表時通常都會先與 PhaseNet 比較。
             </p>
 
             <figure>
               <img src="/articles/phasenet-example.webp" alt="相位拾取範例：同一筆地震的三軸波形，以及 P、S 兩條高斯機率曲線輸出" width="673" height="679" loading="lazy" />
-              <figcaption>一個實際範例：上面三條是同一筆地震的三軸波形（Z／N／E），最下面是模型輸出。淺色是人工標記的<b>高斯曲線</b>（標準答案），深色是模型預測，P（藍）、S（紅）兩個峰幾乎完全疊上標準答案。兩個重點都在這張圖裡：輸入是逐點判讀的整段波形（圖像分割的概念），而目標不是一個單一時間點、是一條帶寬度的高斯曲線。<br/>圖／<a href="https://github.com/SeisBlue" target="_blank" rel="noopener">SeisBlue</a></figcaption>
+              <figcaption>實際範例：上方三條為同一筆地震的三軸波形（Z／N／E），最下方為模型輸出。淺色為人工標記的<b>高斯曲線</b>（標準答案），深色為模型預測，P 波（藍）與 S 波（紅）的峰值幾乎與標準答案重合。圖中呈現兩個重點：輸入是逐點判讀的整段波形，即圖像分割的概念；訓練目標則不是單一時間點，而是一條具有寬度的高斯曲線。<br/>圖／<a href="https://github.com/SeisBlue" target="_blank" rel="noopener">SeisBlue</a></figcaption>
             </figure>
 
-            <h2>EQTransformer：把三件事拆開來做</h2>
+            <h2>EQTransformer：將三項任務分開處理</h2>
             <p>
-              2020 年，同一個圈子的 Mousavi 等人提出 <a href="https://github.com/smousavi05/EQTransformer" target="_blank" rel="noopener">EQTransformer</a>，登上《Nature Communications》。
+              2020 年，同一研究群的 Mousavi 等人提出 <a href="https://github.com/smousavi05/EQTransformer" target="_blank" rel="noopener">EQTransformer</a>，發表於《Nature Communications》。
             </p>
             <p>
-              如果說 PhaseNet 證明了「深度學習挑波可行」，EQTransformer 想的是「能不能做得更聰明」。
-              它引進了當時席捲 AI 圈的<em>注意力機制</em>（attention，後來大型語言模型用的就是同一套底層想法），
-              讓模型在看一段波形時，能同時權衡遠處和近處的線索。
+              PhaseNet 證明了深度學習挑波的可行性，EQTransformer 則進一步提升模型的判讀能力。
+              它引進當時在 AI 領域迅速普及的<em>注意力機制</em>（attention，後來的大型語言模型也採用相同的基本概念），
+              使模型在判讀一段波形時，能同時參考遠處與近處的線索。
             </p>
             <p>
-              它的關鍵設計，是把三件事<strong>拆開來做</strong>：偵測「這段裡到底有沒有地震」、標 P 波、標 S 波，
-              各自交給獨立的輸出分支（head），彼此不干擾。原因在於 PhaseNet 原本把
-              P 波、S 波、雜訊當成三個並排的頻道一起預測，但「有沒有地震」這種偵測訊號涵蓋整段事件、又寬又長，
-              份量遠比 P、S 那兩個又窄又小的高斯尖峰重；全部混在一起學，小小的 P、S 很容易被偵測訊號蓋過去。
-              拆成獨立的 head，每件事才能專心做好自己的。它用一個叫 STEAD 的大型公開地震資料集訓練，
-              資料量比 PhaseNet 當年又大了一截。
-            </p>
-
-            <h2>百花齊放之後的麻煩</h2>
-            <p>
-              PhaseNet、EQTransformer 之後，各種模型冒出來，這本來是好事，但很快撞上一個現實問題：
-              <strong>大家根本沒辦法公平比較</strong>。
-            </p>
-            <p>
-              每個模型用不同格式的資料、不同的前處理、不同的評分標準。你想知道 A 模型是不是真的比 B 好，
-              得先花好幾週把兩邊的資料管線、環境全部重搭一次。光是「把資料讀進來」這一步，就足以勸退很多人。
-              研究做不出可重現的對比，領域就很難往前。
+              其關鍵設計是將三項任務<strong>分開處理</strong>：判斷波形中是否有地震、標記 P 波、標記 S 波，
+              各自交由獨立的輸出分支（head）負責，彼此不受干擾。這樣設計的原因在於，PhaseNet 將
+              P 波、S 波與雜訊視為三個並列的頻道同時預測，而地震偵測訊號涵蓋整個事件，範圍寬且長，
+              比重遠大於 P、S 波狹窄的高斯峰值。若全部混合學習，P、S 波的訊號容易被偵測訊號掩蓋，
+              拆成獨立分支之後，每項任務才能分別學好。EQTransformer 以大型公開地震資料集 STEAD 訓練，
+              資料量也比 PhaseNet 當年大上許多。
             </p>
 
-            <h2>SeisBench：地震 AI 的 USB 介面</h2>
+            <h2>模型大量出現之後的問題</h2>
             <p>
-              2022 年，德國的研究團隊（Woollam、Münchmeyer 等人）推出 <a href="https://github.com/seisbench/seisbench" target="_blank" rel="noopener">SeisBench</a>，解決的正是這件事。
+              PhaseNet 與 EQTransformer 之後，各種模型陸續發表。這原本是好事，但很快遇到一個實際問題：
+              <strong>不同模型之間無法公平比較</strong>。
             </p>
             <p>
-              你可以把它想成地震 AI 的 <em>USB</em>：任何一個訓練好的模型（PhaseNet、EQTransformer 等等）、
-              任何一個公開資料集，都用同一種接法接上去。想換模型？改一行字。想換資料集？再改一行。
-              原本要搭好幾週的東西，現在幾行程式就跑起來，而且每個人跑出來的結果可以直接對比。
-            </p>
-            <p>
-              SeisBench 沒有發明新的挑波模型，但它做的事一樣重要：它把這個領域從「各做各的」變成
-              「人人能上手、結果能重現」。今天一個剛入門的學生，一個下午就能試完過去好幾篇論文的成果；
-              這在五年前幾乎做不到。
+              每個模型使用不同格式的資料、不同的前處理方式與不同的評分標準。若要確認 A 模型是否確實優於 B 模型，
+              必須先花費數週重新建置兩邊的資料管線與執行環境，光是讀取資料這一步便足以讓許多人卻步。
+              研究若無法提出可重現的比較，領域便難以進步。
             </p>
 
-            <h2>那接下來呢？</h2>
+            <h2>SeisBench：統一模型與資料的介面</h2>
             <p>
-              這幾年下來，AI 挑波從一個新點子，長成了開放又可重現的生態系。基礎設施鋪好了，門檻也降下來了。
+              2022 年，德國的研究團隊（Woollam、Münchmeyer 等人）推出 <a href="https://github.com/seisbench/seisbench" target="_blank" rel="noopener">SeisBench</a>，目的正是解決這個問題。
             </p>
             <p>
-              但工具成熟，不代表問題都解決了。模型在某些情況下還是會出錯，例如 S 波振幅被壓抑，
-              或是遇到訓練時沒見過的地區與儀器就水土不服。基礎打穩之後，大家的注意力自然會從「能不能做」，
-              轉到這些更具體的毛病上。
+              SeisBench 的角色類似電腦的 <em>USB</em> 介面：任何訓練完成的模型（如 PhaseNet、EQTransformer）
+              與任何公開資料集，都以同一種方式接入，更換模型或資料集只需修改一行程式。
+              原本需要數週建置的環境，如今以幾行程式即可執行，而且不同研究者得到的結果可以直接比較。
             </p>
             <p>
-              想看 AI 挑波其中一個具體難題怎麼被拆解，可以接著讀：<a href="/articles/bluedisc-shape-aware-loss/">AI 為什麼老是漏看 S 波？ →</a>
+              SeisBench 並未提出新的挑波模型，但其貢獻同樣重要。它使這個領域從各自開發，
+              轉變為人人可以使用、結果可以重現。如今一位剛入門的學生，一個下午便能重現過去多篇論文的成果，
+              這在五年前幾乎無法做到。
+            </p>
+
+            <h2>後續的研究方向</h2>
+            <p>
+              經過這幾年的發展，AI 挑波已從一個新概念，成長為開放且可重現的生態系，基礎設施已經完備，使用門檻也已降低。
+            </p>
+            <p>
+              然而工具成熟並不代表問題都已解決。模型在某些情況下仍會出錯，例如 S 波振幅受到抑制，
+              或是遇到訓練時未曾見過的地區與儀器時表現下降。基礎建立之後，研究的重點自然從能否實現，
+              轉向這些更具體的問題。
+            </p>
+            <p>
+              其中一個具體問題的分析，請參閱：<a href="/articles/bluedisc-shape-aware-loss/">AI 為什麼經常漏判 S 波？ →</a>
             </p>
           </div>
 
@@ -262,7 +261,7 @@
             </p>
           </section>
 
-          <a class="article__back" href="/articles/">← 回到文章列表</a>
+          <a class="article__back" href="/articles/">← 返回文章列表</a>
         </div>
       </div>
     </article>
