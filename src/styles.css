@@ -436,7 +436,6 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* About section: vertically center the body next to the heading */
-.about .two-col { align-items: center; }
 
 @media (max-width: 860px) {
   .two-col { grid-template-columns: 1fr; gap: 24px; }
@@ -932,6 +931,10 @@ p:last-child { margin-bottom: 0; }
 }
 .live-video__cap a { color: var(--brand-2); }
 .live-video__cap a:hover { text-decoration: underline; }
+
+.hero__video { margin: 0; }
+.hero__video .live-video__el { box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.6); }
+.hero__video .live-video__cap { max-width: 820px; line-height: 1.7; }
 
 @media (max-width: 860px) {
   .flow-diagram { grid-template-columns: 1fr; gap: 14px; }
