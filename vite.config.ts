@@ -16,6 +16,8 @@ export default defineConfig({
         'en-articles': 'en/articles/index.html',
         'en-articles-bluedisc': 'en/articles/bluedisc-shape-aware-loss/index.html',
         'en-articles-landscape': 'en/articles/ai-phase-picking-landscape/index.html',
+        technology: 'technology/index.html',
+        'en-technology': 'en/technology/index.html',
       },
     },
   },

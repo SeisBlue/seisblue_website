@@ -1156,9 +1156,20 @@ p:last-child { margin-bottom: 0; }
 
 /* Smooth scroll */
 html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 80px; }
 
 .workstation { background: var(--bg-soft); }
-.workstation .live-video { margin-top: 0; }
+.workstation__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: center;
+}
+.workstation .section__lead { margin-bottom: 0; }
+.workstation .live-video { margin: 0; }
+@media (max-width: 860px) {
+  .workstation__inner { grid-template-columns: 1fr; gap: 32px; }
+}
 
 .flow-system {
   display: inline-block;

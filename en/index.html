@@ -96,7 +96,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links" id="site-nav" aria-label="Primary">
-        <a href="#services">Seismic AI</a>
+        <a href="/en/technology/">Seismic AI</a>
         <a href="/en/articles/">Articles</a>
         <div class="nav__menu">
           <button type="button" class="nav__menu-btn" aria-haspopup="true">Training</button>
@@ -132,7 +132,7 @@
           <strong>earthquake early warning</strong>.
         </p>
         <div class="hero__cta">
-          <a href="#services" class="btn btn--primary">Explore our technology</a>
+          <a href="/en/technology/" class="btn btn--primary">Explore our technology</a>
           <a href="#contact" class="btn btn--ghost">Contact us →</a>
         </div>
 
@@ -150,33 +150,6 @@
             picks P- and S-wave arrivals, associates them into earthquake events and builds the catalog in real time.
             Recorded during the 2025 <strong>Dapu earthquake</strong> aftershock sequence; developed in collaboration with
             Taiwan's <strong>Central Weather Administration</strong>.
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="workstation" class="section workstation">
-      <div class="section__inner">
-        <p class="eyebrow">Analyst workstation</p>
-        <h2>Earthquake Catalog Workstation</h2>
-        <p class="section__lead">
-          An earthquake analysis platform centered on manual analysis, developed with Taiwan's <strong>Central Weather Administration</strong>.
-          As analysts pick phases, the system relocates the event in real time, evaluates location quality, and identifies stations
-          that still require picks, keeping the analysis workflow continuous. Analysts can concentrate on waveform interpretation,
-          and confirmed results are exported as the official catalog and used as labeled data for training seismic AI.
-        </p>
-
-        <figure class="live-video">
-          <video
-            class="live-video__el"
-            autoplay muted loop playsinline
-            poster="/workstation-poster.jpg"
-            preload="metadata"
-            aria-label="Earthquake Catalog Workstation: analysts pick P- and S-wave arrivals station by station while the map shows the location result (sped up).">
-            <source src="/workstation-loop.mp4" type="video/mp4" />
-          </video>
-          <figcaption class="live-video__cap">
-            Earthquake Catalog Workstation (10× speed): analysts pick P- and S-wave arrivals station by station while the map shows the location result and its uncertainty.
           </figcaption>
         </figure>
       </div>
@@ -239,7 +212,7 @@
                 <span class="flow-scale">Near-real-time</span>
                 <h3>Earthquake catalog</h3>
                 <p>Arrivals from multiple stations are combined to determine each event's location, magnitude, and origin time. The official catalog is produced by analysts through manual picking and location in the workstation, which also builds up labeled data for AI training.</p>
-                <a class="flow-system" href="#workstation">Catalog Workstation ↑</a>
+                <a class="flow-system" href="#workstation">Catalog Workstation ↓</a>
               </div>
               <span class="flow-arrow" aria-hidden="true">→</span>
               <div class="flow-node">
@@ -281,6 +254,35 @@
       </div>
     </section>
 
+    <section id="workstation" class="section workstation">
+      <div class="section__inner workstation__inner">
+        <div class="workstation__text">
+          <p class="eyebrow">Analyst workstation</p>
+          <h2>Earthquake Catalog Workstation</h2>
+          <p class="section__lead">
+            An earthquake analysis platform centered on manual analysis, developed with Taiwan's <strong>Central Weather Administration</strong>.
+            As analysts pick phases, the system relocates the event in real time, evaluates location quality, and identifies stations
+            that still require picks, keeping the analysis workflow continuous. Analysts can concentrate on waveform interpretation,
+            and confirmed results are exported as the official catalog and used as labeled data for training seismic AI.
+          </p>
+        </div>
+
+        <figure class="live-video workstation__video">
+          <video
+            class="live-video__el"
+            autoplay muted loop playsinline
+            poster="/workstation-poster.jpg"
+            preload="metadata"
+            aria-label="Earthquake Catalog Workstation: analysts pick P- and S-wave arrivals station by station while the map shows the location result (sped up).">
+            <source src="/workstation-loop.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="live-video__cap">
+            Earthquake Catalog Workstation (10× speed): analysts pick P- and S-wave arrivals station by station while the map shows the location result and its uncertainty.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
     <div id="services" aria-hidden="true"></div>
     <section id="seisblue" class="section technology">
       <div class="section__inner">
@@ -289,167 +291,24 @@
         <p class="section__lead">
           SeisBlue combines seismic-AI <strong>research experience with engineering capability</strong>.
           It builds training pipelines and integrates real-time data streams so that research methods
-          run reliably in production. The full workflow and case studies follow below.
+          run reliably in production.
         </p>
-
-        <div class="mlops-diagram">
-          <div class="flow-node flow-node--offline mlops-n1">
-            <span class="flow-scale">Offline</span>
-            <h3>Data input</h3>
-            <p>Earthquake catalogs paired with continuous waveforms become labeled training data.</p>
-          </div>
-          <span class="flow-arrow mlops-a1" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--offline mlops-n2">
-            <span class="flow-scale">Offline</span>
-            <h3>Preprocessing</h3>
-            <p>Cleaning, windowing, and arrival-time alignment turn raw waveforms into learnable samples.</p>
-          </div>
-          <span class="flow-arrow mlops-a2" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--offline mlops-n3">
-            <span class="flow-scale">Offline</span>
-            <h3>Model training</h3>
-            <p>Reproducible training pipelines manage experiment records, hyperparameters, and training strategies together.</p>
-          </div>
-
-          <div class="mlops-connector mlops-drop" aria-hidden="true">
-            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
-              <path class="mlops-connector__line" d="M12,2 V54" />
-              <path class="mlops-connector__head" d="M5,48 L12,58 L19,48" />
-            </svg>
-          </div>
-          <div class="flow-node flow-node--offline mlops-n4">
-            <span class="flow-scale">Offline</span>
-            <h3>Evaluation</h3>
-            <p>P- and S-wave detection performance is validated on standard test sets, and a model is released only if it outperforms the current version.</p>
-          </div>
-          <span class="flow-arrow mlops-a3" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--online mlops-n5">
-            <span class="flow-scale">Online</span>
-            <h3>Deployment</h3>
-            <p>Models are packaged as services and connected to real-time data streams, running reliably 7×24.</p>
-          </div>
-          <span class="flow-arrow mlops-a4" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--online mlops-n6">
-            <span class="flow-scale">Online</span>
-            <h3>Monitoring</h3>
-            <p>Latency, performance, and data drift are monitored, and new events detected in production are collected as training data.</p>
-          </div>
-
-          <div class="mlops-connector mlops-loop" aria-hidden="true">
-            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
-              <path class="mlops-connector__line" d="M12,62 V10" />
-              <path class="mlops-connector__head" d="M5,16 L12,6 L19,16" />
-            </svg>
-          </div>
-          <p class="mlops-loop-label">↺ New events return as the next round of training data, steadily improving model accuracy</p>
-        </div>
-
-        <div class="mlops-caps__head">
-          <p class="eyebrow">Core capabilities</p>
-          <h3 class="mlops-caps__title">Three pipeline stages<br/>and the corresponding core capabilities</h3>
-        </div>
         <div class="cap-grid">
-          <article class="cap-card">
+          <a class="cap-card" href="/en/technology/#case-bluedisc">
             <h4>Method Research</h4>
             <p>Extensive research experience in loss functions, training strategies, and data engineering raises the performance ceiling of the model.</p>
-          </article>
-          <article class="cap-card">
+          </a>
+          <a class="cap-card" href="/en/technology/#case-platform">
             <h4>Training Infrastructure</h4>
             <p>Reproducible, scalable training infrastructure, including data preprocessing, model architecture, and training strategy.</p>
-          </article>
-          <article class="cap-card">
+          </a>
+          <a class="cap-card" href="/en/technology/#case-ttsam">
             <h4>Production Deployment</h4>
             <p>Models are integrated into real-time data streams (e.g. Earthworm) so that services run reliably 7×24.</p>
-          </article>
+          </a>
         </div>
-
-        <div class="cases">
-          <article class="case" id="case-bluedisc">
-            <p class="case__cap">Method Research</p>
-            <h3 class="case__name">BlueDisc · S-wave detection method</h3>
-            <p>
-              BlueDisc originates from Chun-Ming Huang's years of research on phase picking.
-              Targeting the long-standing <em>S-wave amplitude suppression</em> problem in
-              deep-learning phase pickers, the work dissects <strong>the role of the loss function
-              in training</strong> and <strong>why the data fails to converge</strong>, and validates
-              the findings through a <strong>shape-then-align</strong> training strategy with a conditional GAN
-              proof of concept, raising effective S-phase detections by <strong>64%</strong> on
-              standard benchmarks.
-              Source at <a href="https://github.com/SeisBlue/BlueDisc" target="_blank" rel="noopener">github.com/SeisBlue/BlueDisc</a>.
-              For a non-technical explanation, see the article <a href="/en/articles/bluedisc-shape-aware-loss/">Why Does AI Often Miss S-Waves? →</a>
-            </p>
-            <p class="case__ref">
-              Huang, C.-M., Chang, L.-H., Chang, I.-H., Lee, A.-S., &amp; Kuo-Chen, H. (2025).
-              Recovering Sub-threshold S-wave Arrivals in Deep Learning Phase Pickers via Shape-Aware Loss.
-              <em>arXiv</em>:2511.06731.
-              <a href="https://arxiv.org/abs/2511.06731" target="_blank" rel="noopener">arxiv.org/abs/2511.06731</a>
-            </p>
-          </article>
-
-          <article class="case" id="case-platform">
-            <p class="case__cap">Training Infrastructure</p>
-            <h3 class="case__name">SeisBlue Platform · seismic data framework</h3>
-            <p>
-              SeisBlue is a deep-learning seismic data processing framework developed and
-              open-sourced by Chun-Ming Huang. The platform packages the full pipeline, from
-              waveform ingestion through phase picking to catalog output, into a service that runs
-              reliably in production, adopted by multiple peer-reviewed studies as a core processing tool.
-              Source at <a href="https://github.com/SeisBlue/SeisBlue" target="_blank" rel="noopener">github.com/SeisBlue/SeisBlue</a>.
-            </p>
-            <p class="case__ref">
-              Huang, C.-M., Chang, L.-H., Kuo-Chen, H., &amp; Zhuang, Y. (2023).
-              SeisBlue: a deep-learning data processing platform for seismology.
-              <em>EGU General Assembly 2023</em>, EGU23-13927.
-              <a href="https://doi.org/10.5194/egusphere-egu23-13927" target="_blank" rel="noopener">doi.org/10.5194/egusphere-egu23-13927</a>
-            </p>
-            <details class="case__more">
-              <summary>Follow-up research adopting the SeisBlue Platform (4)</summary>
-              <ul class="case__reflist">
-                <li>
-                  Sun, W.-F., Pan, S.-Y., Huang, C.-M., Guan, Z.-K., Yen, I.-C., Ho, C.-W., Chi, T.-C., Ku, C.-S., Huang, B.-S., Fu, C.-C., &amp; Kuo-Chen, H. (2024).
-                  Deep learning-based earthquake catalog reveals the seismogenic structures of the 2022 M<sub>W</sub> 6.9 Chihshang earthquake sequence.
-                  <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
-                  <a href="https://doi.org/10.1007/s44195-024-00063-9" target="_blank" rel="noopener">doi.org/10.1007/s44195-024-00063-9</a>
-                </li>
-                <li>
-                  Huang, B.-S., Ku, C.-S., Lin, C.-J., Lee, S.-J., Chen, Y.-L. E., Jiang, J.-S., &amp; Sun, W.-F. (2024).
-                  The first 30 min hidden aftershocks of the 2022 September 17, M<sub>L</sub> 6.4, Guanshan, Taiwan earthquake and its seismological implications.
-                  <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
-                  <a href="https://doi.org/10.1007/s44195-023-00059-x" target="_blank" rel="noopener">doi.org/10.1007/s44195-023-00059-x</a>
-                </li>
-                <li>
-                  Sun, W.-F., Pan, S.-Y., Liu, Y.-H., Kuo-Chen, H., Ku, C.-S., Lin, C.-M., &amp; Fu, C.-C. (2025).
-                  A Deep-Learning-Based Real-Time Microearthquake Monitoring System (RT-MEMS) for Taiwan.
-                  <em>Sensors</em>, 25(11), 3353.
-                  <a href="https://doi.org/10.3390/s25113353" target="_blank" rel="noopener">doi.org/10.3390/s25113353</a>
-                </li>
-                <li>
-                  Kuo-Chen, H., Sun, W.-F., Kan, L.-Y., Pan, S.-Y., Yen, I.-C., Liang, S.-H., Guan, Z.-K., Liu, Y.-H., Chen, W.-S., &amp; Brown, D. (2025).
-                  Real-Time Earthquake Monitoring with Deep Learning: A Case Study of the 2025 M<sub>L</sub> 6.4 Dapu Earthquake and Its Fault System in Southwestern Taiwan.
-                  <em>The Seismic Record</em>, 5(3), 320–329.
-                  <a href="https://pubs.geoscienceworld.org/ssa/tsr/article/5/3/320/661129/Real-Time-Earthquake-Monitoring-with-Deep-Learning" target="_blank" rel="noopener">geoscienceworld.org</a>
-                </li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="case" id="case-ttsam">
-            <p class="case__cap">Production Deployment</p>
-            <h3 class="case__name">TT-SAM · real-time earthquake early warning</h3>
-            <p>
-              <strong>TT-SAM</strong> (Taiwan Transformer Shaking Alert Model) is an earthquake early warning system.
-              Its architecture references the TEAM framework by Münchmeyer et al. (2020);
-              Chun-Ming Huang led the <strong>AI engineering core</strong>, including training environment setup,
-              pipeline design, and production deployment. The real-time pipeline runs on the
-              Earthworm real-time data stream.
-            </p>
-            <p class="case__ref">
-              Chen, Y.-H., Chan, C.-H., Chang, C.-C., &amp; Ma, K.-F. (2026).
-              A Deep Learning Framework for Peak Ground Velocity Prediction Using Multi-Station Velocity Waveforms: The Taiwan Transformer Shaking Alert Model (TT-SAM).
-              <em>Journal of Geophysical Research: Machine Learning and Computation</em>.
-              <a href="https://doi.org/10.1029/2025JH001005" target="_blank" rel="noopener">doi.org/10.1029/2025JH001005</a>
-            </p>
-          </article>
+        <div class="articles-more">
+          <a href="/en/technology/" class="btn btn--ghost">Technical details and case studies →</a>
         </div>
       </div>
     </section>

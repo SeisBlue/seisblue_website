@@ -95,7 +95,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav__links" id="site-nav" aria-label="主導覽">
-        <a href="#services">地震 AI 技術</a>
+        <a href="/technology/">地震 AI 技術</a>
         <a href="/articles/">文章</a>
         <div class="nav__menu">
           <button type="button" class="nav__menu-btn" aria-haspopup="true">教育訓練</button>
@@ -131,7 +131,7 @@
           <strong>地震早期預警</strong>。
         </p>
         <div class="hero__cta">
-          <a href="#services" class="btn btn--primary">了解我們的技術</a>
+          <a href="/technology/" class="btn btn--primary">了解我們的技術</a>
           <a href="#contact" class="btn btn--ghost">聯絡我們 →</a>
         </div>
 
@@ -147,32 +147,6 @@
           <figcaption class="live-video__cap">
             即時監測畫面（6 倍速）：全台 472 個測站的連續波形即時傳入，AI 模型自動挑波並標記 P、S 波到時，再進行地震事件關聯，即時產出地震目錄。
             畫面攝於 2025 年<strong>大埔地震</strong>餘震序列期間，此監測系統與<strong>中央氣象署</strong>合作開發。
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="workstation" class="section workstation">
-      <div class="section__inner">
-        <p class="eyebrow">地震分析平台 · Analyst workstation</p>
-        <h2>地震目錄工作台</h2>
-        <p class="section__lead">
-          以人工分析為核心的地震分析平台，與<strong>中央氣象署</strong>合作開發。
-          系統依分析人員的挑波進度，即時重新定位並檢核定位品質，同時提示待補挑的測站，使分析流程連貫順暢。
-          分析人員得以專注於波形判讀，經確認的結果可匯出為正式目錄，並作為訓練地震 AI 的標註資料。
-        </p>
-
-        <figure class="live-video">
-          <video
-            class="live-video__el"
-            autoplay muted loop playsinline
-            poster="/workstation-poster.jpg"
-            preload="metadata"
-            aria-label="地震目錄工作台操作畫面：分析人員逐站挑選 P、S 波到時，地圖同步顯示定位結果（加速播放）">
-            <source src="/workstation-loop.mp4" type="video/mp4" />
-          </video>
-          <figcaption class="live-video__cap">
-            地震目錄工作台操作畫面（10 倍速）：分析人員逐站挑選 P、S 波到時，右側地圖同步顯示定位結果與誤差範圍。
           </figcaption>
         </figure>
       </div>
@@ -234,7 +208,7 @@
                 <span class="flow-scale">近即時</span>
                 <h3>地震目錄</h3>
                 <p>彙整多站到時，計算每次地震的位置、規模與發生時間。正式目錄由分析人員在工作台以人工挑波與定位完成，同時累積 AI 訓練所需的標註資料。</p>
-                <a class="flow-system" href="#workstation">地震目錄工作台 ↑</a>
+                <a class="flow-system" href="#workstation">地震目錄工作台 ↓</a>
               </div>
               <span class="flow-arrow" aria-hidden="true">→</span>
               <div class="flow-node">
@@ -276,6 +250,34 @@
       </div>
     </section>
 
+    <section id="workstation" class="section workstation">
+      <div class="section__inner workstation__inner">
+        <div class="workstation__text">
+          <p class="eyebrow">地震分析平台 · Analyst workstation</p>
+          <h2>地震目錄工作台</h2>
+          <p class="section__lead">
+            以人工分析為核心的地震分析平台，與<strong>中央氣象署</strong>合作開發。
+            系統依分析人員的挑波進度，即時重新定位並檢核定位品質，同時提示待補挑的測站，使分析流程連貫順暢。
+            分析人員得以專注於波形判讀，經確認的結果可匯出為正式目錄，並作為訓練地震 AI 的標註資料。
+          </p>
+        </div>
+
+        <figure class="live-video workstation__video">
+          <video
+            class="live-video__el"
+            autoplay muted loop playsinline
+            poster="/workstation-poster.jpg"
+            preload="metadata"
+            aria-label="地震目錄工作台操作畫面：分析人員逐站挑選 P、S 波到時，地圖同步顯示定位結果（加速播放）">
+            <source src="/workstation-loop.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="live-video__cap">
+            地震目錄工作台操作畫面（10 倍速）：分析人員逐站挑選 P、S 波到時，右側地圖同步顯示定位結果與誤差範圍。
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
     <div id="services" aria-hidden="true"></div>
     <section id="seisblue" class="section technology">
       <div class="section__inner">
@@ -284,160 +286,23 @@
         <p class="section__lead">
           藍震結合多年地震 AI 的<strong>研究經驗與工程能力</strong>，
           建置訓練管線並整合即時資料流，使研究方法能在生產環境中穩定運行。
-          以下說明完整流程與實際案例。
         </p>
-
-        <div class="mlops-diagram">
-          <div class="flow-node flow-node--offline mlops-n1">
-            <span class="flow-scale">離線</span>
-            <h3>資料輸入</h3>
-            <p>彙整地震目錄與連續波形，配對成帶標籤的訓練資料。</p>
-          </div>
-          <span class="flow-arrow mlops-a1" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--offline mlops-n2">
-            <span class="flow-scale">離線</span>
-            <h3>前處理</h3>
-            <p>經過清理、切窗與到時對齊，將原始波形整理為模型可學習的樣本。</p>
-          </div>
-          <span class="flow-arrow mlops-a2" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--offline mlops-n3">
-            <span class="flow-scale">離線</span>
-            <h3>模型訓練</h3>
-            <p>以可重現的訓練管線，統一管理實驗紀錄、超參數與訓練策略。</p>
-          </div>
-
-          <div class="mlops-connector mlops-drop" aria-hidden="true">
-            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
-              <path class="mlops-connector__line" d="M12,2 V54" />
-              <path class="mlops-connector__head" d="M5,48 L12,58 L19,48" />
-            </svg>
-          </div>
-          <div class="flow-node flow-node--offline mlops-n4">
-            <span class="flow-scale">離線</span>
-            <h3>評估測試</h3>
-            <p>在標準測試集上驗證 P、S 波偵測表現，確認優於現行版本後才發布。</p>
-          </div>
-          <span class="flow-arrow mlops-a3" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--online mlops-n5">
-            <span class="flow-scale">上線</span>
-            <h3>部署上線</h3>
-            <p>封裝為服務並接入即時資料流，在 7×24 環境下穩定運行。</p>
-          </div>
-          <span class="flow-arrow mlops-a4" aria-hidden="true">→</span>
-          <div class="flow-node flow-node--online mlops-n6">
-            <span class="flow-scale">上線</span>
-            <h3>線上監控</h3>
-            <p>監控延遲、效能與資料漂移，並將上線後偵測到的新事件累積為新的訓練資料。</p>
-          </div>
-
-          <div class="mlops-connector mlops-loop" aria-hidden="true">
-            <svg viewBox="0 0 24 64" preserveAspectRatio="none">
-              <path class="mlops-connector__line" d="M12,62 V10" />
-              <path class="mlops-connector__head" d="M5,16 L12,6 L19,16" />
-            </svg>
-          </div>
-          <p class="mlops-loop-label">↺ 新事件回流為下一輪訓練資料，持續提升模型準確度</p>
-        </div>
-
-        <div class="mlops-caps__head">
-          <p class="eyebrow">核心能力 · Capabilities</p>
-          <h3 class="mlops-caps__title">管線三個階段<br/>對應的三項核心能力</h3>
-        </div>
         <div class="cap-grid">
-          <article class="cap-card">
+          <a class="cap-card" href="/technology/#case-bluedisc">
             <h4>方法研究</h4>
             <p>以紮實的研究經驗，從損失函數、訓練策略到資料工程，提升模型的效能上限。</p>
-          </article>
-          <article class="cap-card">
+          </a>
+          <a class="cap-card" href="/technology/#case-platform">
             <h4>訓練管線與環境</h4>
             <p>建置可重現、可擴展的訓練基礎設施，規劃資料前處理、模型架構與訓練策略。</p>
-          </article>
-          <article class="cap-card">
+          </a>
+          <a class="cap-card" href="/technology/#case-ttsam">
             <h4>產品級部署</h4>
             <p>將模型整合至即時資料流（如 Earthworm），確保服務在 7×24 環境下穩定運行。</p>
-          </article>
+          </a>
         </div>
-
-        <div class="cases">
-          <article class="case" id="case-bluedisc">
-            <p class="case__cap">方法研究</p>
-            <h3 class="case__name">BlueDisc · S 波偵測方法</h3>
-            <p>
-              BlueDisc 源自黃俊銘在相位拾取上多年的方法研究。針對深度學習相位拾取長期面臨的
-              <em>S 波振幅抑制</em> 問題，這套研究剖析 <strong>損失函數在訓練中的角色</strong> 與
-              <strong>資料為何難以收斂的成因</strong>，並以 <strong>shape-then-align</strong> 訓練策略
-              搭配條件式 GAN 進行驗證，在標準測試集上將有效 S 相位偵測數提升 <strong>64%</strong>。
-              程式碼公開於 <a href="https://github.com/SeisBlue/BlueDisc" target="_blank" rel="noopener">github.com/SeisBlue/BlueDisc</a>。
-              淺顯的說明請參閱科普文章：<a href="/articles/bluedisc-shape-aware-loss/">AI 為什麼經常漏判 S 波？ →</a>
-            </p>
-            <p class="case__ref">
-              Huang, C.-M., Chang, L.-H., Chang, I.-H., Lee, A.-S., &amp; Kuo-Chen, H. (2025).
-              Recovering Sub-threshold S-wave Arrivals in Deep Learning Phase Pickers via Shape-Aware Loss.
-              <em>arXiv</em>:2511.06731.
-              <a href="https://arxiv.org/abs/2511.06731" target="_blank" rel="noopener">arxiv.org/abs/2511.06731</a>
-            </p>
-          </article>
-
-          <article class="case" id="case-platform">
-            <p class="case__cap">訓練管線與環境</p>
-            <h3 class="case__name">SeisBlue 平台 · 地震資料處理框架</h3>
-            <p>
-              SeisBlue 是黃俊銘開發並開源的深度學習地震資料處理框架。平台將連續波形接收、相位拾取到地震目錄輸出的完整流程，
-              封裝為可在生產環境穩定運行的服務，已被多篇同儕審查研究採用為核心處理工具。
-              程式碼公開於 <a href="https://github.com/SeisBlue/SeisBlue" target="_blank" rel="noopener">github.com/SeisBlue/SeisBlue</a>。
-            </p>
-            <p class="case__ref">
-              Huang, C.-M., Chang, L.-H., Kuo-Chen, H., &amp; Zhuang, Y. (2023).
-              SeisBlue: a deep-learning data processing platform for seismology.
-              <em>EGU General Assembly 2023</em>, EGU23-13927.
-              <a href="https://doi.org/10.5194/egusphere-egu23-13927" target="_blank" rel="noopener">doi.org/10.5194/egusphere-egu23-13927</a>
-            </p>
-            <details class="case__more">
-              <summary>採用 SeisBlue 平台的後續研究（4 篇）</summary>
-              <ul class="case__reflist">
-                <li>
-                  Sun, W.-F., Pan, S.-Y., Huang, C.-M., Guan, Z.-K., Yen, I.-C., Ho, C.-W., Chi, T.-C., Ku, C.-S., Huang, B.-S., Fu, C.-C., &amp; Kuo-Chen, H. (2024).
-                  Deep learning-based earthquake catalog reveals the seismogenic structures of the 2022 M<sub>W</sub> 6.9 Chihshang earthquake sequence.
-                  <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
-                  <a href="https://doi.org/10.1007/s44195-024-00063-9" target="_blank" rel="noopener">doi.org/10.1007/s44195-024-00063-9</a>
-                </li>
-                <li>
-                  Huang, B.-S., Ku, C.-S., Lin, C.-J., Lee, S.-J., Chen, Y.-L. E., Jiang, J.-S., &amp; Sun, W.-F. (2024).
-                  The first 30 min hidden aftershocks of the 2022 September 17, M<sub>L</sub> 6.4, Guanshan, Taiwan earthquake and its seismological implications.
-                  <em>Terrestrial, Atmospheric and Oceanic Sciences</em>.
-                  <a href="https://doi.org/10.1007/s44195-023-00059-x" target="_blank" rel="noopener">doi.org/10.1007/s44195-023-00059-x</a>
-                </li>
-                <li>
-                  Sun, W.-F., Pan, S.-Y., Liu, Y.-H., Kuo-Chen, H., Ku, C.-S., Lin, C.-M., &amp; Fu, C.-C. (2025).
-                  A Deep-Learning-Based Real-Time Microearthquake Monitoring System (RT-MEMS) for Taiwan.
-                  <em>Sensors</em>, 25(11), 3353.
-                  <a href="https://doi.org/10.3390/s25113353" target="_blank" rel="noopener">doi.org/10.3390/s25113353</a>
-                </li>
-                <li>
-                  Kuo-Chen, H., Sun, W.-F., Kan, L.-Y., Pan, S.-Y., Yen, I.-C., Liang, S.-H., Guan, Z.-K., Liu, Y.-H., Chen, W.-S., &amp; Brown, D. (2025).
-                  Real-Time Earthquake Monitoring with Deep Learning: A Case Study of the 2025 M<sub>L</sub> 6.4 Dapu Earthquake and Its Fault System in Southwestern Taiwan.
-                  <em>The Seismic Record</em>, 5(3), 320–329.
-                  <a href="https://pubs.geoscienceworld.org/ssa/tsr/article/5/3/320/661129/Real-Time-Earthquake-Monitoring-with-Deep-Learning" target="_blank" rel="noopener">geoscienceworld.org</a>
-                </li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="case" id="case-ttsam">
-            <p class="case__cap">產品級部署</p>
-            <h3 class="case__name">TT-SAM · 即時地震早期預警</h3>
-            <p>
-              <strong>TT-SAM</strong> (Taiwan Transformer Shaking Alert Model) 是地震早期預警系統。
-              模型架構參考自 Münchmeyer 等 (2020) 的 TEAM 框架，由黃俊銘負責 <strong>AI 部署的工程核心</strong>，
-              包括訓練環境建置、訓練管線設計與產品級部署。即時管線基於 Earthworm 即時資料流運作。
-            </p>
-            <p class="case__ref">
-              Chen, Y.-H., Chan, C.-H., Chang, C.-C., &amp; Ma, K.-F. (2026).
-              A Deep Learning Framework for Peak Ground Velocity Prediction Using Multi-Station Velocity Waveforms: The Taiwan Transformer Shaking Alert Model (TT-SAM).
-              <em>Journal of Geophysical Research: Machine Learning and Computation</em>.
-              <a href="https://doi.org/10.1029/2025JH001005" target="_blank" rel="noopener">doi.org/10.1029/2025JH001005</a>
-            </p>
-          </article>
+        <div class="articles-more">
+          <a href="/technology/" class="btn btn--ghost">查看技術細節與研究案例 →</a>
         </div>
       </div>
     </section>

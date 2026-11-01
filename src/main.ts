@@ -6,6 +6,18 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
+// Styles are injected by the module after the browser's initial jump to a
+// URL hash, so re-scroll to the target once the page has finished loading.
+if (location.hash) {
+  const scrollToHash = () => {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    target?.scrollIntoView({ behavior: 'instant' });
+  };
+  requestAnimationFrame(scrollToHash);
+  if (document.readyState === 'complete') scrollToHash();
+  else window.addEventListener('load', scrollToHash);
+}
+
 // Rehydrate obfuscated email links so spam bots scraping the static HTML
 // only see "jimmy [at] seisblue.com" — real address is assembled at runtime.
 document.querySelectorAll<HTMLAnchorElement>('a.email').forEach((el) => {
