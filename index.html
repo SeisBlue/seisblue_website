@@ -135,7 +135,7 @@
           <a href="#contact" class="btn btn--ghost">聯絡我們 →</a>
         </div>
 
-        <figure class="live-video hero__video">
+        <figure id="live" class="live-video hero__video">
           <video
             class="live-video__el"
             autoplay muted loop playsinline
@@ -147,6 +147,32 @@
           <figcaption class="live-video__cap">
             即時監測畫面（6 倍速）：全台 472 個測站的連續波形即時傳入，AI 模型自動挑波並標記 P、S 波到時，再進行地震事件關聯，即時產出地震目錄。
             畫面攝於 2025 年<strong>大埔地震</strong>餘震序列期間，此監測系統與<strong>中央氣象署</strong>合作開發。
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="workstation" class="section workstation">
+      <div class="section__inner">
+        <p class="eyebrow">地震分析平台 · Analyst workstation</p>
+        <h2>地震目錄工作台</h2>
+        <p class="section__lead">
+          以人工分析為核心的地震分析平台，與<strong>中央氣象署</strong>合作開發。
+          系統依分析人員的挑波進度，即時重新定位並檢核定位品質，同時提示待補挑的測站，使分析流程連貫順暢。
+          分析人員得以專注於波形判讀，經確認的結果可匯出為正式目錄，並作為訓練地震 AI 的標註資料。
+        </p>
+
+        <figure class="live-video">
+          <video
+            class="live-video__el"
+            autoplay muted loop playsinline
+            poster="/workstation-poster.jpg"
+            preload="metadata"
+            aria-label="地震目錄工作台操作畫面：分析人員逐站挑選 P、S 波到時，地圖同步顯示定位結果（加速播放）">
+            <source src="/workstation-loop.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="live-video__cap">
+            地震目錄工作台操作畫面（10 倍速）：分析人員逐站挑選 P、S 波到時，右側地圖同步顯示定位結果與誤差範圍。
           </figcaption>
         </figure>
       </div>
@@ -178,6 +204,7 @@
               <span class="flow-scale">秒級</span>
               <h3>相位拾取</h3>
               <p>以深度學習自雜訊中辨識 P、S 波到時，作為後續所有判斷的基礎。</p>
+              <a class="flow-system" href="#live">即時監測系統 ↑</a>
             </div>
           </div>
 
@@ -206,7 +233,8 @@
               <div class="flow-node">
                 <span class="flow-scale">近即時</span>
                 <h3>地震目錄</h3>
-                <p>彙整多站到時，計算每次地震的位置、規模與發生時間。</p>
+                <p>彙整多站到時，計算每次地震的位置、規模與發生時間。正式目錄由分析人員在工作台以人工挑波與定位完成，同時累積 AI 訓練所需的標註資料。</p>
+                <a class="flow-system" href="#workstation">地震目錄工作台 ↑</a>
               </div>
               <span class="flow-arrow" aria-hidden="true">→</span>
               <div class="flow-node">

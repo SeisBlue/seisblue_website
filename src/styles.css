@@ -1156,3 +1156,14 @@ p:last-child { margin-bottom: 0; }
 
 /* Smooth scroll */
 html { scroll-behavior: smooth; }
+
+.workstation { background: var(--bg-soft); }
+.workstation .live-video { margin-top: 0; }
+
+.flow-system {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--brand-2);
+}
+.flow-system:hover { text-decoration: underline; }

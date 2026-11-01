@@ -136,7 +136,7 @@
           <a href="#contact" class="btn btn--ghost">Contact us →</a>
         </div>
 
-        <figure class="live-video hero__video">
+        <figure id="live" class="live-video hero__video">
           <video
             class="live-video__el"
             autoplay muted loop playsinline
@@ -150,6 +150,33 @@
             picks P- and S-wave arrivals, associates them into earthquake events and builds the catalog in real time.
             Recorded during the 2025 <strong>Dapu earthquake</strong> aftershock sequence; developed in collaboration with
             Taiwan's <strong>Central Weather Administration</strong>.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="workstation" class="section workstation">
+      <div class="section__inner">
+        <p class="eyebrow">Analyst workstation</p>
+        <h2>Earthquake Catalog Workstation</h2>
+        <p class="section__lead">
+          An earthquake analysis platform centered on manual analysis, developed with Taiwan's <strong>Central Weather Administration</strong>.
+          As analysts pick phases, the system relocates the event in real time, evaluates location quality, and identifies stations
+          that still require picks, keeping the analysis workflow continuous. Analysts can concentrate on waveform interpretation,
+          and confirmed results are exported as the official catalog and used as labeled data for training seismic AI.
+        </p>
+
+        <figure class="live-video">
+          <video
+            class="live-video__el"
+            autoplay muted loop playsinline
+            poster="/workstation-poster.jpg"
+            preload="metadata"
+            aria-label="Earthquake Catalog Workstation: analysts pick P- and S-wave arrivals station by station while the map shows the location result (sped up).">
+            <source src="/workstation-loop.mp4" type="video/mp4" />
+          </video>
+          <figcaption class="live-video__cap">
+            Earthquake Catalog Workstation (10× speed): analysts pick P- and S-wave arrivals station by station while the map shows the location result and its uncertainty.
           </figcaption>
         </figure>
       </div>
@@ -182,6 +209,7 @@
               <span class="flow-scale">Seconds</span>
               <h3>Phase picking</h3>
               <p>Deep learning identifies P- and S-wave arrival times in noisy data, the basis for every later decision.</p>
+              <a class="flow-system" href="#live">Real-time monitoring ↑</a>
             </div>
           </div>
 
@@ -210,7 +238,8 @@
               <div class="flow-node">
                 <span class="flow-scale">Near-real-time</span>
                 <h3>Earthquake catalog</h3>
-                <p>Arrivals from multiple stations are combined to determine each event's location, magnitude, and origin time.</p>
+                <p>Arrivals from multiple stations are combined to determine each event's location, magnitude, and origin time. The official catalog is produced by analysts through manual picking and location in the workstation, which also builds up labeled data for AI training.</p>
+                <a class="flow-system" href="#workstation">Catalog Workstation ↑</a>
               </div>
               <span class="flow-arrow" aria-hidden="true">→</span>
               <div class="flow-node">
